@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
             
-            $table->string('edifiicio', 100);
+            $table->string('edificio', 100);
             $table->string('piso', 100);
             $table->string('lugar', 100);
-            $table->text('nota');
+            $table->text('nota')->nullable();
             $table->timestamps();
         });
     }

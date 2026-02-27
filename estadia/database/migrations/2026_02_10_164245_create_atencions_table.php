@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('atencions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('paciente_id')->constrained('pacientes')->onDelete('cascade');
+            $table->string('edad', 10);
+            $table->string('semestre', 10)->nullable();//nullable para que no sea obligatori;
             $table->string('hora_atencion', 10);
             $table->string('frecuencia_cardiaca', 100);
             $table->string('frecuencia_respiratoria', 100);
-            $table->string('tension_sistolica', 100);
-            $table->string('tension_diastolica', 100);
+            $table->string('tension_sistolica', 100)->nullable();//nullable para que no sea obligatori;
+            $table->string('tension_diastolica', 100)->nullable();//nullable para que no sea obligatori;
             $table->string('temperatura', 100);
             $table->string('oxigenacion', 100);
             $table->string('glucemia', 100);

@@ -89,7 +89,6 @@ header {
     color: var(--cucsh-red);
     border: 2px solid var(--cucsh-red);
 }
-container
 
 .btn-login:hover {
     background-color: var(--cucsh-red);

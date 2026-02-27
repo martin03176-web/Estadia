@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Atencion extends Model
 {
-    protected $fillable = ['paciente_id','hora_atencion','frecuencia_cardiaca','frecuencia_respiratoria','tension_sistolica','tension_diastolica','temperatura','oxigenacion','glucemia','signos_sintomas','alergias','medicamento','patologia','ultimo_alimento','eventos_previos','destino'];
+    protected $fillable = ['paciente_id', 'edad','semestre','hora_atencion','frecuencia_cardiaca','frecuencia_respiratoria','tension_sistolica','tension_diastolica','temperatura','oxigenacion','glucemia','signos_sintomas','alergias','medicamento','patologia','ultimo_alimento','eventos_previos','destino'];
 
     public const PAGINATE = 10;
 

@@ -24,12 +24,10 @@ class CreatePacienteRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:100',
-            'edad' =>'required|integer|min:4|max:100',
             'sexo' =>'required|in:Masculino,Femenino,Otro',
-            'telefono' =>'nullable|string|max:15',
+            'telefono' =>'nullable|string|max:10',
             'codigo' =>'required|string|max:20',
             'carrera_area' =>'required|string|max:100',
-            'semestre' =>'required|string|max:100',
         ];
     }
 }

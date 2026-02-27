@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Http\Requests\Atencion\CreateAtencionRequest;
 use App\Http\Requests\Atencion\UpdateAtencionRequest;
 use App\Services\Atencion\AtencionService;
-use App\Services\Paciente\PacienteService;
+//use App\Services\Paciente\PacienteService;
 use App\Models\Atencion;
 use App\Models\Paciente;
 
@@ -51,11 +51,9 @@ class AtencionController extends Controller
      */
     public function show(int $id)
     {
-        $atencions = $this->service->find($id);
-        
-        return view('atencions.show', compact('atencion'));
+    $atencion = $this->service->find($id);
+    return view('atencions.show', compact('atencion'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */

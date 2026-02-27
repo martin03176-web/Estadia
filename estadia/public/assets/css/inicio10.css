@@ -375,7 +375,7 @@ footer {
     opacity: 0.8;
 }
 
-/* Responsive */
+/* Responsive
 @media (max-width: 1024px)  {
     .main-nav {
         gap: 2px;
@@ -480,4 +480,4 @@ footer {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
-}
+} */

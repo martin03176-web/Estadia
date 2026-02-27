@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablas.css')}}">    
+<link rel="stylesheet" href="{{asset('assets/css/tablaL.css')}}">    
 @endsection
 
 @section('titulo','Lista de Atenciones')
@@ -9,138 +9,6 @@
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
 
-@section('menu')
- <button class="mobile-menu-btn" id="mobileMenuBtn">
-     <i class="fas fa-bars"></i>
- </button>
- 
- <nav class="main-nav" id="mainNav">
-     <!-- Pacientes -->
-     <div class="nav-item">
-         <a  class="nav-link" id="pacientesLink">
-             <i class="fas fa-user-injured nav-icon"></i>
-             <span>Pacientes</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/atencion_paciente" class="submenu-link">
-                 <i class="fa-regular fa-pen-to-square"></i> Atender Paciente
-             </a>
-             <a href="http://localhost/laravel/estadia/public/lista_pacientes" class="submenu-link">
-                 <i class="fas fa-list"></i> Lista de Pacientes
-             </a>
-             <a href="http://localhost/laravel/estadia/public/lista_atenciones" class="submenu-link">
-                 <i class="fas fa-chart-bar"></i> Lista de Atenciones
-             </a>
-     
-         </div>
-     </div>
-     <!-- Incidencias -->
-     <div class="nav-item">
-         <a  class="nav-link" id="pacientesLink">
-             <i class="fa-solid fa-file-invoice"></i>
-             <span>Incidencias</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/registro_incidencias" class="submenu-link">
-                 <i class="fas fa-exclamation-triangle"></i> Reportar Incidencia
-             </a>
-             <a href="http://localhost/laravel/estadia/public/historial_incidencias" class="submenu-link">
-                 <i class="fas fa-history"></i> Historial de Incidencias
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                 <i class="fa-solid fa-expand"></i> Áreas
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_materiales" class="submenu-link">
-                 <i class="fa-solid fa-toolbox"></i> Materiales o Equipos
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_incidentes" class="submenu-link">
-                 <i class="fa-solid fa-person-falling-burst"></i> Tipo de Incidente
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_riesgos" class="submenu-link">
-                 <i class="fa-solid fa-explosion"></i> Tipo de Riesgo
-             </a>
-              <a href="http://localhost/laravel/estadia/public/tabla_niveles" class="submenu-link">
-                 <i class="fa-solid fa-skull-crossbones"></i> Nivel de Riesgo
-             </a>
-         </div>
-     </div>
-     
-     <!-- Fumigaciones -->
-     <div class="nav-item">
-         <a  class="nav-link" id="fumigacionesLink">
-             <i class="fas fa-spray-can nav-icon"></i>
-             <span>Fumigaciones</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/tabla_fumigaciones" class="submenu-link">
-                 <i class="fa-solid fa-table"></i> Tabla de Fumigaciones 
-             </a>
-             <a href="/fumigaciones/historial" class="submenu-link">
-                 <i class="fas fa-clipboard-list"></i> Historial
-             </a>
-             <a href="http://localhost/laravel/estadia/public/lista_responsables" class="submenu-link">
-                 <i class="fa-solid fa-person"></i> Reponsables
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_equipos" class="submenu-link">
-                 <i class="fa-solid fa-toolbox"></i> Equipos de Fumigación
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                 <i class="fa-solid fa-cube"></i> Áreas
-             </a>
-         </div>
-     </div>
-     
-     <!-- Extintores -->
-     <div class="nav-item">
-         <a  class="nav-link" id="extintoresLink">
-             <i class="fas fa-fire-extinguisher nav-icon"></i>
-             <span>Extintores</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/registro_extintores" class="submenu-link">
-                 <i class="fa-solid fa-circle-plus"></i> Nuevo Extintor
-             </a>
-             <a href="http://localhost/laravel/estadia/public/inventario_extintores" class="submenu-link">
-                 <i class="fas fa-boxes"></i> Inventario
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_mantenimientos" class="submenu-link">
-                 <i class="fas fa-tools"></i> Mantenimiento
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                 <i class="fas fa-clipboard-check"></i> Áreas
-             </a>
-         </div>
-     </div>
-     <div class="nav-item">
-         <div name="trigger">
-             <a  class="btn btn-register" id="extintoresLink">
-                 <i class="fa-solid fa-id-card"></i>
-                 <span>Sesion de {{ Auth::user()->name }}</span>
-             </a>
-         </div>
-         
-         <div class="submenu" name="content">
-             <a href="http://localhost/laravel/estadia/public/dashboard" class="submenu-link">
-                 <i class="fa-regular fa-window-maximize"></i> Inicio
-             </a>
-             <a :href="route('profile.edit')" class="submenu-link">
-                 <i class="fa-solid fa-id-card-clip"></i> {{ __('Profile') }}
-             </a>
-             <form method="POST" action="{{ route('logout') }}">
-                 @csrf
-                 <a :href="route('logout')"
-                 onclick="event.preventDefault();
-                             this.closest('form').submit();"
-                             class="submenu-link">
-                             <i class="fa-solid fa-door-open"></i> {{ __('Log Out') }}
-                 </a>
-             </form>
-         </div>
-     </div>
- </nav>
-
-
-@endsection
  <!-- contenido ----------------------------------------------------------------------------------------------------------------------------------->
 @section('contenido')
  <!-- Hero Section -->
@@ -152,7 +20,7 @@
 
         <div class="form-group">
             <!-- On tables -->
-            <table class="table">
+            {{-- <table class="table">
                 <thead>
                   <tr class="table-active">
                     <th scope="col">Nombre alumno</th>
@@ -189,11 +57,104 @@
                         <li class="list-group-item">L: {{$atencion->ultimo_alimento}}</li>
                         <li class="list-group-item">E: {{$atencion->eventos_previos}}</li>
                       </ul></td>
-                    <td><a href="{{ route('atencions.edit', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
+                    <a href="{{ route('atencions.edit', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-file-arrow-up"></i>Actualizar</a>
+                            <a href="{{ route('atencions.show', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-eye"></i>Ver</a>
                   </tr>
                   @endforeach
                 </tbody>
-              </table>
+              </table> --}}
+              @foreach($atencions as $atencion)
+              <div class="card shadow-lg border-0 mb-4">
+                <div class="card-header bg-active d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">
+                            <i class="fa-solid fa-user-injured"></i>
+                            {{$atencion->paciente->nombre}}
+                        </h4>
+                        <small>Código: {{$atencion->paciente->codigo}} | {{$atencion->paciente->carrera_area}} - {{$atencion->semestre}} Semestre</small>
+                    </div>
+                    <span class="badge text-dark fs-6">
+                        Edad: {{$atencion->edad}} años
+                    </span>
+                </div>
+            
+                <div class="card-body">
+            
+                    <div class="row">
+            
+                        <!-- SIGNOS VITALES -->
+                        <div class="col-md-6 border-end">
+                            <h5 class="text-dark mb-3">
+                                <i class="fa-solid fa-heart-pulse"></i> Signos Vitales
+                            </h5>
+            
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Frecuencia Cardiaca</span>
+                                    <strong>{{$atencion->frecuencia_cardiaca}} lpm</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Frecuencia Respiratoria</span>
+                                    <strong>{{$atencion->frecuencia_respiratoria}} rpm</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Tensión Arterial</span>
+                                    <strong>{{$atencion->tension_sistolica}}/{{$atencion->tension_diastolica}}</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Temperatura</span>
+                                    <strong>{{$atencion->temperatura}} °C</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>SpO2</span>
+                                    <strong>{{$atencion->oxigenacion}}%</strong>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Glucemia</span>
+                                    <strong>{{$atencion->glucemia}} mg/dL</strong>
+                                </li>
+                            </ul>
+                        </div>
+            
+                        <!-- VALORACION SAMPLE -->
+                        <div class="col-md-6">
+                            <h5 class="text-dark mb-3">
+                                <i class="fa-solid fa-notes-medical"></i> Valoración SAMPLE
+                            </h5>
+            
+                            <div class="mb-2">
+                                <strong>S:</strong> {{$atencion->signos_sintomas}}
+                            </div>
+                            <div class="mb-2">
+                                <strong>A:</strong> {{$atencion->alergias}}
+                            </div>
+                            <div class="mb-2">
+                                <strong>M:</strong> {{$atencion->medicamento}}
+                            </div>
+                            <div class="mb-2">
+                                <strong>P:</strong> {{$atencion->ultimo_alimento}}
+                            </div>
+                            <div class="mb-2">
+                                <strong>L:</strong> {{$atencion->ultimo_alimento}}
+                            </div>
+                            <div class="mb-2">
+                                <strong>E:</strong> {{$atencion->eventos_previos}}
+                            </div>
+                        </div>
+            
+                    </div>
+            
+                    <hr>
+            
+                    <!-- BOTONES -->
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('atencions.show', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-eye"></i>Ver</a>
+                        <a href="{{ route('atencions.edit', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-file-arrow-up"></i>Actualizar</a>
+                    </div>
+            
+                </div>
+            </div>
+        @endforeach
     </div>
     </div>
         <div class="row ">

@@ -1,144 +1,13 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/registros1.css')}}"> 
+<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}"> 
 
 @endsection
 
 @section('titulo','Atención de pacientes')
 
 
-@section('menu')
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars"></i>
-    </button>
-    
-    <nav class="main-nav" id="mainNav">
-        <!-- Pacientes -->
-        <div class="nav-item">
-            <a  class="nav-link" id="pacientesLink">
-                <i class="fas fa-user-injured nav-icon"></i>
-                <span>Pacientes</span>
-            </a>
-            <div class="submenu">
-                <a href="http://localhost/laravel/estadia/public/atencion_paciente" class="submenu-link">
-                    <i class="fa-regular fa-pen-to-square"></i> Atender Paciente
-                </a>
-                <a href="http://localhost/laravel/estadia/public/lista_pacientes" class="submenu-link">
-                    <i class="fas fa-list"></i> Lista de Pacientes
-                </a>
-                <a href="http://localhost/laravel/estadia/public/lista_atenciones" class="submenu-link">
-                    <i class="fas fa-chart-bar"></i> Lista de Atenciones
-                </a>
-        
-            </div>
-        </div>
-        <!-- Incidencias -->
-        <div class="nav-item">
-            <a  class="nav-link" id="pacientesLink">
-                <i class="fa-solid fa-file-invoice"></i>
-                <span>Incidencias</span>
-            </a>
-            <div class="submenu">
-                <a href="http://localhost/laravel/estadia/public/registro_incidencias" class="submenu-link">
-                    <i class="fas fa-exclamation-triangle"></i> Reportar Incidencia
-                </a>
-                <a href="http://localhost/laravel/estadia/public/historial_incidencias" class="submenu-link">
-                    <i class="fas fa-history"></i> Historial de Incidencias
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                    <i class="fa-solid fa-expand"></i> Áreas
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_materiales" class="submenu-link">
-                    <i class="fa-solid fa-toolbox"></i> Materiales o Equipos
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_incidentes" class="submenu-link">
-                    <i class="fa-solid fa-person-falling-burst"></i> Tipo de Incidente
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_riesgos" class="submenu-link">
-                    <i class="fa-solid fa-explosion"></i> Tipo de Riesgo
-                </a>
-                 <a href="http://localhost/laravel/estadia/public/tabla_niveles" class="submenu-link">
-                    <i class="fa-solid fa-skull-crossbones"></i> Nivel de Riesgo
-                </a>
-            </div>
-        </div>
-        
-        <!-- Fumigaciones -->
-        <div class="nav-item">
-            <a  class="nav-link" id="fumigacionesLink">
-                <i class="fas fa-spray-can nav-icon"></i>
-                <span>Fumigaciones</span>
-            </a>
-            <div class="submenu">
-                <a href="http://localhost/laravel/estadia/public/tabla_fumigaciones" class="submenu-link">
-                    <i class="fa-solid fa-table"></i> Tabla de Fumigaciones 
-                </a>
-                <a href="/fumigaciones/historial" class="submenu-link">
-                    <i class="fas fa-clipboard-list"></i> Historial
-                </a>
-                <a href="http://localhost/laravel/estadia/public/lista_responsables" class="submenu-link">
-                    <i class="fa-solid fa-person"></i> Reponsables
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_equipos" class="submenu-link">
-                    <i class="fa-solid fa-toolbox"></i> Equipos de Fumigación
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                    <i class="fa-solid fa-cube"></i> Áreas
-                </a>
-            </div>
-        </div>
-        
-        <!-- Extintores -->
-        <div class="nav-item">
-            <a  class="nav-link" id="extintoresLink">
-                <i class="fas fa-fire-extinguisher nav-icon"></i>
-                <span>Extintores</span>
-            </a>
-            <div class="submenu">
-                <a href="http://localhost/laravel/estadia/public/registro_extintores" class="submenu-link">
-                    <i class="fa-solid fa-circle-plus"></i> Nuevo Extintor
-                </a>
-                <a href="http://localhost/laravel/estadia/public/inventario_extintores" class="submenu-link">
-                    <i class="fas fa-boxes"></i> Inventario
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_mantenimientos" class="submenu-link">
-                    <i class="fas fa-tools"></i> Mantenimiento
-                </a>
-                <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                    <i class="fas fa-clipboard-check"></i> Áreas
-                </a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <div name="trigger">
-                <a  class="btn btn-register" id="extintoresLink">
-                    <i class="fa-solid fa-id-card"></i>
-                    <span>Sesion de {{ Auth::user()->name }}</span>
-                </a>
-            </div>
-            
-            <div class="submenu" name="content">
-                <a href="http://localhost/laravel/estadia/public/dashboard" class="submenu-link">
-                    <i class="fa-regular fa-window-maximize"></i> Inicio
-                </a>
-                <a :href="route('profile.edit')" class="submenu-link">
-                    <i class="fa-solid fa-id-card-clip"></i> {{ __('Profile') }}
-                </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a :href="route('logout')"
-                    onclick="event.preventDefault();
-                                this.closest('form').submit();"
-                                class="submenu-link">
-                                <i class="fa-solid fa-door-open"></i> {{ __('Log Out') }}
-                    </a>
-                </form>
-            </div>
-        </div>
-    </nav>
 
-
-@endsection
  <!-- contenido ----------------------------------------------------------------------------------------------------------------------------------->
  @section('contenido')
  <!-- Hero Section -->
@@ -161,33 +30,77 @@
         <form method="POST" action="{{ $atencion->exists ? route('atencions.update', $atencion) : route('atencions.store') }}" class="login-form">
             @csrf
             @if($atencion->exists) @method('PUT') @endif
-            <!-- Paciente_id -->
+            <!-- atencion_id -->
             <div class="form-group">
-                <label >
-                    <i class="fa-solid fa-person"></i> Paciente
-                    <a href="{{ route('pacientes.create') }}" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Paciente Nuevo</a>
-                </label>
-                
-                    <input type="text" id="paciente_input" list="pacientes_list" class="form-control form-control-lg" 
-                           placeholder="Ingrese el Nombre Completo..." >
-                           {{-- Este es el campo que realmente se enviará --}}
-                            <input type="hidden" name="paciente_id" id="paciente_id">
-                           
-                           <datalist id="pacientes_list" >
-                            @foreach($pacientes as $paciente)
-                            <option 
-                            data-id="{{ $paciente->id }}"
-                            value="{{ $paciente->nombre }} - {{ $paciente->codigo }} - {{ $paciente->edad }} - {{ $paciente->carrera_area }} - {{ $paciente->semestre }}">
-                        </option>
-                    @endforeach
-                           </datalist>
-                           @error('paciente_id')     
-                        <div class="logo-text">
-                            <p>{{$message}}</p> 
-                        </div>
-                           @enderror
-                           
+
+                <div class="form-group">
+
+                    <label>
+                        <i class="fa-solid fa-person"></i> Paciente
                         
+                        <a href="{{ route('pacientes.create') }}" 
+                           class="btn btn-outline-secondary">
+                           <i class="fa-solid fa-circle-up"></i> Paciente Nuevo
+                        </a>
+                    </label>
+                
+                    <input 
+                        type="text" 
+                        id="paciente_input"
+                        list="pacientes_list"
+                        class="form-control form-control-lg"
+                        placeholder="Ingrese el Nombre Completo..."
+                        autocomplete="off"
+                    >
+                
+                    {{-- Este es el campo que realmente se enviará --}}
+                    <input type="hidden" name="paciente_id" id="paciente_id">
+                
+                    <datalist id="pacientes_list">
+                        @foreach($pacientes as $paciente)
+                            <option 
+                                data-id="{{ $paciente->id }}"
+                                value="{{ $paciente->nombre }} - {{ $paciente->codigo }} - {{ $paciente->carrera_area}}">
+                            </option>
+                        @endforeach
+                    </datalist>
+                
+                    @error('paciente_id')
+                        <div class="text-danger">
+                            {{$message}}
+                        </div>
+                    @enderror
+                
+                </div>
+           
+             <!-- edad -->
+             <div class="form-group">
+                <label >
+                    <i class="fa-solid fa-calendar"></i> Edad
+                </label>
+                <input type="number" id="edad" name="edad" value="{{ old('edad', $atencion->edad) }}"
+                       placeholder="Ingrese la Edad" required autofocus autocomplete="edad" >
+                       @error('edad')     
+                    <div class="logo-text">
+                        <p>{{$message}}</p> 
+                    </div>
+                       @enderror
+                      
+            </div>
+            
+             <!-- Semestre -->
+             <div class="form-group">
+                <label >
+                    <i class="fa-solid fa-business-time"></i> Semestre
+                </label>
+                <input type="text" id="semestre" name="semestre" value="{{ old('semestre', $atencion->semestre) }}"
+                       placeholder="Ingrese el Semestre">
+                       @error('semestre')     
+                    <div class="logo-text">
+                        <p>{{$message}}</p> 
+                    </div>
+                       @enderror
+                      
             </div>
             <!-- hora_atencion -->
             <div class="form-group">
@@ -242,7 +155,7 @@
                     <i class="fa-solid fa-up-long"></i> Tensión Sistólica
                 </label>
                 <input type="text" id="tension_sistolica" name="tension_sistolica" value="{{ old('tension_sistolica', $atencion->tension_sistolica) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="tension_sistolica">
+                       placeholder="Descripción..." >
                        @error('tension_sistolica')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -256,7 +169,7 @@
                     <i class="fa-solid fa-down-long"></i> Tensión Diastólica
                 </label>
                 <input type="text" id="tension_diastolica" name="tension_diastolica" value="{{ old('tension_diastolica', $atencion->tension_diastolica) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="tension_diastolica">
+                       placeholder="Descripción..." >
                        @error('tension_diastolica')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -305,7 +218,7 @@
                     </div>
                        @enderror
                       
-            </div>glucemia
+            </div>
             <!-- Apartado de Valoración SAMPLE -->
             <div class="logo-text">
                <p><i class="fa-solid fa-clipboard-user"></i> Valoración SAMPLE</p>
@@ -328,10 +241,10 @@
             
             <div class="form-group">
                 <label >
-                    <i class="fa-solid fa-head-side-cough"></i> Alergias
+                    <i class="fa-solid fa-head-side-cough"></i> Alergias: No/Si y ¿Cuáles?
                 </label>
                 <input type="text" id="alergias" name="alergias" value="{{ old('alergias', $atencion->alergias) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="alergias">
+                       placeholder=" No, ninguna/Sí, a penicilina..." required autofocus autocomplete="alergias">
                        @error('alergias')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -342,10 +255,10 @@
             <!-- medicamentos -->
             <div class="form-group">
                 <label >
-                    <i class="fa-solid fa-capsules"></i> Medicamentos
+                    <i class="fa-solid fa-capsules"></i> Medicamentos que toma actualmente, si es que si ¿Cuáles?
                 </label>
                 <input type="text" id="medicamento" name="medicamento" value="{{ old('medicamento', $atencion->medicamento) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="medicamento">
+                       placeholder="Solo llenar si es necesario" autocomplete="medicamento">
                        @error('medicamento')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -356,7 +269,7 @@
             <!-- patologia -->
             <div class="form-group">
                 <label >
-                    <i class="fa-solid fa-utensils"></i> Patologia
+                    <i class="fa-solid fa-utensils"></i> Patologías o Antecedentes medicos
                 </label>
                 <input type="text" id="patologia" name="patologia" value="{{ old('patologia', $atencion->patologia) }}"
                        placeholder="Descripción..." required autofocus autocomplete="patologia">
@@ -370,7 +283,7 @@
             <!-- ultimo_alimento -->
             <div class="form-group">
                 <label >
-                    <i class="fa-solid fa-utensils"></i> Último Alimento
+                    <i class="fa-solid fa-utensils"></i> Último Alimento ingerido
                 </label>
                 <input type="text" id="ultimo_alimento" name="ultimo_alimento" value="{{ old('ultimo_alimento', $atencion->ultimo_alimento) }}"
                        placeholder="Descripción..." required autofocus autocomplete="ultimo_alimento">
@@ -384,7 +297,7 @@
             <!-- eventos_previos -->
             <div class="form-group">
                 <label >
-                    <i class="fa-solid fa-calendar-day"></i> Eventos Previos
+                    <i class="fa-solid fa-calendar-day"></i> Eventos que ocaciono la atención
                 </label>
                 <input type="text" id="eventos_previos" name="eventos_previos" value="{{ old('eventos_previos', $atencion->eventos_previos) }}"
                        placeholder="Descripción..." required autofocus autocomplete="eventos_previos">
@@ -400,8 +313,13 @@
                 <label>
                     <i class="fa-solid fa-location-dot"></i> Destino
                 </label>
-                <input type="text" id="destino" name="destino" value="{{ old('destino', $atencion->destino) }}"
-                       placeholder="Escriba el destino" required autofocus autocomplete="destino">
+                <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="destino" >
+                    <option value="Se retira por sus propios medios" @selected(old('destino', $atencion->destino) === 'Se retira por sus propios medios' )>Se retira por sus propios medios</option>
+                    <option value="Acompañado por familiar/amigo" @selected(old('destino', $atencion->destino) === 'Acompañado por familiar/amigo' )>Acompañado por familiar/amigo</option>
+                    <option value="Traslado a servicio medico interno" @selected(old('destino', $atencion->destino) === 'Traslado a servicio medico interno' )>Traslado a servicio medico interno</option>
+                    <option value="Traslado en ambulancia" @selected(old('destino', $atencion->destino) === 'Traslado en ambulancia' )>Traslado en ambulancia</option>
+                    <option value="Traslado a la unidad de cuidados" @selected(old('destino', $atencion->destino) === 'Traslado a la unidad de cuidados' )>Traslado a la unidad de cuidados</option>
+                  </select>
                        @error('destino')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -425,49 +343,27 @@
     </div>
 </section>
 @endsection
+
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Menú móvil
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Cerrar menú al hacer clic en un enlace
-        const navLinks = document.querySelectorAll('.nav-link, .submenu-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 900) {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-        document.getElementById('paciente_input').addEventListener('input', function () {
 
-let input = this.value;
-let options = document.querySelectorAll('#pacientes_list option');
-let hidden = document.getElementById('paciente_id');
-
-hidden.value = '';
-
-options.forEach(option => {
-
-    if(option.value === input){
-        hidden.value = option.dataset.id;
-    }
-
-});
-
-});
-    });
-</script>
+    document.getElementById('paciente_input').addEventListener('input', function () {
     
+        let input = this.value;
+        let options = document.querySelectorAll('#pacientes_list option');
+        let hidden = document.getElementById('paciente_id');
+    
+        hidden.value = '';
+    
+        options.forEach(option => {
+    
+            if(option.value === input){
+                hidden.value = option.dataset.id;
+            }
+    
+        });
+    
+    });
+    
+    </script>
 @endsection
- 

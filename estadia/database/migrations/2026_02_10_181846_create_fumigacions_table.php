@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('responsble_servicio_id')->constrained('responsables')->onDelete('cascade');
-            $table->foreignId('areas_id')->constrained('areas')->onDelete('cascade');
+            $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->foreignId('responsable_titular_id')->constrained('responsables')->onDelete('cascade');
             $table->date('fecha');
             $table->foreignId('motivo_id')->constrained('motivos')->onDelete('cascade');

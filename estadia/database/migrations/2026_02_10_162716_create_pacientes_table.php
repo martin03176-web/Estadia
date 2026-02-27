@@ -15,12 +15,10 @@ return new class extends Migration
             $table->id();
             
             $table->string('nombre', 100);
-            $table->integer('edad');
-            $table->string('sexo', 20);
-            $table->integer('telefono', 15)->nullable();
-            $table->integer('codigo')->unique();
+            $table->string('sexo',50);
+            $table->string('telefono')->nullable();
+            $table->string('codigo')->unique();
             $table->string('carrera_area', 100);
-            $table->string('semestre', 100);
             $table->timestamps();
         });
     }

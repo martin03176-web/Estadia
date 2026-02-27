@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('nombre', 100);
-            $table->string('nota', 50);
+            $table->string('nota', 50)->nullable();
             $table->timestamps();
         });
     }

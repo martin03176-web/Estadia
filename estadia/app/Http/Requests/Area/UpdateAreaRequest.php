@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Paciente;
+namespace App\Http\Requests\Area;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdatePacienteRequest extends FormRequest
+class UpdateAreaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,6 @@ class UpdatePacienteRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreatePacienteRequest())->rules();
+        return (new CreateAreaRequest())->rules();
     }
 }

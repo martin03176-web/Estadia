@@ -32,7 +32,7 @@ class AreaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateAreaRequest $request)
     {
         $this->service->create($request->validated());
         return redirect()->route('areas.index')->with('message', 'Area creada correctamente');

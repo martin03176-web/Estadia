@@ -4,7 +4,6 @@ namespace App\Http\Requests\Atencion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class CreateAtencionRequest extends FormRequest
 {
     /**
@@ -24,11 +23,13 @@ class CreateAtencionRequest extends FormRequest
     {
         return [
             'paciente_id' => 'required|exists:pacientes,id', 
+            'edad' =>'required|string|max:50',
+            'semestre' =>'nullable|string|max:50',
             'hora_atencion' =>'required|string|max:10',
             'frecuencia_cardiaca' =>'required|string| max:100',
             'frecuencia_respiratoria' =>'required|string|max:100',
-            'tension_sistolica' =>'required|string|max:100',
-            'tension_diastolica' =>'required|string|max:100',
+            'tension_sistolica' =>'nullable|string|max:100',
+            'tension_diastolica' =>'nullable|string|max:100',
             'temperatura' =>'required|string|max:100',
             'oxigenacion' => 'required|string|max:100',
             'glucemia' =>'required|string|max:100',

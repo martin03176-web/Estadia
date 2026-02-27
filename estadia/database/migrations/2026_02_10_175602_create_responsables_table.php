@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre', 100);
             $table->integer('telefono');
             $table->string('puesto_area');
-            $table->string('nota');
+            $table->string('nota')->nullable();
             $table->timestamps();
         });
     }

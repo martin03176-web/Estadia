@@ -16,11 +16,11 @@ return new class extends Migration
 
             $table->text('asunto');
             $table->date('fecha');
-            $table->foreignId('areas_id')->constrained('areas')->onDelete('cascade');
+            $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->foreignId('responsable_id')->constrained('responsables')->onDelete('cascade');
             $table->foreignId('tipo_incidente_id')->constrained('tipo_incidentes')->onDelete('cascade');
             $table->foreignId('tipo_riesgo_id')->constrained('tipo_riesgos')->onDelete('cascade');
-            $table->text('decripcion');
+            $table->text('descripcion');
             $table->foreignId('nivel_riesgo_id')->constrained('nivel_riesgos')->onDelete('cascade');
             $table->text('acciones_correctivas');
             $table->foreignId('material_equipo_id')->constrained('material_equipos')->onDelete('cascade');

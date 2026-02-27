@@ -1,143 +1,11 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/registros.css')}}">    
+<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}">    
 @endsection
 
 @section('titulo','Registro de áreas')
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
 
-@section('menu')
- <button class="mobile-menu-btn" id="mobileMenuBtn">
-     <i class="fas fa-bars"></i>
- </button>
- 
- <nav class="main-nav" id="mainNav">
-     <!-- Pacientes -->
-     <div class="nav-item">
-         <a  class="nav-link" id="pacientesLink">
-             <i class="fas fa-user-injured nav-icon"></i>
-             <span>Pacientes</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/atencion_paciente" class="submenu-link">
-                 <i class="fa-regular fa-pen-to-square"></i> Atender Paciente
-             </a>
-             <a href="http://localhost/laravel/estadia/public/lista_pacientes" class="submenu-link">
-                 <i class="fas fa-list"></i> Lista de Pacientes
-             </a>
-             <a href="http://localhost/laravel/estadia/public/lista_atenciones" class="submenu-link">
-                 <i class="fas fa-chart-bar"></i> Lista de Atenciones
-             </a>
-     
-         </div>
-     </div>
-     <!-- Incidencias -->
-     <div class="nav-item">
-         <a  class="nav-link" id="pacientesLink">
-             <i class="fa-solid fa-file-invoice"></i>
-             <span>Incidencias</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/registro_incidencias" class="submenu-link">
-                 <i class="fas fa-exclamation-triangle"></i> Reportar Incidencia
-             </a>
-             <a href="http://localhost/laravel/estadia/public/historial_incidencias" class="submenu-link">
-                 <i class="fas fa-history"></i> Historial de Incidencias
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                 <i class="fa-solid fa-expand"></i> Áreas
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_materiales" class="submenu-link">
-                 <i class="fa-solid fa-toolbox"></i> Materiales o Equipos
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_incidentes" class="submenu-link">
-                 <i class="fa-solid fa-person-falling-burst"></i> Tipo de Incidente
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_riesgos" class="submenu-link">
-                 <i class="fa-solid fa-explosion"></i> Tipo de Riesgo
-             </a>
-              <a href="http://localhost/laravel/estadia/public/tabla_niveles" class="submenu-link">
-                 <i class="fa-solid fa-skull-crossbones"></i> Nivel de Riesgo
-             </a>
-         </div>
-     </div>
-     
-     <!-- Fumigaciones -->
-     <div class="nav-item">
-         <a  class="nav-link" id="fumigacionesLink">
-             <i class="fas fa-spray-can nav-icon"></i>
-             <span>Fumigaciones</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/tabla_fumigaciones" class="submenu-link">
-                 <i class="fa-solid fa-table"></i> Tabla de Fumigaciones 
-             </a>
-             <a href="/fumigaciones/historial" class="submenu-link">
-                 <i class="fas fa-clipboard-list"></i> Historial
-             </a>
-             <a href="http://localhost/laravel/estadia/public/lista_responsables" class="submenu-link">
-                 <i class="fa-solid fa-person"></i> Reponsables
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_equipos" class="submenu-link">
-                 <i class="fa-solid fa-toolbox"></i> Equipos de Fumigación
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                 <i class="fa-solid fa-cube"></i> Áreas
-             </a>
-         </div>
-     </div>
-     
-     <!-- Extintores -->
-     <div class="nav-item">
-         <a  class="nav-link" id="extintoresLink">
-             <i class="fas fa-fire-extinguisher nav-icon"></i>
-             <span>Extintores</span>
-         </a>
-         <div class="submenu">
-             <a href="http://localhost/laravel/estadia/public/registro_extintores" class="submenu-link">
-                 <i class="fa-solid fa-circle-plus"></i> Nuevo Extintor
-             </a>
-             <a href="http://localhost/laravel/estadia/public/inventario_extintores" class="submenu-link">
-                 <i class="fas fa-boxes"></i> Inventario
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_mantenimientos" class="submenu-link">
-                 <i class="fas fa-tools"></i> Mantenimiento
-             </a>
-             <a href="http://localhost/laravel/estadia/public/tabla_areas" class="submenu-link">
-                 <i class="fas fa-clipboard-check"></i> Áreas
-             </a>
-         </div>
-     </div>
-     <div class="nav-item">
-         <div name="trigger">
-             <a  class="btn btn-register" id="extintoresLink">
-                 <i class="fa-solid fa-id-card"></i>
-                 <span>Sesion de {{ Auth::user()->name }}</span>
-             </a>
-         </div>
-         
-         <div class="submenu" name="content">
-             <a href="http://localhost/laravel/estadia/public/dashboard" class="submenu-link">
-                 <i class="fa-regular fa-window-maximize"></i> Inicio
-             </a>
-             <a :href="route('profile.edit')" class="submenu-link">
-                 <i class="fa-solid fa-id-card-clip"></i> {{ __('Profile') }}
-             </a>
-             <form method="POST" action="{{ route('logout') }}">
-                 @csrf
-                 <a :href="route('logout')"
-                 onclick="event.preventDefault();
-                             this.closest('form').submit();"
-                             class="submenu-link">
-                             <i class="fa-solid fa-door-open"></i> {{ __('Log Out') }}
-                 </a>
-             </form>
-         </div>
-     </div>
- </nav>
-
-
-@endsection
  <!-- contenido ----------------------------------------------------------------------------------------------------------------------------------->
 @section('contenido')
  <!-- Hero Section -->
@@ -157,28 +25,45 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('register') }}" class="login-form">
+        <form method="POST" action="{{ $area->exists ? route('areas.update', $area) : route('areas.store') }}" class="login-form">
             @csrf
-             <!-- Name/Nombre -->
+            @if ($area->exists) @method('PUT') @endif
+             <!-- Edificio -->
             <div class="form-group">
-                <label for="edifico" :value="__('Edifico')">
-                    <i class="fas fa-user"></i> Edifiocio
+                <label >
+                    <i class="fa-solid fa-arrow-right-to-city"></i> Edifiocio
                 </label>
-                <input type="text" id="edifico" name="edifico" :value="old('edifico')"
-                       placeholder="Ingrese el Edificio" required autofocus autocomplete="edifico">
-                       @error('edifico')     
-                    <div class="logo-text">
-                        <p>{{$message}}</p> 
-                    </div>
-                       @enderror
-                      
+                <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="edificio" >
+                    <option value="F" @selected(old('edificio', $area->edificio) === 'F' )>F</option>
+                    <option value="A" @selected(old('edificio', $area->edificio) === 'A' )>A</option>
+                    <option value="F1" @selected(old('edificio', $area->edificio) === 'F1' )>F1</option>
+                    <option value="B" @selected(old('edificio', $area->edificio) === 'B' )>B</option>
+                    <option value="F2" @selected(old('edificio', $area->edificio) === 'F2' )>F2</option>
+                    <option value="C" @selected(old('edificio', $area->edificio) === 'C' )>C</option>
+                    <option value="F3" @selected(old('edificio', $area->edificio) === 'F3' )>F3</option>
+                    <option value="D" @selected(old('edificio', $area->edificio) === 'D' )>D</option>
+                    <option value="F4" @selected(old('edificio', $area->edificio) === 'F4' )>F4</option>
+                    <option value="E" @selected(old('edificio', $area->edificio) === 'E' )>E</option>
+                    <option value="G" @selected(old('edificio', $area->edificio) === 'G' )>G</option>
+                    <option value="H" @selected(old('edificio', $area->edificio) === 'H' )>H</option>
+                    <option value="I" @selected(old('edificio', $area->edificio) === 'I' )>I</option>
+                    <option value="J" @selected(old('edificio', $area->edificio) === 'J' )>J</option>
+                    <option value="Nave" @selected(old('edificio', $area->edificio) === 'Nave' )>Nave</option>
+                  </select>
+                  @error('sexo')     
+                  <div class="logo-text">
+                      <p>{{$message}}</p> 
+                  </div>
+                     @enderror
+    
             </div>
-            <!-- Email Address/Correo Electronico -->
+            
+            <!-- Piso -->
             <div class="form-group">
-                <label for="piso" :value="__('Piso')">
-                    <i class="fa-regular fa-calendar-days"></i> Piso
+                <label>
+                    <i class="fa-solid fa-sort"></i> Piso
                 </label>
-                <input type="number" id="piso" name="piso" :value=" {{ old('piso') }}"
+                <input type="text" id="piso" name="piso" value="{{ old('piso', $area->piso) }}"
                        placeholder="Ingrese el Piso" required autofocus autocomplete="piso">
                        @error('piso')     
                     <div class="logo-text">
@@ -187,11 +72,12 @@
                        @enderror
                       
             </div>
+            <!-- Lugar -->
             <div class="form-group">
-                <label for="lugar" :value="__('Lugar')">
-                    <i class="fa-regular fa-calendar-days"></i> Lugar
+                <label >
+                    <i class="fa-solid fa-magnifying-glass-location"></i> Lugar
                 </label>
-                <input type="text" id="lugar" name="lugar" :value=" {{ old('lugar') }}"
+                <input type="text" id="lugar" name="lugar" value="{{ old('lugar', $area->lugar) }}"
                        placeholder="Ingrese el Lugar" required autofocus autocomplete="lugar">
                        @error('lugar')     
                     <div class="logo-text">
@@ -202,10 +88,10 @@
             </div>
             
             <div class="form-group">
-                <label for="nota" :value="__('Nota')">
-                    <i class="fa-solid fa-qrcode"></i> Nota(Opcional)
+                <label >
+                    <i class="fa-solid fa-pen-clip"></i> Nota(Opcional)
                 </label>
-                <input type="text" id="nota" name="nota" :value="old('nota')"
+                <input type="text" id="nota" name="nota" value="{{ old('nota', $area->nota) }}"
                        placeholder="Ingrese código del paciente" required autofocus autocomplete="nota">
                        @error('nota')     
                     <div class="logo-text">
@@ -216,9 +102,9 @@
             </div>
         
             <div class="flex items-center justify-end mt-4">
-                <a  class="btn btn-login">
-                    <i class="fa-solid fa-check-to-slot"></i> Registrar
-                </a>
+                <x-primary-button class="btn btn-login">
+                    <i class="fa-solid fa-check-to-slot"></i> {{ $area->exists ? 'Actualizar' : 'Registrar'}}
+                </x-primary-button>
                 {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a> --}}

@@ -23,10 +23,10 @@ class CreateAreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'edifiicio' => 'required|string|max:100',
-            'piso' =>'required|integer|min:4|max:100',
-            'lugar' =>'required|in:Masculino,Femenino,Otro',
-            'nota' =>'nullable|string|max:15',
+            'edificio' => 'required|string|max:100',
+            'piso' =>'required|string|max:100',
+            'lugar' =>'required|string|max:100',
+            'nota' =>'nullable|string|max:100',
         ];
     }
 }

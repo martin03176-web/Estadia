@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('clave_id')->constrained('claves')->onDelete('cascade');
             $table->string('numeracion', 50);
             $table->date('fecha_adquisicion', 100);
-            $table->foreignId('areas_id')->constrained('areas')->onDelete('cascade');
+            $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->foreignId('tipo_id')->constrained('tipos')->onDelete('cascade');
             $table->string('peso', 100);
             $table->string('ubicacion', 100);
