@@ -23,7 +23,7 @@ class CreateClaveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Clave' => 'required|string|max:100',
+            'clave' => 'required|string|max:100',
         ];
     }
 }

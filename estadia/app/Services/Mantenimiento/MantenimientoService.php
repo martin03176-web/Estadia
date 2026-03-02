@@ -1,40 +1,40 @@
 <?php
 
-namespace App\Services\Mantenimientos;
+namespace App\Services\Mantenimiento;
 
 use \Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use App\Models\Mantenimientos;
+use App\Models\Mantenimiento;
 
-class MantenimientosService
+class MantenimientoService
 {
     public function getAll(): LengthAwarePaginator
     {
-    return Mantenimientos::with('paciente')
+    return Mantenimiento::with('paciente')
         ->latest()
-        ->paginate(Mantenimientos::PAGINATE);
+        ->paginate(Mantenimiento::PAGINATE);
     }
 
-    public function find(int $id): ?Mantenimientos
+    public function find(int $id): ?Mantenimiento
     {
-    return Mantenimientos::with('paciente')->findOrFail($id); 
+    return Mantenimiento::with('paciente')->findOrFail($id); 
     }
 
-    public function create(array $data): Mantenimientos
+    public function create(array $data): Mantenimiento
     {
         
-        return Mantenimientos::create($data);
+        return Mantenimiento::create($data);
     }
 
-    public function update(Mantenimientos $Mantenimientos, array $data)
+    public function update(Mantenimiento $Mantenimiento, array $data)
     {
-        $Mantenimientos->update($data);
+        $Mantenimiento->update($data);
 
-        return $Mantenimientos;
+        return $Mantenimiento;
     }
 
     public function delete(int $id): bool
     {
-        return Mantenimientos::where('id', $id)->delete();
+        return Mantenimiento::where('id', $id)->delete();
     }
 
 }

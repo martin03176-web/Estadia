@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Incidente;
+namespace App\Http\Requests\Extintor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class CreateIncidenteRequest extends FormRequest
+class CreateExtintorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +23,16 @@ class CreateIncidenteRequest extends FormRequest
     public function rules(): array
     {
         return [ 
-            'asunto' => 'required|string|max:1000',
-            'fecha' => 'required|date',
+            'clave_id' => 'required|exists:claves,id',
+            'numeracion' => 'required|string',
+            'fecha_adquisicion' => 'required|date',
             'area_id' => 'required|exists:areas,id', 
-            'responsable_id' => 'required|exists:responsables,id',
-            'tipo_incidente_id' => 'required|exists:tipo_incidentes,id',
-            'tipo_riesgo_id' => 'required|exists:tipo_riesgos,id',
-            'descripcion' => 'required|string|max:5000', 
-            'nivel_riesgo_id' => 'required|exists:nivel_riesgos,id',
-            'acciones_correctivas' => 'required|string|max:5000',
-            'material_equipo_id' => 'required|exists:material_equipos,id',
-            'tiempo_total' => 'required|string|max:100',
+            'tipo_id' => 'required|exists:tipos,id',
+            'peso' => 'required|string',
+            'ubicacion' => 'required|string',
+            'lugar_referencia' => 'required|string', 
+            'observaciones' => 'required|string',
+            'condicion_extintor' => 'required|string',
         ];
     }
 }

@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Area extends Model
 {
-    protected $fillable = ['edificio','piso','lugar','nota'];
+    protected $fillable = [
+        'edificio',
+        'piso',
+        'lugar',
+        'nota'
+    ];
 
     public const PAGINATE = 10;
 

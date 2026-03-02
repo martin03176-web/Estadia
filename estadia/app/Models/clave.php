@@ -3,20 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Clave extends Model
 {
-    protected $fillable = ['clave'];
+    protected $fillable = [
+        'clave'
+    ];
 
     public const PAGINATE = 10;
 
 
-    //Relación con las incidencias
-   
-    //Accesor para obtener datos del Area
-    public function getNombreCompletoAttribute(): string
-    {
-        return "{$this->clave} ";
-    }
+    public function atncion(): HasMany
+     {
+         return $this->hasMany(Extintor::class);
+     }
     
 }

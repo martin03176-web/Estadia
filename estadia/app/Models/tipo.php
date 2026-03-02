@@ -3,21 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class Tipo extends Model
 {
-    protected $fillable = ['tipo'];
+    protected $fillable = [
+        'tipo'
+    ];
 
     public const PAGINATE = 10;
 
-
-    //Relación con las incidencias
-   
-    //Accesor para obtener datos del Area
-    public function getNombreCompletoAttribute(): string
+    //Relación con los extintores
+    public function atncion(): HasMany
     {
-        return "{$this->tipo} ";
+        return $this->hasMany(Extintor::class);
     }
-    
 }

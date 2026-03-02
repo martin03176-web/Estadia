@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Paciente extends Model
 {
-    protected $fillable = ['nombre','sexo','telefono','codigo','carrera_area'];
+    protected $fillable = [
+        'nombre',
+        'sexo',
+        'telefono',
+        'codigo',
+        'carrera_area'
+    ];
 
     public const PAGINATE = 10;
 
@@ -18,10 +24,4 @@ class Paciente extends Model
         return $this->hasMany(Atencion::class);
     }
 
-    //Accesor para obtener datos del paciente
-    public function getNombreCompletoAttribute(): string
-    {
-        return "{$this->nombre} {$this->codigo} {$this->carrera_area}";
-    }
-    
 }

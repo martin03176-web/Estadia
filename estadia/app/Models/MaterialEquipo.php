@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MaterialEquipo extends Model
 {
-    protected $fillable = ['nombre','nota'];
+    protected $fillable = [
+        'nombre',
+        'nota'
+    ];
 
     public const PAGINATE = 10;
 
@@ -15,12 +19,6 @@ class MaterialEquipo extends Model
     public function atncion(): HasMany
     {
         return $this->hasMany(Incidente::class);
-    }
-
-    //Accesor para obtener datos del paciente
-    public function getNombreCompletoAttribute(): string
-    {
-        return "{$this->nombre} {$this->nota}";
     }
     
 }

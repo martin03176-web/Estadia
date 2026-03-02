@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Atencion;
+namespace App\Http\Requests\Extintor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateAtencionRequest extends FormRequest
+class UpdateExtintorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,6 @@ class UpdateAtencionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreateAtencionRequest())->rules();
+        return (new CreateExtintorRequest())->rules();
     }
 }

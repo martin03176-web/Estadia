@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TipoRiesgo extends Model
 {
-    protected $fillable = ['tipo'];
+    protected $fillable = [
+        'tipo'
+    ];
 
     public const PAGINATE = 10;
 
@@ -18,10 +20,4 @@ class TipoRiesgo extends Model
         return $this->hasMany(Incidente::class);
     }
    
-    //Accesor para obtener datos del Area
-    public function getNombreCompletoAttribute(): string
-    {
-        return "{$this->tipo} ";
-    }
-    
 }

@@ -51,20 +51,10 @@ class IncidenteController extends Controller
      */
     public function store(CreateIncidenteRequest $request)
     {
-        \Log::info('=== NUEVO INCIDENTE ===');
-        \Log::info('Datos completos:', $request->all());
-        \Log::info('Datos validados:', $request->validated());
-        
-        // Verificar específicamente los IDs
-        \Log::info('area_id:', [$request->input('area_id')]);
-        \Log::info('responsable_id:', [$request->input('responsable_id')]);
-        \Log::info('tipo_incidente_id:', [$request->input('tipo_incidente_id')]);
-        \Log::info('descripcion:', [$request->input('descripcion')]);
-        
         try {
             $incidente = $this->service->create($request->validated());
             \Log::info('Incidente creado con ID: ' . $incidente->id);
-            
+
             return redirect()->route('incidentes.index')
                 ->with('message', 'Atención creada exitosamente');
         } catch (\Exception $e) {
@@ -74,12 +64,13 @@ class IncidenteController extends Controller
                 ->withInput();
         }
     }
+
     /**
      * Display the specified resource.
      */
     public function show(int $id)
     {
-        $incidentes = $this->service->find($id);
+        $incidente = $this->service->find($id);
         
         return view('incidentes.show', compact('incidente'));
     }
@@ -87,11 +78,17 @@ class IncidenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Incidente $incidente)
+    public function edit(int $id)
     {
-        
-        $incidentes = Incidente::orderBy('nombre')->get();
-        return view('incidentes.form', compact('incidente', 'incidentes'));
+        $incidente = $this->service->find($id);
+        $areas = Area::orderBy('edificio')->get();
+        $responsables = Responsable::orderBy('nombre')->get();
+        $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
+        $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
+        $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
+        $materialEquipos = MaterialEquipo::orderBy('nombre')->get();
+
+        return view('incidentes.form', compact('incidente', 'areas', 'responsables', 'tipoIncidentes', 'tipoRiesgos', 'nivelRiesgos', 'materialEquipos'));
     }
 
     /**
@@ -101,7 +98,7 @@ class IncidenteController extends Controller
     {
         $this->service->update($incidente, $request->validated());
 
-        return redirect()->route('incidentes.index')->with('message', 'Atención actualizado exitosamente');
+        return redirect()->route('incidentes.index')->with('message', 'Atención actualizada exitosamente');
     }
 
     /**
@@ -111,6 +108,6 @@ class IncidenteController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('incidentes.index')->with('message', 'Atención Eliminado exitosamente');
+        return redirect()->route('incidentes.index')->with('message', 'Atención eliminada exitosamente');
     }
 }
