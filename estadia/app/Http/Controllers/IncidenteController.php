@@ -79,29 +79,29 @@ class IncidenteController extends Controller
      */
     public function show(int $id)
     {
-        $Incidentes = $this->service->find($id);
+        $incidentes = $this->service->find($id);
         
-        return view('Incidentes.show', compact('Incidente'));
+        return view('incidentes.show', compact('incidente'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Incidente $Incidente)
+    public function edit(Incidente $incidente)
     {
         
-        $Incidentes = Incidente::orderBy('nombre')->get();
-        return view('Incidentes.form', compact('Incidente', 'Incidentes'));
+        $incidentes = Incidente::orderBy('nombre')->get();
+        return view('incidentes.form', compact('incidente', 'incidentes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIncidenteRequest $request, Incidente $Incidente)
+    public function update(UpdateIncidenteRequest $request, Incidente $incidente)
     {
-        $this->service->update($Incidente, $request->validated());
+        $this->service->update($incidente, $request->validated());
 
-        return redirect()->route('Incidentes.index')->with('message', 'Atención actualizado exitosamente');
+        return redirect()->route('incidentes.index')->with('message', 'Atención actualizado exitosamente');
     }
 
     /**
@@ -111,6 +111,6 @@ class IncidenteController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('Incidentes.index')->with('message', 'Atención Eliminado exitosamente');
+        return redirect()->route('incidentes.index')->with('message', 'Atención Eliminado exitosamente');
     }
 }

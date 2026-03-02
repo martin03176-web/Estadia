@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TipoRiesgo extends Model
 {
@@ -14,7 +15,7 @@ class TipoRiesgo extends Model
     //Relación con las incidencias
     public function atncion(): HasMany
     {
-        return $this->hasMany(Incidencia::class);
+        return $this->hasMany(Incidente::class);
     }
    
     //Accesor para obtener datos del Area

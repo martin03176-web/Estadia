@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/registros.css')}}">    
+<link rel="stylesheet" href="{{asset('assets/css/tablaS.css')}}">    
 @endsection
 
 @section('titulo','Tabla Equipos de Fumigaciones')
@@ -21,26 +21,16 @@
                 <thead>
                   <tr class="table-active">
                     <th scope="col">Nombre del equipo de fumigación</th>
-                    <th scope="col">Nota</th>
-                    <th scope="col">Accion</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
+                @forEach($equipoFumigacions as $equipoFumigacion)
                 <tbody>
-                 
                   <tr>
-                    <th scope="row">Mochila</th>
+                    <th scope="row">{{$equipoFumigacion->nombre}}</th>
                     <td>Agotado</td>
                     <td><a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                    
-                  </tr>
-                  <tr>
-                    <th scope="row">Otro</th>
-                    <td>...</td>
-                    <td><a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                    
-                  </tr>
-                 
-
+                    @endforeach
                 </tbody>
               </table>
     </div>
@@ -63,31 +53,7 @@
 </section>
 @endsection
 @section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Menú móvil
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Cerrar menú al hacer clic en un enlace
-        const navLinks = document.querySelectorAll('.nav-link, .submenu-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 900) {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-    });
-</script>
+
     
 @endsection
  

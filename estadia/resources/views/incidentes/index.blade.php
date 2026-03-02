@@ -19,38 +19,63 @@
             <h1>Historial de Incidencias</h1>
         </div>
 
-        <div class="form-group">
-            <!-- On tables -->
-            <table class="table">
-                <thead>
-                  <tr class="table-active">
-                    <th scope="col">Asunto</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Lugar del incidente</th>
-                    <th scope="col">Tipo de incidente</th>
-                    <th scope="col">Tipo de riesgo</th>
-                    <th scope="col">Nivel de riesgo</th>
-                    <th scope="col">Descripción del incidente</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                @foreach ($incidentes as $incidente)
-                <tbody>
-                  <tr>
-                    <th scope="row">{{$incidente->asunto}}</th>
-                    <td>{{ $incidente->fecha }}</td>
-                    <td>{{$incidente->area->edificio}}{{$incidente->area->piso}}{{$incidente->area->lugar}}</td>
-                    <td>{{$incidente->tipoIncidente->tipo}}</td>
-                    <td>{{$incidente->tipoRiesgo->tipo}}</td>
-                    <td>{{$incidente->nivelRiesgo->nivel}}</td>
-                    <td>{{$incidente->descripcion}}</td>
-                    <td><a href="{{ route('incidentes.edit', $incidente) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                  </tr>
-                  @endforeach
-                
-                </tbody>
-              </table>
-    </div>
+        <div class="container-fluid mt-4 px-4">
+            <div class="row">
+                @foreach($incidentes as $incidente)
+                <div class="col-12 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-black d-flex justify-content-between">
+                            <strong>{{ $incidente->asunto }}</strong>
+        
+                            @php
+                                $color = match($incidente->nivelRiesgo->nivel ?? '') {
+                                    'Bajo' => 'success',
+                                    'Medio' => 'warning',
+                                    'Alto' => 'danger',
+                                    default => 'secondary'
+                                };
+                            @endphp
+        
+                            <span class="badge bg-{{ $color }}">
+                                {{ $incidente->nivelRiesgo->nivel ?? 'N/A' }}
+                            </span>
+                        </div>
+        
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p><strong>Fecha:</strong> {{ $incidente->fecha }}</p>
+                                    <p><strong>Área:</strong><br>
+                                        {{ $incidente->area->edificio ?? 'N/A' }} <br>
+                                        {{ $incidente->area->piso ?? 'N/A' }} <br>
+                                        {{ $incidente->area->lugar ?? 'N/A' }}
+                                    </p>
+                                </div>
+        
+                                <div class="col-md-9">
+                                    <p><strong>Tipo:</strong> {{ $incidente->tipoIncidente->tipo ?? 'N/A' }}</p>
+                                    <p><strong>Riesgo:</strong> {{ $incidente->tipoRiesgo->tipo ?? 'N/A' }}</p>
+        
+                                    <hr>
+        
+                                    <p class="text-muted">
+                                        {{ Str::limit($incidente->descripcion, 400) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="card-footer text-end">
+                            <a href="{{ route('incidentes.edit', $incidente) }}" 
+                               class="btn btn-sm btn-outline-primary">
+                                Actualizar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
         <div class="row ">
             <div class="col-md-6 justify-content-center" >

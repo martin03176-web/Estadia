@@ -1,17 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PacienteController;
-use App\Http\Controllers\AtencionController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AtencionController;
+use App\Http\Controllers\ClaveController;
+use App\Http\Controllers\EquipoFumigacionController;
+use App\Http\Controllers\ExtintorController;
+use App\Http\Controllers\FumigacionController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncidenteController;
+use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\MaterialEquipoController;
+use App\Http\Controllers\NivelRiesgoController;
+use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResponsableController;
+use App\Http\Controllers\TipoController;
 use App\Http\Controllers\TipoIncidenteController;
 use App\Http\Controllers\TipoRiesgoController;
-use App\Http\Controllers\NivelRiesgoController;
-use App\Http\Controllers\IncidenteController;
+use Illuminate\Support\Facades\Route;
+
 
 
 //Route::get('/', function () {
@@ -38,6 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('materialEquipos', MaterialEquipoController::class);
     Route::resource('pacientes', PacienteController::class);
     Route::resource('atencions', AtencionController::class);
+    Route::resource('equipoFumigacions', EquipoFumigacionController::class);
+    Route::resource('fumigacions', FumigacionController::class);
+    Route::resource('claves', ClaveController::class);
+    Route::resource('tipos', TipoController::class);
+    Route::resource('extintors', ExtintorController::class);
+    Route::resource('mantenimientos', MantenimientoController::class);
 });
 
 require __DIR__.'/auth.php';

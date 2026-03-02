@@ -302,6 +302,7 @@
                             <a href="{{ route('incidentes.create') }}" class="submenu-link"><i class="fas fa-exclamation-triangle"></i> Reportar Incidencia</a>
                             <a href="{{ route('incidentes.index') }}" class="submenu-link"><i class="fas fa-history"></i> Historial</a>
                             <a href="{{ route('areas.index') }}" class="submenu-link"><i class="fa-solid fa-expand"></i> Áreas</a>
+                            <a href="{{ route('responsables.index') }}" class="submenu-link"><i class="fa-solid fa-person"></i> Responsables</a>
                             <a href="{{ route('materialEquipos.index') }}" class="submenu-link"><i class="fa-solid fa-toolbox"></i> Materiales</a>
                             <a href="{{ route('tipoIncidentes.index') }}" class="submenu-link"><i class="fa-solid fa-person-falling-burst"></i> Tipo Incidente</a>
                             <a href="{{ route('tipoRiesgos.index') }}" class="submenu-link"><i class="fa-solid fa-explosion"></i> Tipo Riesgo</a>
@@ -316,10 +317,10 @@
                             <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="submenu">
-                            <a href="{{ url('tabla_fumigaciones') }}" class="submenu-link"><i class="fa-solid fa-table"></i> Tabla Fumigaciones</a>
-                            <a href="{{ url('fumigaciones/historial') }}" class="submenu-link"><i class="fas fa-clipboard-list"></i> Historial</a>
+                            <a href="{{ route('fumigacions.create') }}" class="submenu-link"><i class="fa-solid fa-table"></i> Fumigaciones</a>
+                            <a href="{{ route('fumigacions.index') }}" class="submenu-link"><i class="fas fa-clipboard-list"></i> Historial</a>
                             <a href="{{ route('responsables.index') }}" class="submenu-link"><i class="fa-solid fa-person"></i> Responsables</a>
-                            <a href="{{ url('tabla_equipos') }}" class="submenu-link"><i class="fa-solid fa-toolbox"></i> Equipos</a>
+                            <a href="{{ route('equipoFumigacions.index') }}" class="submenu-link"><i class="fa-solid fa-toolbox"></i> Equipos</a>
                         </div>
                     </div>
                     
@@ -330,10 +331,12 @@
                             <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="submenu">
-                            <a href="{{ url('registro_extintores') }}" class="submenu-link"><i class="fa-solid fa-circle-plus"></i> Nuevo Extintor</a>
-                            <a href="{{ url('inventario_extintores') }}" class="submenu-link"><i class="fas fa-boxes"></i> Inventario</a>
-                            <a href="{{ url('tabla_mantenimientos') }}" class="submenu-link"><i class="fas fa-tools"></i> Mantenimiento</a>
-                            <a href="{{ url('tabla_areas') }}" class="submenu-link"><i class="fas fa-clipboard-check"></i> Áreas</a>
+                            <a href="{{ route('extintors.create') }}" class="submenu-link"><i class="fa-solid fa-circle-plus"></i> Nuevo Extintor</a>
+                            <a href="{{ route('extintors.index') }}" class="submenu-link"><i class="fas fa-boxes"></i> Inventario</a>
+                            <a href="{{ route('mantenimientos.index') }}" class="submenu-link"><i class="fas fa-tools"></i> Mantenimiento</a>
+                            <a href="{{ route('areas.index') }}" class="submenu-link"><i class="fas fa-clipboard-check"></i> Áreas</a>
+                            <a href="{{ route('tipos.index') }}" class="submenu-link"><i class="fa-solid fa-layer-group"></i> Tipos</a>
+                            <a href="{{ route('claves.index') }}" class="submenu-link"><i class="fa-solid fa-barcode"></i> Clave</a>
                         </div>
                     </div>
                     

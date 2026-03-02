@@ -255,10 +255,10 @@
             <!-- medicamentos -->
             <div class="form-group">
                 <label >
-                    <i class="fa-solid fa-capsules"></i> Medicamentos que toma actualmente, si es que si ¿Cuáles?
+                    <i class="fa-solid fa-capsules"></i> Medicamentos que toma actualmente, No/Si y ¿Cuáles?
                 </label>
                 <input type="text" id="medicamento" name="medicamento" value="{{ old('medicamento', $atencion->medicamento) }}"
-                       placeholder="Solo llenar si es necesario" autocomplete="medicamento">
+                       placeholder="No, ninguno/ Sí,..." autocomplete="medicamento">
                        @error('medicamento')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 

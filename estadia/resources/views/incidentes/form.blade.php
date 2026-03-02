@@ -30,7 +30,7 @@
             @if($incidente->exists)
             @method('PUT')
             @endif
-             <!-- Name/Nombre -->
+             <!-- Asunto -->
             <div class="form-group">
                 <label>
                     <i class="fa-solid fa-align-left"></i> Asunto
@@ -43,7 +43,7 @@
                        @enderror
                       
             </div>
-            <!-- Email Address/Correo Electronico -->
+            <!-- fecha -->
             <div class="form-group">
                 <label>
                     <i class="fa-regular fa-calendar-days"></i> Fecha
@@ -271,21 +271,6 @@
                 </a> --}}
             </div>
         </form>
-        @if(config('app.debug'))
-<div style="background: #f0f0f0; padding: 10px; margin-top: 20px;">
-    <h4>Datos de depuración:</h4>
-    <p>Área seleccionada ID: <span id="debug_area_id"></span></p>
-    <p>Responsable ID: <span id="debug_responsable_id"></span></p>
-</div>
-
-<script>
-    // Actualizar debug cuando cambien los valores
-    document.getElementById('areas_input').addEventListener('input', function() {
-        document.getElementById('debug_area_id').textContent = document.getElementById('area_id').value;
-    });
-</script>
-@endif
-        
         <div id="message" class="message"></div>
     </div>
 </section>
