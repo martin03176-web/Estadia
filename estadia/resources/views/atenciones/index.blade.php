@@ -1,9 +1,9 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaL.css')}}">    
+
 @endsection
 
-@section('titulo','Lista de Atenciones')
+@section('titulo','Lista de atenciones')
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
@@ -13,9 +13,10 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-L">
         <div class="logo-text">
             <h1>Lista de Atenciones</h1>
+            <a href="{{ route('atenciones.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Atención</a>
         </div>
 
         <div class="form-group">
@@ -63,7 +64,7 @@
                   @endforeach
                 </tbody>
               </table> --}}
-              @foreach($atencions as $atencion)
+              @foreach($atenciones as $atencion)
               <div class="card shadow-lg border-0 mb-4">
                 <div class="card-header bg-active d-flex justify-content-between align-items-center">
                     <div>
@@ -148,8 +149,8 @@
             
                     <!-- BOTONES -->
                     <div class="d-flex justify-content-end gap-2">
-                        <a href="{{ route('atencions.show', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-eye"></i>Ver</a>
-                        <a href="{{ route('atencions.edit', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-file-arrow-up"></i>Actualizar</a>
+                        <a href="{{ route('atenciones.show', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-eye"></i>Ver</a>
+                        <a href="{{ route('atenciones.edit', $atencion) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-file-arrow-up"></i>Actualizar</a>
                     </div>
             
                 </div>

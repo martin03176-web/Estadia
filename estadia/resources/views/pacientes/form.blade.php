@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}">    
+
 @endsection
 
 @section('titulo','Registro de pacientes')
@@ -11,7 +11,7 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         <div class="logo-text">
             <h1>Registro de Paciente</h1>
         </div>
@@ -106,8 +106,8 @@
            
         <!-- Boton principal -->
             <div class="flex items-center justify-end mt-4">
-                <x-primary-button class="btn btn-login">
-                    <i class="fa-solid fa-check-to-slot"></i> {{ $paciente->exists ? 'Actualizar' : 'Registrar'}}
+                <x-primary-button class="btn btn-solid-red">
+                    <i class="fa-solid fa-check-to-slot"></i> {{ $paciente->exists ? 'Actualizar' : 'Registrar' }}
                 </x-primary-button>
             </div>
         </form>

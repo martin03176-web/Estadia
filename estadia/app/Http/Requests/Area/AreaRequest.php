@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Extintor;
+namespace App\Http\Requests\Area;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateExtintorRequest extends FormRequest
+class AreaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,11 @@ class UpdateExtintorRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreateExtintorRequest())->rules();
+        return [
+            'edificio' => 'required|string|max:100',
+            'piso' =>'required|string|max:100',
+            'lugar' =>'required|string|max:100',
+            'nota' =>'nullable|string|max:100',
+        ];
     }
 }

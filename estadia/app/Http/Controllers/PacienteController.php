@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\Paciente\CreatePacienteRequest;
-use App\Http\Requests\Paciente\UpdatePacienteRequest;
+use App\Http\Requests\Paciente\PacienteRequest;
 use App\Services\Paciente\PacienteService;
 use App\Models\Paciente;
 
@@ -27,13 +26,13 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        return view('pacientes.form', ['paciente'=> new Paciente()]); 
+        return view('pacientes.form', ['paciente'=> new Paciente()]); // paciente => new Paciente se elimina 
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreatePacienteRequest $request)
+    public function store(PacienteRequest $request)
     {
         $this->service->create($request->validated());
         return redirect()->route('pacientes.index')->with('message', 'Paciente creado exitosamente');
@@ -43,11 +42,11 @@ class PacienteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
-    {
-        $paciente = $this->service->find($id);
-        return view('pacientes.show', compact('paciente'));
-    }
+    // public function show(int $id)
+    // {
+    //     $paciente = $this->service->find($id);
+    //     return view('pacientes.show', compact('paciente'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -61,7 +60,7 @@ class PacienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePacienteRequest $request, int $id)
+    public function update(PacienteRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
 

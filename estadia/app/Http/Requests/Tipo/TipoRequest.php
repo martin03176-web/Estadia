@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Area;
+namespace App\Http\Requests\Tipo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateAreaRequest extends FormRequest
+class TipoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,8 @@ class UpdateAreaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreateAreaRequest())->rules();
+        return [
+            'tipo' => 'required|string|max:100',
+        ];
     }
 }

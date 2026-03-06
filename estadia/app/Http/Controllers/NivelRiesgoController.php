@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\NivelRiesgo\CreateNivelRiesgoRequest;
-use App\Http\Requests\NivelRiesgo\UpdateNivelRiesgoRequest;
+//use Illuminate\Http\Request;
+use App\Http\Requests\NivelRiesgo\NivelRiesgoRequest;
 use App\Services\NivelRiesgo\NivelRiesgoService;
 use App\Models\NivelRiesgo;
 
@@ -32,10 +31,10 @@ class NivelRiesgoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateNivelRiesgoRequest $request)
+    public function store(NivelRiesgoRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('nivelRiesgos.index')->with('message', 'NivelRiesgo creada correctamente');
+        return redirect()->route('nivelRiesgos.index')->with('message', 'Nivel de Riesgo creado correctamente');
     }
 
     /**
@@ -59,10 +58,10 @@ class NivelRiesgoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNivelRiesgoRequest $request, int $id)
+    public function update(NivelRiesgoRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
-        return redirect()->route('nivelRiesgos.index')->with('message', 'NivelRiesgo actualizada correctamente');
+        return redirect()->route('nivelRiesgos.index')->with('message', 'Nivel de Riesgo actualizado correctamente');
     }
 
     /**
@@ -71,6 +70,6 @@ class NivelRiesgoController extends Controller
     public function destroy(string $id)
     {
         $this->service->delete($id);
-        return redirect()->route('nivelRiesgos.index')->with('message', 'NivelRiesgo eliminada correctamente');
+        return redirect()->route('nivelRiesgos.index')->with('message', 'Nivel de Riesgo eliminado correctamente');
     }
 }

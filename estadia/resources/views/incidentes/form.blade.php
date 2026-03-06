@@ -1,13 +1,13 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}">
+
 @endsection
 
 @section('titulo','Reporte de incidencias')
 
 @section('contenido')
 <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         <div class="logo-text">
             <h1>Registro de Incidencias</h1>
         </div>
@@ -28,7 +28,7 @@
             @method('PUT')
             @endif
 
-            <!-- Asunto -->
+            <!-- Asunto -->|
             <div class="form-group">
                 <label><i class="fa-solid fa-align-left"></i> Asunto</label>
                 <textarea name="asunto" class="form-control" rows="4">{{ old('asunto', $incidente->asunto) }}</textarea>
@@ -201,7 +201,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-primary-button class="btn btn-login">
+                <x-primary-button class="btn btn-solid-red">
                     <i class="fa-solid fa-check-to-slot"></i> {{ $incidente->exists ? 'Actualizar' : 'Registrar' }}
                 </x-primary-button>
             </div>

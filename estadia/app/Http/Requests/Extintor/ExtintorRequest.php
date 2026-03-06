@@ -5,7 +5,7 @@ namespace App\Http\Requests\Extintor;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class CreateExtintorRequest extends FormRequest
+class ExtintorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

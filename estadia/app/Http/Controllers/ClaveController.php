@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\Clave\CreateClaveRequest;
-use App\Http\Requests\Clave\UpdateClaveRequest;
+use App\Http\Requests\Clave\ClaveRequest;
 use App\Services\Clave\ClaveService;
 use App\Models\Clave;
 
@@ -32,7 +31,7 @@ class ClaveController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateClaveRequest $request)
+    public function store(ClaveRequest $request)
     {
         $this->service->create($request->validated());
         return redirect()->route('claves.index')->with('message', 'clave creada correctamente');
@@ -59,7 +58,7 @@ class ClaveController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClaveRequest $request, int $id)
+    public function update(ClaveRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
         return redirect()->route('claves.index')->with('message', 'Clave actualizada correctamente');

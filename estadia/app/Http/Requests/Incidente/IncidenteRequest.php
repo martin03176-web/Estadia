@@ -5,7 +5,7 @@ namespace App\Http\Requests\Incidente;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class CreateIncidenteRequest extends FormRequest
+class IncidenteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

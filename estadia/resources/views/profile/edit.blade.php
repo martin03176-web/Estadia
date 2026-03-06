@@ -1,29 +1,59 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-200 leading-tight">
-            {{ __('Mi Perfil') }}
-        </h2>
-    </x-slot>
+@extends('layouts.template')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-black/50 backdrop-blur-md shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+@section('titulo', 'Mi Perfil')
+
+@section('contenido')
+<div>
+    <div class="container">
+        <h1 class="page-title">Mi Perfil</h1>
+        <p class="page-subtitle">Administra tu información personal, contraseña y configuración de cuenta</p>
+    </div>
+</div>
+
+<div class="container main-content">
+    <div class="row g-4">
+        <!-- Información de perfil -->
+        <div class="col-12">
+            <div class="content-card">
+                <h3 >
+                    <i class="fas fa-user me-2"></i>Información de perfil
+                </h3>
+                @include('profile.partials.update-profile-information-form')
             </div>
+        </div>
 
-            <div class="p-4 sm:p-8 bg-black/50 backdrop-blur-md shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
+        <!-- Actualizar contraseña -->
+        <div class="col-12">
+            <div class="content-card">
+                <h3 >
+                    <i class="fas fa-lock me-2"></i>Actualizar contraseña
+                </h3>
+                @include('profile.partials.update-password-form')
             </div>
+        </div>
 
-            <div class="p-4 sm:p-8 bg-black/50 backdrop-blur-md shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+        <!-- Eliminar cuenta -->
+        <div class="col-12">
+            <div class="content-card">
+                <h3 class="content-title text-danger">
+                    <i class="fas fa-trash-alt me-2"></i>Eliminar cuenta
+                </h3>
+                @include('profile.partials.delete-user-form')
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    // Auto-ocultar alertas después de 3 segundos
+    setTimeout(function() {
+        document.querySelectorAll('.alert-auto-hide').forEach(function(alert) {
+            alert.style.transition = 'opacity 0.5s';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+        });
+    }, 3000);
+</script>
+@endsection

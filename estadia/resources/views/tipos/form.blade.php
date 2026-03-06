@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}">    
+
 @endsection
 
 @section('titulo','Registro de tipos de extintores')
@@ -12,7 +12,7 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         <div class="logo-text">
             <h1>Registro de Tipos de Extintores</h1>
         </div>
@@ -46,12 +46,9 @@
             </div>
         
             <div class="flex items-center justify-end mt-4">
-                <x-primary-button class="btn btn-login">
-                    <i class="fa-solid fa-check-to-slot"></i> {{ $tipo->exists ? 'Actualizar' : 'Registrar'}}
+                <x-primary-button class="btn btn-solid-red">
+                    <i class="fa-solid fa-check-to-slot"></i> {{ $tipo->exists ? 'Actualizar' : 'Registrar' }}
                 </x-primary-button>
-                {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a> --}}
             </div>
         </form>
         

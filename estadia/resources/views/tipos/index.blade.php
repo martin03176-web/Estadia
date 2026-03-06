@@ -1,9 +1,9 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaS.css')}}">    
+
 @endsection
 
-@section('titulo','Tabla tipo de riesgos')
+@section('titulo','Tabla tipos de extintores')
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
@@ -14,9 +14,10 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-S">
         <div class="logo-text">
             <h1>Tablas Tipos de Riesgos</h1>
+            <a href="{{ route('tipos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Tipo de Extintor</a>
         </div>
 
         <div class="form-group">

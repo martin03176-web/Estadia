@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('titulo','Expediente Clínico')
+@section('titulo','Expediente clínico')
 
 @section('estilos')
 <style>

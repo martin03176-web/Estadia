@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\Area\CreateAreaRequest;
-use App\Http\Requests\Area\UpdateAreaRequest;
+use App\Http\Requests\Area\AreaRequest;
 use App\Services\Area\AreaService;
 use App\Models\Area;
 
@@ -33,7 +32,7 @@ class AreaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateAreaRequest $request)
+    public function store(AreaRequest $request)
     {
         $this->service->create($request->validated());
         return redirect()->route('areas.index')->with('message', 'Area creada correctamente');
@@ -60,7 +59,7 @@ class AreaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAreaRequest $request, int $id)
+    public function update(AreaRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
         return redirect()->route('areas.index')->with('message', 'Area actualizada correctamente');

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\MaterialEquipo;
+namespace App\Http\Requests\NivelRiesgo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class CreateMaterialEquipoRequest extends FormRequest
+class NivelRiesgoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,7 @@ class CreateMaterialEquipoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:100',
-            'nota' =>'required|string|max:100',
+            'nivel' => 'required|string|max:100',
         ];
     }
 }

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\Incidente\CreateIncidenteRequest;
-use App\Http\Requests\Incidente\UpdateIncidenteRequest;
+use App\Http\Requests\Incidente\IncidenteRequest;
 use App\Services\Incidente\IncidenteService;
 
 use App\Models\Incidente;
@@ -49,14 +48,14 @@ class IncidenteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateIncidenteRequest $request)
+    public function store(IncidenteRequest $request)
     {
         try {
             $incidente = $this->service->create($request->validated());
             \Log::info('Incidente creado con ID: ' . $incidente->id);
 
             return redirect()->route('incidentes.index')
-                ->with('message', 'Atención creada exitosamente');
+                ->with('message', 'Incidente creado exitosamente');
         } catch (\Exception $e) {
             \Log::error('Error al crear incidente: ' . $e->getMessage());
             return back()
@@ -70,8 +69,14 @@ class IncidenteController extends Controller
      */
     public function show(int $id)
     {
-        $incidente = $this->service->find($id);
-        
+        $incidente = Incidente::with([
+            'responsable',
+            'tipoIncidente',
+            'tipoRiesgo',
+            'nivelRiesgo',
+            'materialEquipo'
+        ])->findOrFail($id);
+    
         return view('incidentes.show', compact('incidente'));
     }
 
@@ -94,11 +99,11 @@ class IncidenteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIncidenteRequest $request, Incidente $incidente)
+    public function update(IncidenteRequest $request, Incidente $incidente)
     {
         $this->service->update($incidente, $request->validated());
 
-        return redirect()->route('incidentes.index')->with('message', 'Atención actualizada exitosamente');
+        return redirect()->route('incidentes.index')->with('message', 'Incidente actualizado exitosamente');
     }
 
     /**
@@ -108,6 +113,6 @@ class IncidenteController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('incidentes.index')->with('message', 'Atención eliminada exitosamente');
+        return redirect()->route('incidentes.index')->with('message', 'Incidente eliminado exitosamente');
     }
 }

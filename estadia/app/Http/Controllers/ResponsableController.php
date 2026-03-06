@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\Responsable\CreateResponsableRequest;
-use App\Http\Requests\Responsable\UpdateResponsableRequest;
+//use Illuminate\Http\Request;
+use App\Http\Requests\Responsable\ResponsableRequest;
 use App\Services\Responsable\ResponsableService;
 use App\Models\Responsable;
 
@@ -33,7 +32,7 @@ class ResponsableController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateResponsableRequest $request)
+    public function store(ResponsableRequest $request)
     {
         $this->service->create($request->validated());
         return redirect()->route('responsables.index')->with('message', 'Responsable creado exitosamente');
@@ -61,7 +60,7 @@ class ResponsableController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateResponsableRequest $request, int $id)
+    public function update(ResponsableRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
 

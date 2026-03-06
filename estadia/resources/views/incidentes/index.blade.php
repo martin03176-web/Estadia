@@ -1,15 +1,16 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaL.css')}}">
+
 @endsection
 
-@section('titulo','Historial de Incidencias')
+@section('titulo','Historial de incidencias')
 
 @section('contenido')
 <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-L">
         <div class="logo-text">
             <h1>Historial de Incidencias</h1>
+            <a href="{{ route('incidentes.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Incidente</a>
         </div>
 
         <div class="container-fluid mt-4 px-4">
@@ -51,7 +52,7 @@
                         </div>
 
                         <div class="card-footer text-end">
-                            <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('incidentes.show', $incidente) }}" class="btn btn-outline-secondary">
                                 <i class="fa-solid fa-eye"></i> Ver
                             </a>
                             <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-outline-secondary">

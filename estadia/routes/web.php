@@ -44,12 +44,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('nivelRiesgos', NivelRiesgoController::class);
     Route::resource('materialEquipos', MaterialEquipoController::class);
     Route::resource('pacientes', PacienteController::class);
-    Route::resource('atencions', AtencionController::class);
-    Route::resource('equipoFumigacions', EquipoFumigacionController::class);
-    Route::resource('fumigacions', FumigacionController::class);
+    Route::resource('atenciones', AtencionController::class);
+    Route::resource('equipoFumigaciones', EquipoFumigacionController::class);
+    Route::resource('fumigaciones', FumigacionController::class);
     Route::resource('claves', ClaveController::class);
     Route::resource('tipos', TipoController::class);
-    Route::resource('extintors', ExtintorController::class);
+    Route::resource('extintores', ExtintorController::class);
     Route::resource('mantenimientos', MantenimientoController::class);
 });
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Atencion;
+namespace App\Http\Requests\MaterialEquipo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateAtencionRequest extends FormRequest
+class MaterialEquipoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,9 @@ class UpdateAtencionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreateAtencionRequest())->rules();
+        return [
+            'nombre' => 'required|string|max:100',
+            'nota' =>'required|string|max:100',
+        ];
     }
 }

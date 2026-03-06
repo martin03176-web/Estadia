@@ -6,6 +6,7 @@
     <title>@yield('titulo','Proteccion Civil')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/css/tablasR.css')}}">
     
     @yield('estilos')
     <style>
@@ -286,9 +287,9 @@
                             <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="submenu">
-                            <a href="{{ route('atencions.create') }}" class="submenu-link"><i class="fa-regular fa-pen-to-square"></i> Atender Paciente</a>
+                            <a href="{{ route('atenciones.create') }}" class="submenu-link"><i class="fa-regular fa-pen-to-square"></i> Atender Paciente</a>
                             <a href="{{ route('pacientes.index') }}" class="submenu-link"><i class="fas fa-list"></i> Lista de Pacientes</a>
-                            <a href="{{ route('atencions.index') }}" class="submenu-link"><i class="fas fa-chart-bar"></i> Lista de Atenciones</a>
+                            <a href="{{ route('atenciones.index') }}" class="submenu-link"><i class="fas fa-chart-bar"></i> Lista de Atenciones</a>
                         </div>
                     </div>
                     
@@ -317,10 +318,10 @@
                             <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="submenu">
-                            <a href="{{ route('fumigacions.create') }}" class="submenu-link"><i class="fa-solid fa-table"></i> Fumigaciones</a>
-                            <a href="{{ route('fumigacions.index') }}" class="submenu-link"><i class="fas fa-clipboard-list"></i> Historial</a>
+                            <a href="{{ route('fumigaciones.create') }}" class="submenu-link"><i class="fa-solid fa-table"></i> Fumigaciones</a>
+                            <a href="{{ route('fumigaciones.index') }}" class="submenu-link"><i class="fas fa-clipboard-list"></i> Historial</a>
                             <a href="{{ route('responsables.index') }}" class="submenu-link"><i class="fa-solid fa-person"></i> Responsables</a>
-                            <a href="{{ route('equipoFumigacions.index') }}" class="submenu-link"><i class="fa-solid fa-toolbox"></i> Equipos</a>
+                            <a href="{{ route('equipoFumigaciones.index') }}" class="submenu-link"><i class="fa-solid fa-toolbox"></i> Equipos</a>
                         </div>
                     </div>
                     
@@ -331,8 +332,8 @@
                             <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="submenu">
-                            <a href="{{ route('extintors.create') }}" class="submenu-link"><i class="fa-solid fa-circle-plus"></i> Nuevo Extintor</a>
-                            <a href="{{ route('extintors.index') }}" class="submenu-link"><i class="fas fa-boxes"></i> Inventario</a>
+                            <a href="{{ route('extintores.create') }}" class="submenu-link"><i class="fa-solid fa-circle-plus"></i> Nuevo Extintor</a>
+                            <a href="{{ route('extintores.index') }}" class="submenu-link"><i class="fas fa-boxes"></i> Inventario</a>
                             <a href="{{ route('mantenimientos.index') }}" class="submenu-link"><i class="fas fa-tools"></i> Mantenimiento</a>
                             <a href="{{ route('areas.index') }}" class="submenu-link"><i class="fas fa-clipboard-check"></i> Áreas</a>
                             <a href="{{ route('tipos.index') }}" class="submenu-link"><i class="fa-solid fa-layer-group"></i> Tipos</a>
@@ -439,6 +440,7 @@
         
         
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     @yield('scripts')
     
 </body>

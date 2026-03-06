@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\Tipo\CreateTipoRequest;
-use App\Http\Requests\Tipo\UpdateTipoRequest;
+use App\Http\Requests\Tipo\TipoRequest;
 use App\Services\Tipo\TipoService;
 use App\Models\Tipo;
 
@@ -32,10 +31,10 @@ class TipoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateTipoRequest $request)
+    public function store(TipoRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('tipos.index')->with('message', 'Tipo creada correctamente');
+        return redirect()->route('tipos.index')->with('message', 'Tipo creado correctamente');
     }
 
     /**
@@ -59,10 +58,10 @@ class TipoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTipoRequest $request, int $id)
+    public function update(TipoRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
-        return redirect()->route('tipos.index')->with('message', 'Tipo actualizada correctamente');
+        return redirect()->route('tipos.index')->with('message', 'Tipo actualizado correctamente');
     }
 
     /**
@@ -71,6 +70,6 @@ class TipoController extends Controller
     public function destroy(string $id)
     {
         $this->service->delete($id);
-        return redirect()->route('tipos.index')->with('message', 'Tipo eliminada correctamente');
+        return redirect()->route('tipos.index')->with('message', 'Tipo eliminado correctamente');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\MaterialEquipo;
+namespace App\Http\Requests\Clave;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateMaterialEquipoRequest extends FormRequest
+class ClaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,8 @@ class UpdateMaterialEquipoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreateMaterialEquipoRequest())->rules();
+        return [
+            'clave' => 'required|string|max:100',
+        ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Fumigacion;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class CreateFumigacionRequest extends FormRequest
+class FumigacionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

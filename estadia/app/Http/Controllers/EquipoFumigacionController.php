@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\EquipoFumigacion\CreateEquipoFumigacionRequest;
-use App\Http\Requests\EquipoFumigacion\UpdateEquipoFumigacionRequest;
+use App\Http\Requests\EquipoFumigacion\EquipoFumigacionRequest;
 use App\Services\EquipoFumigacion\EquipoFumigacionService;
 use App\Models\EquipoFumigacion;
 
@@ -33,10 +32,10 @@ class EquipoFumigacionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateEquipoFumigacionRequest $request)
+    public function store(EquipoFumigacionRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('equipoFumigacions.index')->with('message', '');
+        return redirect()->route('equipoFumigacions.index')->with('message', 'Equipo de Fumigación creado exitosamente');
     
     }
 
@@ -61,11 +60,11 @@ class EquipoFumigacionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEquipoFumigacionRequest $request, int $id)
+    public function update(EquipoFumigacionRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
 
-        return redirect()->route('equipoFumigacions.index')->with('message', '');
+        return redirect()->route('equipoFumigacions.index')->with('message', 'Equipo de Fumigación actualizado exitosamente');
     }
 
     /**
@@ -75,6 +74,6 @@ class EquipoFumigacionController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('EquipoFumigacions.index')->with('message', '');
+        return redirect()->route('EquipoFumigacions.index')->with('message', 'Equipo de Fumigación eliminado exitosamente');
     }
 }

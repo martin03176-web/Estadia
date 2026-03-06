@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Mantenimiento;
+namespace App\Http\Requests\Atencion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateMantenimientoRequest extends FormRequest
+class AtencionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class CreateMantenimientoRequest extends FormRequest
             'paciente_id' => 'required|exists:pacientes,id', 
             'edad' =>'required|string|max:50',
             'semestre' =>'nullable|string|max:50',
-            'hora_Mantenimiento' =>'required|string|max:10',
+            'hora_atencion' =>'required|string|max:10',
             'frecuencia_cardiaca' =>'required|string| max:100',
             'frecuencia_respiratoria' =>'required|string|max:100',
             'tension_sistolica' =>'nullable|string|max:100',

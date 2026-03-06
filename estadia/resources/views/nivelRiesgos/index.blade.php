@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaS.css')}}">    
+
 @endsection
 
 @section('titulo','Tabla niveles de riesgos')
@@ -10,9 +10,10 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-S">
         <div class="logo-text">
             <h1>Tablas Niveles de Riesgos</h1>
+            <a href="{{ route('nivelRiesgos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Nivel de Riesgo</a>
         </div>
 
         <div class="form-group">

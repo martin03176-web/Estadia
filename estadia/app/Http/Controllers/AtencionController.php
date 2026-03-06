@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\Atencion\CreateAtencionRequest;
-use App\Http\Requests\Atencion\UpdateAtencionRequest;
+use App\Http\Requests\Atencion\AtencionRequest;
 use App\Services\Atencion\AtencionService;
-//use App\Services\Paciente\PacienteService;
 use App\Models\Atencion;
 use App\Models\Paciente;
 
@@ -22,9 +20,9 @@ class AtencionController extends Controller
     public function index()
     {
         
-        $atencions = $this->service->getAll();
+        $atenciones = $this->service->getAll();
         
-        return view('atencions.index', compact('atencions'));
+        return view('atenciones.index', compact('atenciones'));
     }
 
     /**
@@ -33,16 +31,16 @@ class AtencionController extends Controller
     public function create()
     {
         $pacientes = Paciente::orderBy('nombre')->get();
-        return view('atencions.form', ['atencion'=> new Atencion()] , compact('pacientes')); 
+        return view('atenciones.form', ['atencion'=> new Atencion()] , compact('pacientes')); 
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateAtencionRequest $request)
+    public function store(AtencionRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('atencions.index')->with('message', 'Atención creada exitosamente');
+        return redirect()->route('atenciones.index')->with('message', 'Atención creada exitosamente');
     
     }
 
@@ -51,27 +49,28 @@ class AtencionController extends Controller
      */
     public function show(int $id)
     {
-    $atencion = $this->service->find($id);
-    return view('atencions.show', compact('atencion'));
+        $atencion = $this->service->find($id);
+        return view('atenciones.show', compact('atencion'));
     }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Atencion $atencion)
+    public function edit(int $id)
     {
         
         $pacientes = Paciente::orderBy('nombre')->get();
-        return view('atencions.form', compact('atencion', 'pacientes'));
+        $atencion = $this->service->find($id);
+        return view('atenciones.form', compact('atencion', 'pacientes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAtencionRequest $request, Atencion $atencion)
+    public function update(AtencionRequest $request, Atencion $atencion)
     {
         $this->service->update($atencion, $request->validated());
 
-        return redirect()->route('atencions.index')->with('message', 'Atención actualizado exitosamente');
+        return redirect()->route('atenciones.index')->with('message', 'Atención actualizado exitosamente');
     }
 
     /**
@@ -81,6 +80,6 @@ class AtencionController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('atencions.index')->with('message', 'Atención Eliminado exitosamente');
+        return redirect()->route('atenciones.index')->with('message', 'Atención Eliminada exitosamente');
     }
 }

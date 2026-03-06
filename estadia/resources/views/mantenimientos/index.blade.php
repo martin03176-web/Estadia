@@ -1,9 +1,9 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/registros.css')}}">    
+
 @endsection
 
-@section('titulo','Tabla de Mantenimientos')
+@section('titulo','Tabla de mantenimientos')
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
@@ -14,9 +14,10 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         <div class="logo-text">
             <h1>Tabla de Mantenimientos</h1>
+            <a href="{{ route('mantenimientos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Mantenimiento</a>
         </div>
 
         <div class="form-group">

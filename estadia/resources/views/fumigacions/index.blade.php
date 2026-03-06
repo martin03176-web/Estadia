@@ -1,16 +1,17 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaL.css')}}">    
+  
 @endsection
 
-@section('titulo','Tabla de Fumigaciones')
+@section('titulo','Tabla de fumigaciones')
  
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-L">
         <div class="logo-text">
             <h1>Tablas de Fumigación</h1>
+            <a href="{{ route('fumigacions.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Fumigación</a>
         </div>
 
         <div class="form-group">

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Http\Requests\Extintor\CreateExtintorRequest;
-use App\Http\Requests\Extintor\UpdateExtintorRequest;
+use App\Http\Requests\Extintor\ExtintorRequest;
 use App\Services\Extintor\ExtintorService;
 
 use App\Models\Extintor;
@@ -49,7 +48,7 @@ class ExtintorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateExtintorRequest $request)
+    public function store(ExtintorRequest $request)
     {
         \Log::info('=== NUEVO Extintor ===');
         \Log::info('Datos completos:', $request->all());
@@ -66,7 +65,7 @@ class ExtintorController extends Controller
             \Log::info('Extintor creado con ID: ' . $Extintor->id);
             
             return redirect()->route('Extintors.index')
-                ->with('message', 'Atención creada exitosamente');
+                ->with('message', 'Extintor creado exitosamente');
         } catch (\Exception $e) {
             \Log::error('Error al crear Extintor: ' . $e->getMessage());
             return back()
@@ -77,11 +76,13 @@ class ExtintorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show($id)
     {
-        $Extintors = $this->service->find($id);
-        
-        return view('Extintors.show', compact('Extintor'));
+        $extintor = Extintor::with([
+            'area'
+        ])->findOrFail($id);
+
+        return view('extintors.show', compact('extintor'));
     }
 
     /**
@@ -97,11 +98,11 @@ class ExtintorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateExtintorRequest $request, Extintor $Extintor)
+    public function update(ExtintorRequest $request, Extintor $Extintor)
     {
         $this->service->update($Extintor, $request->validated());
 
-        return redirect()->route('Extintors.index')->with('message', 'Atención actualizado exitosamente');
+        return redirect()->route('Extintors.index')->with('message', 'Extintor actualizado exitosamente');
     }
 
     /**
@@ -111,6 +112,6 @@ class ExtintorController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('Extintors.index')->with('message', 'Atención Eliminado exitosamente');
+        return redirect()->route('Extintors.index')->with('message', 'Extintor Eliminado exitosamente');
     }
 }

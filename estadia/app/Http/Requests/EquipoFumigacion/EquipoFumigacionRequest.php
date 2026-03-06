@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Tipo;
+namespace App\Http\Requests\EquipoFumigacion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateTipoRequest extends FormRequest
+class EquipoFumigacionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,8 @@ class UpdateTipoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreateTipoRequest())->rules();
+        return [
+            'nombre' => 'required|string|max:100',
+        ];
     }
 }

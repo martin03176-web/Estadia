@@ -1,9 +1,9 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}">    
+
 @endsection
 
-@section('titulo','Tabla Materiales o Equipos')
+@section('titulo','Tabla materiales o equipos')
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
  <!-- botones ------------------------------------------------------------------------------------------------------------------------------->
@@ -14,9 +14,10 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         <div class="logo-text">
             <h1>Tabla Materiales o Equipos</h1>
+            <a href="{{ route('materialEquipos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Material o Equipo</a>
         </div>
 
         <div class="form-group">

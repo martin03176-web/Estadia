@@ -92,10 +92,10 @@
                 </div>
                 <!-- Boton de acceso -->
                 <div class="flex items-center justify-end mt-4">
-                    <x-primary-button class="btn btn-login-primary">
+                    <x-primary-button class="btn btn-solid-red">
                         <i class="fas fa-sign-in-alt"></i> {{ __('Register') }}
                     </x-primary-button>
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    <a class="forgot-link" href="{{ route('login') }}">
                         {{ __('Already registered?') }}
                     </a>
                 </div>
@@ -109,29 +109,5 @@
     
 @endsection
 @section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Menú móvil
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Cerrar menú al hacer clic en un enlace
-        const navLinks = document.querySelectorAll('.nav-link, .submenu-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 900) {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-    });
-</script>
+
 @endsection

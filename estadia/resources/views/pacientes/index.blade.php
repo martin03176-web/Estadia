@@ -1,23 +1,24 @@
 @extends('layouts.template')
 
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}">    
+    
 @endsection
 
-@section('titulo','Lista de Pacientes')
+@section('titulo','Lista de pacientes')
 
 
 
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         @if(session('message'))
             <div class="alert alert-secondary my-2">{{ session('message') }}</div>
         @endif
         
         <div class="logo-text">
             <h1>Lista de Pacientes</h1>
+            <a href="{{ route('pacientes.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Paciente</a>
         </div>
         
         <div class="form-group">
@@ -33,7 +34,6 @@
                         <th scope="col">Teléfono</th>
                         <th scope="col">Código</th>
                         <th scope="col">Carrera o Área</th>
-                        <th scope="col">Semestre</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -47,7 +47,6 @@
                                 <td>{{$paciente->telefono}}</td>
                                 <td>{{$paciente->codigo}}</td>
                                 <td>{{$paciente->carrera_area}}</td>
-                                <td>{{$paciente->semestre}}</td>
                                 <td>
                                     <a href="{{ route('pacientes.edit', $paciente) }}" type="button" class="btn btn-outline-secondary btn-sm">
                                         <i class="fa-solid fa-circle-up"></i> Actualizar

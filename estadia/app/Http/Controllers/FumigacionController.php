@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Fumigacion\CreateFumigacionRequest;
-use App\Http\Requests\Fumigacion\UpdateFumigacionRequest;
+use App\Http\Requests\Fumigacion\FumigacionRequest;
 use App\Services\Fumigacion\FumigacionService;
 use App\Models\Fumigacion;
 use App\Models\Area;
@@ -35,7 +34,7 @@ class FumigacionController extends Controller
         ); 
     }
 
-    public function store(CreateFumigacionRequest $request)
+    public function store(FumigacionRequest $request)
     {
         \Log::info('=== NUEVO Fumigacion ===');
         \Log::info('Datos completos:', $request->all());
@@ -49,7 +48,7 @@ class FumigacionController extends Controller
             \Log::info('Fumigacion creado con ID: ' . $fumigacion->id);
             
             return redirect()->route('fumigacions.index')
-                ->with('message', 'Atención creada exitosamente');
+                ->with('message', 'Fumigacion creada exitosamente');
         } catch (\Exception $e) {
             \Log::error('Error al crear Fumigacion: ' . $e->getMessage());
             return back()
@@ -58,9 +57,14 @@ class FumigacionController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show($id)
     {
-        $fumigacion = $this->service->find($id);
+        $fumigacion = Fumigacion::with([
+            'area',
+            'responsable',
+            'equipoFumigacion'
+        ])->findOrFail($id);
+
         return view('fumigacions.show', compact('fumigacion'));
     }
 
@@ -75,12 +79,12 @@ class FumigacionController extends Controller
         return view('fumigacions.form', compact('fumigacion', 'areas', 'responsables', 'materialEquipos'));
     }
 
-    public function update(UpdateFumigacionRequest $request, Fumigacion $fumigacion)
+    public function update(FumigacionRequest $request, Fumigacion $fumigacion)
     {
         $this->service->update($fumigacion, $request->validated());
 
         return redirect()->route('fumigacions.index')
-            ->with('message', 'Atención actualizado exitosamente');
+            ->with('message', 'Fumigacion actualizada exitosamente');
     }
 
     public function destroy(int $id)
@@ -88,6 +92,6 @@ class FumigacionController extends Controller
         $this->service->delete($id);
 
         return redirect()->route('fumigacions.index')
-            ->with('message', 'Atención Eliminado exitosamente');
+            ->with('message', 'Fumigacion Eliminada exitosamente');
     }
 }

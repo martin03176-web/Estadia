@@ -1,18 +1,19 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaS.css')}}">    
+
 @endsection
 
-@section('titulo','Tabla Equipos de Fumigaciones')
+@section('titulo','Tabla equipos de fumigación')
  
 
  <!-- contenido ----------------------------------------------------------------------------------------------------------------------------------->
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-S">
         <div class="logo-text">
             <h1>Tablas Equipos de Fumigación</h1>
+            <a href="{{ route('responsables.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Equipo de Fumigación</a>
         </div>
 
         <div class="form-group">

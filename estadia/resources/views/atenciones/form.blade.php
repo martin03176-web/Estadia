@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}"> 
+
 
 @endsection
 
@@ -12,7 +12,7 @@
  @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         <div class="logo-text">
             <h1>Atención a Pacientes</h1>
         </div>
@@ -27,9 +27,10 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ $atencion->exists ? route('atencions.update', $atencion) : route('atencions.store') }}" class="login-form">
+        <form method="POST" action="{{ $atencion->exists ? route('atenciones.update', $atencion) : route('atenciones.store') }}" class="login-form">
             @csrf
-            @if($atencion->exists) @method('PUT') @endif
+            @if($atencion->exists) 
+            @method('PUT') @endif
             <!-- atencion_id -->
             <div class="form-group">
 
@@ -46,7 +47,7 @@
                 
                     <input 
                         type="text" 
-                        id="paciente_input"
+                        id="pacientes_input"
                         list="pacientes_list"
                         class="form-control form-control-lg"
                         placeholder="Ingrese el Nombre Completo..."
@@ -125,8 +126,8 @@
                 <label >
                     <i class="fa-solid fa-heart-pulse"></i> Frecuencia Cardíaca
                 </label>
-                <input type="text" id="frecuencia_cardiaca" name="frecuencia_cardiaca" value="{{ old('frecuencia_cardiaca', $atencion->frecuencia_cardiaca) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="frecuencia_cardiaca">
+                <input type="number" step="0.01" min="0" id="frecuencia_cardiaca" name="frecuencia_cardiaca" value="{{ old('frecuencia_cardiaca', $atencion->frecuencia_cardiaca) }}"
+                        placeholder="Solo numeros..." required autofocus autocomplete="frecuencia_cardiaca">
                        @error('frecuencia_cardiaca')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -140,8 +141,8 @@
                 <label >
                     <i class="fa-solid fa-lungs"></i> Frecuencia Respiratoria
                 </label>
-                <input type="text" id="frecuencia_respiratoria" name="frecuencia_respiratoria" value="{{ old('frecuencia_respiratoria', $atencion->frecuencia_respiratoria) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="frecuencia_respiratoria">
+                <input type="number" step="0.01" min="0" id="frecuencia_respiratoria" name="frecuencia_respiratoria" value="{{ old('frecuencia_respiratoria', $atencion->frecuencia_respiratoria) }}"
+                        placeholder="Solo numeros..." required autofocus autocomplete="frecuencia_respiratoria">
                        @error('frecuencia_respiratoria')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -154,8 +155,8 @@
                 <label >
                     <i class="fa-solid fa-up-long"></i> Tensión Sistólica
                 </label>
-                <input type="text" id="tension_sistolica" name="tension_sistolica" value="{{ old('tension_sistolica', $atencion->tension_sistolica) }}"
-                       placeholder="Descripción..." >
+                <input type="number" step="0.01" min="0" id="tension_sistolica" name="tension_sistolica" value="{{ old('tension_sistolica', $atencion->tension_sistolica) }}"
+                        placeholder="Solo numeros..." >
                        @error('tension_sistolica')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -168,8 +169,8 @@
                 <label >
                     <i class="fa-solid fa-down-long"></i> Tensión Diastólica
                 </label>
-                <input type="text" id="tension_diastolica" name="tension_diastolica" value="{{ old('tension_diastolica', $atencion->tension_diastolica) }}"
-                       placeholder="Descripción..." >
+                <input type="number" step="0.01" min="0" id="tension_diastolica" name="tension_diastolica" value="{{ old('tension_diastolica', $atencion->tension_diastolica) }}"
+                       placeholder="Solo numeros..." >
                        @error('tension_diastolica')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -182,8 +183,8 @@
                 <label >
                     <i class="fa-solid fa-temperature-low"></i> Temperatura
                 </label>
-                <input type="text" id="temperatura" name="temperatura" value="{{ old('temperatura', $atencion->temperatura) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="temperatura">
+                <input type="number" step="0.01" min="0" id="temperatura" name="temperatura" value="{{ old('temperatura', $atencion->temperatura) }}"
+                        placeholder="Solo numeros..." required autofocus autocomplete="temperatura">
                        @error('temperatura')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -196,8 +197,8 @@
                 <label >
                     <i class="fa-solid fa-arrow-up-wide-short"></i> Oxigenación
                 </label>
-                <input type="text" id="oxigenacion" name="oxigenacion" value="{{ old('oxigenacion', $atencion->oxigenacion) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="oxigenacion">
+                <input type="number" step="0.01" min="0" id="oxigenacion" name="oxigenacion" value="{{ old('oxigenacion', $atencion->oxigenacion) }}"
+                       placeholder="Solo numeros..." required autofocus autocomplete="oxigenacion">
                        @error('oxigenacion')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -210,8 +211,8 @@
                 <label >
                     <i class="fa-notdog fa-solid fa-droplet" style="color: #cc0000;"></i> Glucemia
                 </label>
-                <input type="text" id="glucemia" name="glucemia" value="{{ old('glucemia', $atencion->glucemia) }}"
-                       placeholder="Descripción..." required autofocus autocomplete="glucemia">
+                <input type="number" step="0.01" min="0" id="glucemia" name="glucemia" value="{{ old('glucemia', $atencion->glucemia) }}"
+                       placeholder="Solo numeros..." required autofocus autocomplete="glucemia">
                        @error('glucemia')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -330,12 +331,9 @@
             
             <!-- Boton principal -->
             <div class="flex items-center justify-end mt-4">
-                <x-primary-button class="btn btn-login">
-                    <i class="fa-solid fa-check-to-slot"></i> {{ $atencion->exists ? 'Actualizar' : 'Registrar'}}
+                <x-primary-button class="btn btn-solid-red">
+                    <i class="fa-solid fa-check-to-slot"></i> {{ $atencion->exists ? 'Actualizar' : 'Registrar' }}
                 </x-primary-button>
-                {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a> --}}
             </div>
         </form>
         
@@ -346,24 +344,41 @@
 
 @section('scripts')
 <script>
+    function setupDatalist(inputId, listId, hiddenId) {
+        const input = document.getElementById(inputId);
+        const hidden = document.getElementById(hiddenId);
 
-    document.getElementById('paciente_input').addEventListener('input', function () {
-    
-        let input = this.value;
-        let options = document.querySelectorAll('#pacientes_list option');
-        let hidden = document.getElementById('paciente_id');
-    
-        hidden.value = '';
-    
-        options.forEach(option => {
-    
-            if(option.value === input){
-                hidden.value = option.dataset.id;
+        if (!input || !hidden) return;
+
+        input.addEventListener('input', function() {
+            const options = document.querySelectorAll(`#${listId} option`);
+            let found = false;
+
+            options.forEach(option => {
+                if (option.value === this.value) {
+                    hidden.value = option.dataset.id;
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                hidden.value = '';
             }
-    
         });
-    
+
+        input.addEventListener('change', function() {
+            const options = document.querySelectorAll(`#${listId} option`);
+
+            options.forEach(option => {
+                if (option.value === this.value) {
+                    hidden.value = option.dataset.id;
+                }
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        setupDatalist('pacientes_input', 'pacientes_list', 'paciente_id');
     });
-    
-    </script>
+</script>
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/registros.css')}}">    
+
 @endsection
 
 @section('titulo','Registro de extintores')
@@ -10,7 +10,7 @@
 @section('contenido')
  <!-- Hero Section -->
  <section class="hero">
-    <div class="login-wrapper">
+    <div class="login-wrapper-M">
         <div class="logo-text">
             <h1>Nuevo Extintor</h1>
         </div>
@@ -30,7 +30,7 @@
              <!-- Name/Nombre -->
              
              <div class="form-group">
-                <label for="clave_id" :value="__('clave_id')">
+                <label>
                     <i class="fa-solid fa-shield"></i> Clave del Extintor
                     <a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Clave Nueva</a>
                 </label>
@@ -50,7 +50,7 @@
                            
             </div>
             <div class="form-group">
-                <label for="telefono" :value="__('Telefono')">
+                <label >
                     <i class="fa-solid fa-arrow-up-9-1"></i> Numeración
                 </label>
                 <input type="text" id="telefono" name="telefono" :value=" {{ old('telefono') }}"
@@ -64,7 +64,7 @@
             </div>
 
             <div class="form-group">
-                <label for="number" :value="__('Email')">
+                <label >
                     <i class="fa-regular fa-calendar-days"></i> Fecha de Adquisición
                 </label>
                 <input type="date" id="email" name="email" :value=" {{ old('email') }}"
@@ -78,7 +78,7 @@
             </div>
 
             <div class="form-group">
-                <label for="area_id" :value="__('area_id')">
+                <label >
                     <i class="fa-solid fa-expand"></i> Áreas
                     <a href="http://localhost/laravel/estadia/public/registro_areas" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Área Nueva</a>
                 </label>
@@ -99,7 +99,7 @@
             </div>
 
             <div class="form-group">
-                <label for="ex_id" :value="__('ex_id')">
+                <label>
                     <i class="fa-solid fa-fire-extinguisher"></i> Tipo de Extintor
                     <a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Nuevo Tipo</a>
                 </label>
@@ -121,7 +121,7 @@
             </div>
 
             <div class="form-group">
-                <label for="telefono" :value="__('Telefono')">
+                <label >
                     <i class="fa-solid fa-weight-scale"></i> Pesos del Extintor
                 </label>
                 <input type="text" id="telefono" name="telefono" :value=" {{ old('telefono') }}"
@@ -138,7 +138,7 @@
            
 
             <div class="form-group">
-                <label for="name" :value="__('Name')">
+                <label >
                     <i class="fa-solid fa-location-dot"></i> Ubicación
                 </label>
                 <textarea name="name" id="name"  rows="2" :value="old('name')"
@@ -152,7 +152,7 @@
             </div>
 
             <div class="form-group">
-                <label for="name" :value="__('Name')">
+                <label >
                     <i class="fa-solid fa-map-pin"></i> Lugar de Referecia
                 </label>
                 <textarea name="name" id="name"  rows="2" :value="old('name')"
@@ -168,7 +168,7 @@
             
 
             <div class="form-group">
-                <label for="man_id" :value="__('man_id')">
+                <label >
                     <i class="fa-solid fa-helmet-safety"></i> Tipo de Mantenimiento
                 </label>
                     <input type="text" id="man_id" list="tipo_man" class="form-control form-control-lg"
@@ -189,7 +189,7 @@
                       
             </div>
             <div class="form-group">
-                <label for="number" :value="__('Email')">
+                <label >
                     <i class="fa-regular fa-calendar-days"></i> Fecha del Mantenimiento
                 </label>
                 <input type="date" id="email" name="email" :value=" {{ old('email') }}"
@@ -203,7 +203,7 @@
             </div>
 
             <div class="form-group">
-                <label for="name" :value="__('Name')">
+                <label >
                     <i class="fa-solid fa-align-left"></i> Observaciones
                 </label>
                 <textarea name="name" id="name"  rows="4" :value="old('name')"
@@ -217,7 +217,7 @@
             </div>
 
             <div class="form-group">
-                <label for="condicion_id" :value="__('condicion_id')">
+                <label >
                     <i class="fa-solid fa-calendar-check"></i> Condición del Extintor
                     <a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Nueva Condición</a>
                 </label>
@@ -238,12 +238,9 @@
 
 
             <div class="flex items-center justify-end mt-4">
-                <a  class="btn btn-login">
-                    <i class="fa-solid fa-check-to-slot"></i> Registrar
-                </a>
-                {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a> --}}
+                <x-primary-button class="btn btn-solid-red">
+                    <i class="fa-solid fa-check-to-slot"></i> {{ $extintors->exists ? 'Actualizar' : 'Registrar' }}
+                </x-primary-button>
             </div>
         </form>
         

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\TipoRiesgo\CreateTipoRiesgoRequest;
-use App\Http\Requests\TipoRiesgo\UpdateTipoRiesgoRequest;
+//use Illuminate\Http\Request;
+use App\Http\Requests\TipoRiesgo\TipoRiesgoRequest;
 use App\Services\TipoRiesgo\TipoRiesgoService;
 use App\Models\TipoRiesgo;
 
@@ -32,10 +31,10 @@ class TipoRiesgoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateTipoRiesgoRequest $request)
+    public function store(TipoRiesgoRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('tipoRiesgos.index')->with('message', 'TipoRiesgo creada correctamente');
+        return redirect()->route('tipoRiesgos.index')->with('message', 'Tipo de Riesgo creado correctamente');
     }
 
     /**
@@ -59,10 +58,10 @@ class TipoRiesgoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTipoRiesgoRequest $request, int $id)
+    public function update(TipoRiesgoRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
-        return redirect()->route('tipoRiesgos.index')->with('message', 'TipoRiesgo actualizada correctamente');
+        return redirect()->route('tipoRiesgos.index')->with('message', 'Tipo de Riesgo actualizado correctamente');
     }
 
     /**
@@ -71,6 +70,6 @@ class TipoRiesgoController extends Controller
     public function destroy(string $id)
     {
         $this->service->delete($id);
-        return redirect()->route('tipoRiesgos.index')->with('message', 'TipoRiesgo eliminada correctamente');
+        return redirect()->route('tipoRiesgos.index')->with('message', 'Tipo de Riesgo eliminado correctamente');
     }
 }

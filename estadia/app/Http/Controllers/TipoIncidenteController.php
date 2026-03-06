@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\TipoIncidente\CreateTipoIncidenteRequest;
-use App\Http\Requests\TipoIncidente\UpdateTipoIncidenteRequest;
+//use Illuminate\Http\Request;
+use App\Http\Requests\TipoIncidente\TipoIncidenteRequest;
 use App\Services\TipoIncidente\TipoIncidenteService;
 use App\Models\TipoIncidente;
 
@@ -32,10 +31,10 @@ class TipoIncidenteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateTipoIncidenteRequest $request)
+    public function store(TipoIncidenteRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('tipoIncidentes.index')->with('message', 'TipoIncidente creada correctamente');
+        return redirect()->route('tipoIncidentes.index')->with('message', 'Tipo de Incidente creado correctamente');
     }
 
     /**
@@ -59,10 +58,10 @@ class TipoIncidenteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTipoIncidenteRequest $request, int $id)
+    public function update(TipoIncidenteRequest $request, int $id)
     {
         $this->service->update($id, $request->validated());
-        return redirect()->route('tipoIncidentes.index')->with('message', 'TipoIncidente actualizada correctamente');
+        return redirect()->route('tipoIncidentes.index')->with('message', 'Tipo de Incidente actualizado correctamente');
     }
 
     /**
@@ -71,6 +70,6 @@ class TipoIncidenteController extends Controller
     public function destroy(string $id)
     {
         $this->service->delete($id);
-        return redirect()->route('tipoIncidentes.index')->with('message', 'TipoIncidente eliminada correctamente');
+        return redirect()->route('tipoIncidentes.index')->with('message', 'Tipo de Incidente eliminado correctamente');
     }
 }

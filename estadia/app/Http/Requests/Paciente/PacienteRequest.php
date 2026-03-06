@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\NivelRiesgo;
+namespace App\Http\Requests\Paciente;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateNivelRiesgoRequest extends FormRequest
+class PacienteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,12 @@ class UpdateNivelRiesgoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new CreateNivelRiesgoRequest())->rules();
+        return [
+            'nombre' => 'required|string|max:100',
+            'sexo' =>'required|in:Masculino,Femenino,Otro',
+            'telefono' =>'nullable|string|max:10',
+            'codigo' =>'required|string|max:20',
+            'carrera_area' =>'required|string|max:100',
+        ];
     }
 }

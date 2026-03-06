@@ -1,18 +1,18 @@
 @extends('layouts.template')
 @section('estilos')
-<link rel="stylesheet" href="{{asset('assets/css/tablaM.css')}}">    
+
 @endsection
 
-@section('titulo','Tabla de Áreas')
+@section('titulo','Tabla de áreas')
 
 @section('contenido')
  <!-- Hero Section -->
     <section class="hero">
-        <div class="login-wrapper">
+        <div class="login-wrapper-M">
             <div class="logo-text">
                 <h1>Tablas de Áreas</h1>
                   <!-- Botón para nuevo paciente (comentado) -->
-            {{-- <a href="{{ route('areas.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Área</a> --}}
+             <a href="{{ route('areas.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Área</a>
           
             </div>
 
