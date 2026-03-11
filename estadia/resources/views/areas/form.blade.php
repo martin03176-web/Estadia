@@ -34,7 +34,7 @@
                 <label >
                     <i class="fa-solid fa-arrow-right-to-city"></i> Edifiocio
                 </label>
-                <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="edificio" >
+                <select class="form-select form-select-sm" aria-label="Large select example" name="edificio" >
                     <option value="F" @selected(old('edificio', $area->edificio) === 'F' )>F</option>
                     <option value="A" @selected(old('edificio', $area->edificio) === 'A' )>A</option>
                     <option value="F1" @selected(old('edificio', $area->edificio) === 'F1' )>F1</option>

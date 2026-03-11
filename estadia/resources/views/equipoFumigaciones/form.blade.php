@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ $equipoFumigacion->exists ? route('equipoFumigacions.update', $equipoFumigacion) : route('equipoFumigacions.store') }}" class="login-form">
+        <form method="POST" action="{{ $equipoFumigacion->exists ? route('equipoFumigaciones.update', $equipoFumigacion) : route('equipoFumigaciones.store') }}" class="login-form">
             @csrf
             @if($equipoFumigacion->exists) @method('PUT') @endif
              <!-- Name/Nombre -->
@@ -36,7 +36,7 @@
                     <i class="fa-solid fa-toolbox"></i> Nombre
                 </label>
                 <input type="text" id="nombre" name="nombre" value="{{ old('equipoFumigacion', $equipoFumigacion->nombre) }}"
-                       placeholder="Ingrese el Nuevo Riesgo " required autofocus autocomplete="nombre">
+                       placeholder="Ingrese el Nuevo Equipo " required autofocus autocomplete="nombre">
                        @error('nombre')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 

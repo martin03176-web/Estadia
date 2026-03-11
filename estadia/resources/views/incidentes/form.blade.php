@@ -51,17 +51,16 @@
                 <label><i class="fa-solid fa-expand"></i> Áreas
                     <a href="{{ route('areas.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Área</a>
                 </label>
-                <input type="text" id="areas_input" list="areas_list" class="form-control"
-                       value="{{ $incidente->exists && $incidente->area ? $incidente->area->edificio . ' - ' . $incidente->area->piso . ' - ' . $incidente->area->lugar : old('area_text', '') }}"
-                       placeholder="Seleccione o busque un área...">
-                <input type="hidden" name="area_id" id="area_id" required value="{{ old('area_id', $incidente->area_id) }}">
-                <datalist id="areas_list">
+                <select class="form-control form-select-sm" name="area_id" required>
+                    <option value="">Seleccione un área...</option>
                     @foreach($areas as $area)
-                    <option data-id="{{ $area->id }}" value="{{ $area->edificio }} - {{ $area->piso }} - {{ $area->lugar }}"></option>
+                        <option value="{{ $area->id }}" {{ old('area_id', $incidente->area_id) == $area->id ? 'selected' : '' }}>
+                            {{ $area->edificio }} - {{ $area->piso }} - {{ $area->lugar }}
+                        </option>
                     @endforeach
-                </datalist>
+                </select>
                 @error('area_id')
-                <div class="logo-text"><p>{{$message}}</p></div>
+                    <div class="logo-text"><p>{{ $message }}</p></div>
                 @enderror
             </div>
 
@@ -70,20 +69,16 @@
                 <label><i class="fa-solid fa-person"></i> Responsable que Reporta
                     <a href="{{ route('responsables.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Responsable</a>
                 </label>
-        
-                <input type="text" id="responsables_input" list="responsables_list" class="form-control"
-                       value="{{ $incidente->exists && $incidente->responsable ? $incidente->responsable->nombre . ' - ' . $incidente->responsable->telefono . ' - ' . $incidente->responsable->puesto_area : old('responsable_text', '') }}"
-                       placeholder="Seleccione el responsable">
-                <input type="hidden" name="responsable_id" id="responsable_id" required value="{{ old('responsable_id', $incidente->responsable_id) }}">
-                
-                
-                <datalist id="responsables_list">
+                <select name="responsable_id" class="form-control form-select-sm" required>
+                    <option value="">Seleccione un responsable...</option>
                     @foreach($responsables as $responsable)
-                    <option data-id="{{ $responsable->id }}" value="{{ $responsable->nombre }} - {{ $responsable->telefono }} - {{ $responsable->puesto_area }}"></option>
+                        <option value="{{ $responsable->id }}" {{ old('responsable_id', $incidente->responsable_id) == $responsable->id ? 'selected' : '' }}>
+                            {{ $responsable->nombre }} - {{ $responsable->telefono }} - {{ $responsable->puesto_area }}
+                        </option>
                     @endforeach
-                </datalist>
+                </select>
                 @error('responsable_id')
-                <div class="logo-text"><p>{{$message}}</p></div>
+                    <div class="logo-text"><p>{{ $message }}</p></div>
                 @enderror
             </div>
 
@@ -92,19 +87,16 @@
                 <label><i class="fa-solid fa-person-falling-burst"></i> Tipo de Incidente
                     <a href="{{ route('tipoIncidentes.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Tipo</a>
                 </label>
-            
-                <input type="text" id="tipoIncidentes_input" list="tipoIncidentes_list" class="form-control"
-                       value="{{ $incidente->exists && $incidente->tipoIncidente ? $incidente->tipoIncidente->tipo : old('tipoIncidente_text', '') }}"
-                       placeholder="Seleccione el tipo...">
-                <input type="hidden" name="tipo_incidente_id" id="tipo_incidente_id" required value="{{ old('tipo_incidente_id', $incidente->tipo_incidente_id) }}">
-
-                <datalist id="tipoIncidentes_list">
+                <select name="tipo_incidente_id" class="form-control form-select-sm" required>
+                    <option value="">Seleccione un tipo...</option>
                     @foreach($tipoIncidentes as $tipoIncidente)
-                    <option data-id="{{ $tipoIncidente->id }}" value="{{ $tipoIncidente->tipo }}"></option>
+                        <option value="{{ $tipoIncidente->id }}" {{ old('tipo_incidente_id', $incidente->tipo_incidente_id) == $tipoIncidente->id ? 'selected' : '' }}>
+                            {{ $tipoIncidente->tipo }}
+                        </option>
                     @endforeach
-                </datalist>
+                </select>
                 @error('tipo_incidente_id')
-                <div class="logo-text"><p>{{$message}}</p></div>
+                    <div class="logo-text"><p>{{ $message }}</p></div>
                 @enderror
             </div>
 
@@ -113,20 +105,16 @@
                 <label><i class="fa-solid fa-explosion"></i> Tipo de Riesgo
                     <a href="{{ route('tipoRiesgos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Tipo</a>
                 </label>
-
-                <input type="text" id="tipoRiesgos_input" list="tipoRiesgos_list" class="form-control"
-                       value="{{ $incidente->exists && $incidente->tipoRiesgo ? $incidente->tipoRiesgo->tipo : old('tipoIncidente_text', '') }}"
-                       placeholder="Seleccione el tipo...">
-                <input type="hidden" name="tipo_riesgo_id" id="tipo_riesgo_id" required value="{{ old('tipo_riesgo_id', $incidente->tipo_riesgo_id) }}">
-
-
-                <datalist id="tipoRiesgos_list">
+                <select name="tipo_riesgo_id" class="form-control form-select-sm" required>
+                    <option value="">Seleccione un tipo...</option>
                     @foreach($tipoRiesgos as $tipoRiesgo)
-                    <option data-id="{{ $tipoRiesgo->id }}" value="{{ $tipoRiesgo->tipo }}"></option>
+                        <option value="{{ $tipoRiesgo->id }}" {{ old('tipo_riesgo_id', $incidente->tipo_riesgo_id) == $tipoRiesgo->id ? 'selected' : '' }}>
+                            {{ $tipoRiesgo->tipo }}
+                        </option>
                     @endforeach
-                </datalist>
+                </select>
                 @error('tipo_riesgo_id')
-                <div class="logo-text"><p>{{$message}}</p></div>
+                    <div class="logo-text"><p>{{ $message }}</p></div>
                 @enderror
             </div>
 
@@ -144,19 +132,16 @@
                 <label><i class="fa-solid fa-skull-crossbones"></i> Nivel de Riesgo
                     <a href="{{ route('nivelRiesgos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Nivel</a>
                 </label>
-
-                <input type="text" id="tipoRiesgos_input" list="tipoRiesgos_list" class="form-control"
-                       value="{{ $incidente->exists && $incidente->nivelRiesgo ? $incidente->nivelRiesgo->nivel : old('nivelRiesgo_text', '') }}"
-                       placeholder="Ingrese el Nivel...">
-                <input type="hidden" name="nivel_riesgo_id" id="nivel_riesgo_id" required value="{{ old('nivel_riesgo_id', $incidente->nivel_riesgo_id) }}">
-                
-                <datalist id="nivelRiesgos_list">
+                <select name="nivel_riesgo_id" class="form-control form-select-sm" required>
+                    <option value="">Seleccione un nivel...</option>
                     @foreach($nivelRiesgos as $nivelRiesgo)
-                    <option data-id="{{ $nivelRiesgo->id }}" value="{{ $nivelRiesgo->nivel }}"></option>
+                        <option value="{{ $nivelRiesgo->id }}" {{ old('nivel_riesgo_id', $incidente->nivel_riesgo_id) == $nivelRiesgo->id ? 'selected' : '' }}>
+                            {{ $nivelRiesgo->nivel }}
+                        </option>
                     @endforeach
-                </datalist>
+                </select>
                 @error('nivel_riesgo_id')
-                <div class="logo-text"><p>{{$message}}</p></div>
+                    <div class="logo-text"><p>{{ $message }}</p></div>
                 @enderror
             </div>
 
@@ -174,19 +159,16 @@
                 <label><i class="fa-solid fa-toolbox"></i> Material o Equipo Utilizado
                     <a href="{{ route('materialEquipos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Material/Equipo</a>
                 </label>
-                
-                <input type="text" id="materialEquipos_input" list="materialEquipos_list" class="form-control"
-                       value="{{ $incidente->exists && $incidente->materialEquipo ? $incidente->materialEquipo->nombre : old('nivelRiesgo_text', '') }}"
-                       placeholder="Ingrese el Material utilizado...">
-                <input type="hidden" name="material_equipo_id" id="material_equipo_id" required value="{{ old('material_equipo_id', $incidente->nivel_riesgo_id) }}">
-            
-                <datalist id="materialEquipos_list">
+                <select name="material_equipo_id" class="form-control form-select-sm" required>
+                    <option value="">Seleccione un material/equipo...</option>
                     @foreach($materialEquipos as $materialEquipo)
-                    <option data-id="{{ $materialEquipo->id }}" value="{{ $materialEquipo->nombre }} - {{ $materialEquipo->nota }}"></option>
+                        <option value="{{ $materialEquipo->id }}" {{ old('material_equipo_id', $incidente->material_equipo_id) == $materialEquipo->id ? 'selected' : '' }}>
+                            {{ $materialEquipo->nombre }} - {{ $materialEquipo->nota }}
+                        </option>
                     @endforeach
-                </datalist>
+                </select>
                 @error('material_equipo_id')
-                <div class="logo-text"><p>{{$message}}</p></div>
+                    <div class="logo-text"><p>{{ $message }}</p></div>
                 @enderror
             </div>
 
@@ -212,47 +194,5 @@
 @endsection
 
 @section('scripts')
-<script>
-    function setupDatalist(inputId, listId, hiddenId) {
-        const input = document.getElementById(inputId);
-        const hidden = document.getElementById(hiddenId);
 
-        if (!input || !hidden) return;
-
-        input.addEventListener('input', function() {
-            const options = document.querySelectorAll(`#${listId} option`);
-            let found = false;
-
-            options.forEach(option => {
-                if (option.value === this.value) {
-                    hidden.value = option.dataset.id;
-                    found = true;
-                }
-            });
-
-            if (!found) {
-                hidden.value = '';
-            }
-        });
-
-        input.addEventListener('change', function() {
-            const options = document.querySelectorAll(`#${listId} option`);
-
-            options.forEach(option => {
-                if (option.value === this.value) {
-                    hidden.value = option.dataset.id;
-                }
-            });
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        setupDatalist('areas_input', 'areas_list', 'area_id');
-        setupDatalist('responsables_input', 'responsables_list', 'responsable_id');
-        setupDatalist('tipoIncidentes_input', 'tipoIncidentes_list', 'tipo_incidente_id');
-        setupDatalist('tipoRiesgos_input', 'tipoRiesgos_list', 'tipo_riesgo_id');
-        setupDatalist('nivelRiesgos_input', 'nivelRiesgos_list', 'nivel_riesgo_id');
-        setupDatalist('materialEquipos_input', 'materialEquipos_list', 'material_equipo_id');
-    });
-</script>
 @endsection

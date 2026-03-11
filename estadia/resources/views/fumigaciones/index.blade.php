@@ -11,7 +11,7 @@
     <div class="login-wrapper-L">
         <div class="logo-text">
             <h1>Tablas de Fumigación</h1>
-            <a href="{{ route('fumigacions.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Fumigación</a>
+            <a href="{{ route('fumigaciones.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Fumigación</a>
         </div>
 
         <div class="form-group">
@@ -30,7 +30,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($fumigacions as $fumigacion)
+                  @foreach($fumigaciones as $fumigacion)
                       @if($fumigacion->area_id->edificio == 'F')
                           <tr class="table-danger">
                               <th scope="row">F</th>

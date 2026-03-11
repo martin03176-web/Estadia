@@ -2,33 +2,41 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
 use App\Http\Requests\Incidente\IncidenteRequest;
 use App\Services\Incidente\IncidenteService;
-
 use App\Models\Incidente;
 use App\Models\Area;
 use App\Models\Responsable;
-use App\Models\MaterialEquipo;
 use App\Models\TipoIncidente;
 use App\Models\TipoRiesgo;
 use App\Models\NivelRiesgo;
-
+use App\Models\MaterialEquipo;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class IncidenteController extends Controller
 {
     public function __construct(protected IncidenteService $service)
     {}
-    // public function __construct(protected IncidenteService $service2)
-    // {}
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $incidentes = $this->service->getAll($request);
         
-        $incidentes = $this->service->getAll();
-        return view('incidentes.index', compact('incidentes'));
+        // Obtener datos para los filtros
+        $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
+        $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
+        $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
+        
+        return view('incidentes.index', compact(
+            'incidentes', 
+            'tipoIncidentes', 
+            'tipoRiesgos', 
+            'nivelRiesgos'
+        ));
     }
 
     /**
@@ -36,13 +44,22 @@ class IncidenteController extends Controller
      */
     public function create()
     {
-        $areas = Area::orderBy('edificio')->get();
+        $areas = Area::orderBy('edificio')->orderBy('piso')->get();
         $responsables = Responsable::orderBy('nombre')->get();
         $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
         $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
         $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
         $materialEquipos = MaterialEquipo::orderBy('nombre')->get();
-        return view('incidentes.form', ['incidente'=> new Incidente()] , compact('areas','responsables','tipoIncidentes','tipoRiesgos','nivelRiesgos','materialEquipos')); 
+        
+        return view('incidentes.form', [
+            'incidente' => new Incidente(),
+            'areas' => $areas,
+            'responsables' => $responsables,
+            'tipoIncidentes' => $tipoIncidentes,
+            'tipoRiesgos' => $tipoRiesgos,
+            'nivelRiesgos' => $nivelRiesgos,
+            'materialEquipos' => $materialEquipos
+        ]);
     }
 
     /**
@@ -50,18 +67,8 @@ class IncidenteController extends Controller
      */
     public function store(IncidenteRequest $request)
     {
-        try {
-            $incidente = $this->service->create($request->validated());
-            \Log::info('Incidente creado con ID: ' . $incidente->id);
-
-            return redirect()->route('incidentes.index')
-                ->with('message', 'Incidente creado exitosamente');
-        } catch (\Exception $e) {
-            \Log::error('Error al crear incidente: ' . $e->getMessage());
-            return back()
-                ->withErrors(['error' => 'Error al guardar: ' . $e->getMessage()])
-                ->withInput();
-        }
+        $this->service->create($request->validated());
+        return redirect()->route('incidentes.index')->with('message', 'Incidente creado exitosamente');
     }
 
     /**
@@ -69,41 +76,54 @@ class IncidenteController extends Controller
      */
     public function show(int $id)
     {
-        $incidente = Incidente::with([
-            'responsable',
-            'tipoIncidente',
-            'tipoRiesgo',
-            'nivelRiesgo',
-            'materialEquipo'
-        ])->findOrFail($id);
-    
-        return view('incidentes.show', compact('incidente'));
+        try {
+            $incidente = $this->service->find($id);
+            return view('incidentes.show', compact('incidente'));
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('incidentes.index')->with('error', 'Incidente no encontrado');
+        }
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(int $id)
     {
-        $incidente = $this->service->find($id);
-        $areas = Area::orderBy('edificio')->get();
-        $responsables = Responsable::orderBy('nombre')->get();
-        $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
-        $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
-        $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
-        $materialEquipos = MaterialEquipo::orderBy('nombre')->get();
-
-        return view('incidentes.form', compact('incidente', 'areas', 'responsables', 'tipoIncidentes', 'tipoRiesgos', 'nivelRiesgos', 'materialEquipos'));
+        try {
+            $incidente = $this->service->find($id);
+            $areas = Area::orderBy('edificio')->orderBy('piso')->get();
+            $responsables = Responsable::orderBy('nombre')->get();
+            $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
+            $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
+            $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
+            $materialEquipos = MaterialEquipo::orderBy('nombre')->get();
+            
+            return view('incidentes.form', compact(
+                'incidente', 
+                'areas', 
+                'responsables', 
+                'tipoIncidentes', 
+                'tipoRiesgos', 
+                'nivelRiesgos', 
+                'materialEquipos'
+            ));
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('incidentes.index')->with('error', 'Incidente no encontrado');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(IncidenteRequest $request, Incidente $incidente)
+    public function update(IncidenteRequest $request, int $id)
     {
-        $this->service->update($incidente, $request->validated());
-
-        return redirect()->route('incidentes.index')->with('message', 'Incidente actualizado exitosamente');
+        try {
+            $incidente = $this->service->find($id);
+            $this->service->update($incidente, $request->validated());
+            return redirect()->route('incidentes.index')->with('message', 'Incidente actualizado exitosamente');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('incidentes.index')->with('error', 'Incidente no encontrado');
+        }
     }
 
     /**
@@ -111,8 +131,11 @@ class IncidenteController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->service->delete($id);
-
-        return redirect()->route('incidentes.index')->with('message', 'Incidente eliminado exitosamente');
+        try {
+            $this->service->delete($id);
+            return redirect()->route('incidentes.index')->with('message', 'Incidente eliminado exitosamente');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('incidentes.index')->with('error', 'Incidente no encontrado');
+        }
     }
 }

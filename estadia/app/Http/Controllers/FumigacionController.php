@@ -16,8 +16,8 @@ class FumigacionController extends Controller
 
     public function index()
     {
-        $fumigacions = $this->service->getAllOrdenado();
-        return view('fumigacions.index', compact('fumigacions'));
+        $fumigaciones = $this->service->getAllOrdenado();
+        return view('fumigaciones.index', compact('fumigaciones'));
     }
 
     public function create()
@@ -28,7 +28,7 @@ class FumigacionController extends Controller
         $responsables = Responsable::orderBy('nombre')->get();
         $materialEquipos = EquipoFumigacion::orderBy('nombre')->get();
         
-        return view('fumigacions.form', 
+        return view('fumigaciones.form', 
             ['fumigacion' => new Fumigacion()], 
             compact('areas', 'responsables', 'materialEquipos')
         ); 
@@ -47,7 +47,7 @@ class FumigacionController extends Controller
             $fumigacion = $this->service->create($request->validated());
             \Log::info('Fumigacion creado con ID: ' . $fumigacion->id);
             
-            return redirect()->route('fumigacions.index')
+            return redirect()->route('fumigaciones.index')
                 ->with('message', 'Fumigacion creada exitosamente');
         } catch (\Exception $e) {
             \Log::error('Error al crear Fumigacion: ' . $e->getMessage());
@@ -65,7 +65,7 @@ class FumigacionController extends Controller
             'equipoFumigacion'
         ])->findOrFail($id);
 
-        return view('fumigacions.show', compact('fumigacion'));
+        return view('fumigaciones.show', compact('fumigacion'));
     }
 
     public function edit(Fumigacion $fumigacion)
@@ -76,14 +76,14 @@ class FumigacionController extends Controller
         $responsables = Responsable::orderBy('nombre')->get();
         $materialEquipos = EquipoFumigacion::orderBy('nombre')->get();
         
-        return view('fumigacions.form', compact('fumigacion', 'areas', 'responsables', 'materialEquipos'));
+        return view('fumigaciones.form', compact('fumigacion', 'areas', 'responsables', 'materialEquipos'));
     }
 
     public function update(FumigacionRequest $request, Fumigacion $fumigacion)
     {
         $this->service->update($fumigacion, $request->validated());
 
-        return redirect()->route('fumigacions.index')
+        return redirect()->route('fumigaciones.index')
             ->with('message', 'Fumigacion actualizada exitosamente');
     }
 
@@ -91,7 +91,7 @@ class FumigacionController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('fumigacions.index')
+        return redirect()->route('fumigaciones.index')
             ->with('message', 'Fumigacion Eliminada exitosamente');
     }
 }

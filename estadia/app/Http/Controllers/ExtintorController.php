@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
 use App\Http\Requests\Extintor\ExtintorRequest;
-use App\Services\Extintor\ExtintorService;
-
-use App\Models\Extintor;
 use App\Models\Area;
-use App\Models\Responsable;
+use App\Models\Clave;
+use App\Models\Extintor;
 use App\Models\MaterialEquipo;
-use App\Models\TipoExtintor;
-use App\Models\TipoRiesgo;
 use App\Models\NivelRiesgo;
+use App\Models\Responsable;
+use App\Models\Tipo;
+use App\Models\TipoRiesgo;
+use App\Services\Extintor\ExtintorService;
 
 
 class ExtintorController extends Controller
@@ -27,8 +27,8 @@ class ExtintorController extends Controller
     public function index()
     {
         
-        $Extintors = $this->service->getAll();
-        return view('Extintors.index', compact('Extintors'));
+        $extintores = $this->service->getAll();
+        return view('extintores.index', compact('extintors'));
     }
 
     /**
@@ -37,12 +37,13 @@ class ExtintorController extends Controller
     public function create()
     {
         $areas = Area::orderBy('edificio')->get();
+        $claves = Clave::orderBy('clave')->get();
         $responsables = Responsable::orderBy('nombre')->get();
-        $tipoExtintors = TipoExtintor::orderBy('tipo')->get();
+        $tipo = Tipo::orderBy('tipo')->get();
         $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
         $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
         $materialEquipos = MaterialEquipo::orderBy('nombre')->get();
-        return view('Extintors.form', ['Extintor'=> new Extintor()] , compact('areas','responsables','tipoExtintors','tipoRiesgos','nivelRiesgos','materialEquipos')); 
+        return view('extintores.form', ['extintor'=> new Extintor()] , compact('areas','responsables','tipo','tipoRiesgos','nivelRiesgos','materialEquipos','claves')); 
     }
 
     /**
@@ -61,10 +62,10 @@ class ExtintorController extends Controller
         \Log::info('descripcion:', [$request->input('descripcion')]);
         
         try {
-            $Extintor = $this->service->create($request->validated());
-            \Log::info('Extintor creado con ID: ' . $Extintor->id);
+            $extintor = $this->service->create($request->validated());
+            \Log::info('Extintor creado con ID: ' . $extintor->id);
             
-            return redirect()->route('Extintors.index')
+            return redirect()->route('extintores.index')
                 ->with('message', 'Extintor creado exitosamente');
         } catch (\Exception $e) {
             \Log::error('Error al crear Extintor: ' . $e->getMessage());
@@ -82,27 +83,26 @@ class ExtintorController extends Controller
             'area'
         ])->findOrFail($id);
 
-        return view('extintors.show', compact('extintor'));
+        return view('extintores.show', compact('extintor'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Extintor $Extintor)
+    public function edit(Extintor $extintor)
     {
         
-        $Extintors = Extintor::orderBy('nombre')->get();
-        return view('Extintors.form', compact('Extintor', 'Extintors'));
+        $extintors = Extintor::orderBy('nombre')->get();
+        return view('extintores.form', compact('extintor', 'extintors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ExtintorRequest $request, Extintor $Extintor)
+    public function update(ExtintorRequest $request, Extintor $extintor)
     {
-        $this->service->update($Extintor, $request->validated());
-
-        return redirect()->route('Extintors.index')->with('message', 'Extintor actualizado exitosamente');
+        $this->service->update($extintor, $request->validated());
+        return redirect()->route('extintors.index')->with('message', 'Extintor actualizado exitosamente');
     }
 
     /**
@@ -111,7 +111,6 @@ class ExtintorController extends Controller
     public function destroy(int $id)
     {
         $this->service->delete($id);
-
-        return redirect()->route('Extintors.index')->with('message', 'Extintor Eliminado exitosamente');
+        return redirect()->route('extintors.index')->with('message', 'Extintor Eliminado exitosamente');
     }
 }

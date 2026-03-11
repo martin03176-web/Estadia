@@ -13,7 +13,7 @@
     <div class="login-wrapper-S">
         <div class="logo-text">
             <h1>Tablas Equipos de Fumigación</h1>
-            <a href="{{ route('responsables.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Equipo de Fumigación</a>
+            <a href="{{ route('equipoFumigaciones.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Equipo de Fumigación</a>
         </div>
 
         <div class="form-group">
@@ -25,11 +25,10 @@
                     <th scope="col"></th>
                   </tr>
                 </thead>
-                @forEach($equipoFumigacions as $equipoFumigacion)
+                @forEach($equipoFumigaciones as $equipoFumigacion)
                 <tbody>
                   <tr>
                     <th scope="row">{{$equipoFumigacion->nombre}}</th>
-                    <td>Agotado</td>
                     <td><a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
                     @endforeach
                 </tbody>

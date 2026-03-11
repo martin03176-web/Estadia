@@ -27,7 +27,7 @@
 
         <form method="POST" action="{{ $fumigacion->exists ? route('fumigaciones.update', $fumigacion) :route('fumigaciones.store') }}" class="login-form">
             @csrf
-            
+
              <!-- Responsables del servicio -->
             <div class="form-group">
                 <label >
@@ -126,7 +126,7 @@
 
             <div class="form-group">
                 <label >
-                    <i class="fa-solid fa-person"></i> Motivo
+                    <i class="fa-solid fa-book"></i> Motivo
                     <a href="{{ route('responsables.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Motivo</a>
                 </label>
                     <input type="text" id="responsables_input" list="responsables_list" class="form-control form-control-lg" 
@@ -181,7 +181,7 @@
             <div class="form-group">
                 <label >
                     <i class="fa-solid fa-toolbox"></i> Material o Equipo Utilizado para Fumigación
-                    <a href="{{ route('equipoFumigacions.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Material/Equipo</a>
+                    <a href="{{ route('equipoFumigaciones.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Material/Equipo</a>
                 </label>
                     <input type="text" id="responsables_input" list="responsables_list" class="form-control form-control-lg" 
                          placeholder="Ingrese el Nombre Completo..." >

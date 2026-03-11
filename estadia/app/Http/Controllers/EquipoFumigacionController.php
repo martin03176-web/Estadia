@@ -17,8 +17,8 @@ class EquipoFumigacionController extends Controller
      */
     public function index()
     {
-        $equipoFumigacions = $this->service->getAll();
-        return view('equipoFumigacions.index', compact('equipoFumigacions'));
+        $equipoFumigaciones = $this->service->getAll();
+        return view('equipoFumigaciones.index', compact('equipoFumigaciones'));
     }
 
     /**
@@ -26,7 +26,7 @@ class EquipoFumigacionController extends Controller
      */
     public function create()
     {
-        return view('equipoFumigacions.form', ['equipoFumigacion'=> new EquipoFumigacion()]); 
+        return view('equipoFumigaciones.form', ['equipoFumigacion'=> new EquipoFumigacion()]); 
     }
 
     /**
@@ -35,7 +35,7 @@ class EquipoFumigacionController extends Controller
     public function store(EquipoFumigacionRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('equipoFumigacions.index')->with('message', 'Equipo de Fumigación creado exitosamente');
+        return redirect()->route('equipoFumigaciones.index')->with('message', 'Equipo de Fumigación creado exitosamente');
     
     }
 
@@ -45,7 +45,7 @@ class EquipoFumigacionController extends Controller
     public function show(int $id)
     {
         $equipoFumigacion = $this->service->find($id);
-        return view('equipoFumigacions.show', compact('equipoFumigacion'));
+        return view('equipoFumigaciones.show', compact('equipoFumigacion'));
     }
 
     /**
@@ -54,7 +54,7 @@ class EquipoFumigacionController extends Controller
     public function edit(int $id)
     {
         $equipoFumigacion = $this->service->find($id);
-        return view('equipoFumigacions.form', compact('equipoFumigacion'));
+        return view('equipoFumigaciones.form', compact('equipoFumigacion'));
     }
 
     /**
@@ -64,7 +64,7 @@ class EquipoFumigacionController extends Controller
     {
         $this->service->update($id, $request->validated());
 
-        return redirect()->route('equipoFumigacions.index')->with('message', 'Equipo de Fumigación actualizado exitosamente');
+        return redirect()->route('equipoFumigaciones.index')->with('message', 'Equipo de Fumigación actualizado exitosamente');
     }
 
     /**
@@ -74,6 +74,6 @@ class EquipoFumigacionController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('EquipoFumigacions.index')->with('message', 'Equipo de Fumigación eliminado exitosamente');
+        return redirect()->route('EquipoFumigaciones.index')->with('message', 'Equipo de Fumigación eliminado exitosamente');
     }
 }

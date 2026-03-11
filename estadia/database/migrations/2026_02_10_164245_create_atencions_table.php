@@ -14,22 +14,22 @@ return new class extends Migration
         Schema::create('atencions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('paciente_id')->constrained('pacientes')->onDelete('cascade');
-            $table->string('edad', 10);
-            $table->string('semestre', 10)->nullable();//nullable para que no sea obligatori;
-            $table->string('hora_atencion', 10);
-            $table->string('frecuencia_cardiaca', 100);
-            $table->string('frecuencia_respiratoria', 100);
-            $table->string('tension_sistolica', 100)->nullable();//nullable para que no sea obligatori;
-            $table->string('tension_diastolica', 100)->nullable();//nullable para que no sea obligatori;
-            $table->string('temperatura', 100);
-            $table->string('oxigenacion', 100);
-            $table->string('glucemia', 100);
-            $table->string('signos_sintomas', 100);
-            $table->string('alergias', 100);
-            $table->string('medicamento', 100);
-            $table->string('patologia', 100);
-            $table->string('ultimo_alimento', 100);
-            $table->string('eventos_previos', 100);
+            $table->integer('edad'); // Cambiado a integer
+            $table->string('semestre', 10)->nullable();
+            $table->time('hora_atencion'); // Cambiado a time
+            $table->decimal('frecuencia_cardiaca', 8, 2); // Cambiado a decimal
+            $table->decimal('frecuencia_respiratoria', 8, 2);
+            $table->decimal('tension_sistolica', 8, 2)->nullable();
+            $table->decimal('tension_diastolica', 8, 2)->nullable();
+            $table->decimal('temperatura', 8, 2);
+            $table->decimal('oxigenacion', 8, 2);
+            $table->decimal('glucemia', 8, 2);
+            $table->text('signos_sintomas'); // Cambiado a text para permitir más contenido
+            $table->text('alergias', 255);
+            $table->text('medicamento', 255);
+            $table->text('patologia');
+            $table->text('ultimo_alimento');
+            $table->text('eventos_previos');
             $table->string('destino', 100);             
             $table->timestamps();
         });
