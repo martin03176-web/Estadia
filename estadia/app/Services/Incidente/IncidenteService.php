@@ -27,26 +27,19 @@ class IncidenteService
         }
 
         // Filtros por área
-        if ($request->filled('edificio')) {
+        if ($request->filled('tipo_establecimiento')) {
             $query->whereHas('area', function($q) use ($request) {
-                $q->where('edificio', 'LIKE', '%' . $request->edificio . '%');
+                $q->where('tipo_establecimiento', 'LIKE', '%' . $request->tipo_establecimiento . '%');
             });
         }
-        if ($request->filled('piso')) {
+        if ($request->filled('nivel')) {
             $query->whereHas('area', function($q) use ($request) {
-                $q->where('piso', 'LIKE', '%' . $request->piso . '%');
+                $q->where('nivel', 'LIKE', '%' . $request->nivel . '%');
             });
         }
-        if ($request->filled('lugar')) {
+        if ($request->filled('lugar_especifico')) {
             $query->whereHas('area', function($q) use ($request) {
-                $q->where('lugar', 'LIKE', '%' . $request->lugar . '%');
-            });
-        }
-
-        // Filtro por responsable
-        if ($request->filled('responsable')) {
-            $query->whereHas('responsable', function($q) use ($request) {
-                $q->where('nombre', 'LIKE', '%' . $request->responsable . '%');
+                $q->where('lugar_especifico', 'LIKE', '%' . $request->lugar_especifico . '%');
             });
         }
 

@@ -13,7 +13,7 @@
  <section class="hero">
     <div class="login-wrapper-M">
         <div class="logo-text">
-            <h1>Registro de Paciente</h1>
+            <h1>Registro de Pacientes</h1>
         </div>
         <div class="row ">
             <div class="col-md-6 justify-content-center" >

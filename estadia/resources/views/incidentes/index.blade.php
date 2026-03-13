@@ -150,23 +150,17 @@
                             </div>
                             
                             <div class="filter-group">
-                                <label><i class="fa-solid fa-expand"></i> Edificio</label>
-                                <input type="text" name="edificio" value="{{ request('edificio') }}" 
-                                       placeholder="Buscar por edificio...">
+                                <label><i class="fa-solid fa-expand"></i> Tipo de establecimiento</label>
+                                <input type="text" name="tipo_establecimiento" value="{{ request('tipo_establecimiento') }}" 
+                                       placeholder="Buscar por tipo de establecimiento...">
                             </div>
                             
                             <div class="filter-group">
-                                <label><i class="fa-solid fa-expand"></i> Piso</label>
-                                <input type="text" name="piso" value="{{ request('piso') }}" 
-                                       placeholder="Buscar por piso...">
+                                <label><i class="fa-solid fa-expand"></i> Nivel</label>
+                                <input type="text" name="nivel" value="{{ request('nivel') }}" 
+                                       placeholder="Buscar por nivel...">
                             </div>
-                            
-                            <div class="filter-group">
-                                <label><i class="fa-solid fa-expand"></i> Lugar</label>
-                                <input type="text" name="lugar" value="{{ request('lugar') }}" 
-                                       placeholder="Buscar por lugar...">
-                            </div>
-                            
+                        
                             <div class="filter-group">
                                 <label><i class="fa-solid fa-person-falling-burst"></i> Tipo de Incidente</label>
                                 <select name="tipo_incidente_id">
@@ -205,13 +199,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            
-                            <div class="filter-group">
-                                <label><i class="fa-solid fa-person"></i> Responsable</label>
-                                <input type="text" name="responsable" value="{{ request('responsable') }}" 
-                                       placeholder="Nombre del responsable...">
-                            </div>
-                            
+
                             <div class="filter-actions">
                                 <button type="submit" class="btn-filter btn-filter-primary">
                                     <i class="fa-solid fa-search"></i> Buscar

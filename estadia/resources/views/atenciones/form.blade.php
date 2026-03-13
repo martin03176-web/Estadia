@@ -36,7 +36,9 @@
 
             <!-- Paciente -->
             <div class="form-group">
-                <label><i class="fa-solid fa-person"></i> Paciente</label>
+                <label><i class="fa-solid fa-person"></i> Paciente
+                    <a href="{{ route('pacientes.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Paciente</a>
+                </label>
                 <select class="form-control form-select-sm" name="paciente_id" required>
                     <option value="">Seleccione un paciente...</option>
                     @foreach($pacientes as $paciente)
@@ -72,10 +74,10 @@
 
             <!-- Hora de Atención -->
             <div class="form-group">
-                <label><i class="fa-regular fa-calendar-days"></i> Hora de Atención</label>
-                <input type="time" id="hora_atencion" name="hora_atencion" value="{{ old('hora_atencion', $atencion->hora_atencion) }}"
-                       placeholder="Hora de Atención..." required autofocus autocomplete="hora_atencion">
-                @error('hora_atencion')
+                <label><i class="fa-regular fa-calendar-days"></i> Fecha y Hora de Atención</label>
+                <input type="datetime-local" id="fecha_atencion" name="fecha_atencion" value="{{ old('fecha_atencion', $atencion->fecha_atencion) }}"
+                       placeholder="Fecha de Atención..." required class="form-control" >
+                @error('fecha_atencion')
                     <div class="logo-text"><p>{{ $message }}</p></div>
                 @enderror
             </div>

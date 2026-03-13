@@ -11,7 +11,7 @@ class Atencion extends Model
         'paciente_id', 
         'edad',
         'semestre',
-        'hora_atencion',
+        'fecha_atencion',
         'frecuencia_cardiaca',
         'frecuencia_respiratoria',
         'tension_sistolica',

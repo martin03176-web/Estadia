@@ -16,7 +16,7 @@
  <section class="hero">
     <div class="login-wrapper-S">
         <div class="logo-text">
-            <h1>Tablas Tipos de Riesgos</h1>
+            <h1>Tabla Tipos de Riesgos</h1>
             <a href="{{ route('tipos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Tipo de Extintor</a>
         </div>
 

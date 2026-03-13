@@ -10,7 +10,7 @@
  <section class="hero">
     <div class="login-wrapper-L">
         <div class="logo-text">
-            <h1>Tablas de Fumigación</h1>
+            <h1>Tabla de Fumigaciones</h1>
             <a href="{{ route('fumigaciones.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Fumigación</a>
         </div>
 

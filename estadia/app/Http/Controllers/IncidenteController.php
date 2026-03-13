@@ -25,8 +25,6 @@ class IncidenteController extends Controller
     public function index(Request $request)
     {
         $incidentes = $this->service->getAll($request);
-        
-        // Obtener datos para los filtros
         $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
         $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
         $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
@@ -44,7 +42,7 @@ class IncidenteController extends Controller
      */
     public function create()
     {
-        $areas = Area::orderBy('edificio')->orderBy('piso')->get();
+        $areas = Area::orderBy('tipo_establecimiento')->orderBy('nivel')->get();
         $responsables = Responsable::orderBy('nombre')->get();
         $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
         $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();

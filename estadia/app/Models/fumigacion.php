@@ -33,6 +33,10 @@ class Fumigacion extends Model
     {
         return $this->belongsTo(EquipoFumigacion::class);
     }
+    public function motivo(): BelongsTo
+    {
+        return $this->belongsTo(Motivo::class);
+    }
 
 
 

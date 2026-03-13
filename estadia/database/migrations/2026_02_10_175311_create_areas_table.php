@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
             
-            $table->string('edificio', 100);
-            $table->string('piso', 100);
-            $table->string('lugar', 100);
+            $table->string('tipo_establecimiento');
+            $table->string('nivel');
+            $table->string('lugar_especifico');
             $table->text('nota')->nullable();
             $table->timestamps();
         });

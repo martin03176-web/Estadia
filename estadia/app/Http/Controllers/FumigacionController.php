@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Fumigacion\FumigacionRequest;
-use App\Services\Fumigacion\FumigacionService;
-use App\Models\Fumigacion;
 use App\Models\Area;
-use App\Models\Responsable;
 use App\Models\EquipoFumigacion;
+use App\Models\Fumigacion;
+use App\Models\Motivo;
+use App\Models\Responsable;
+use App\Services\Fumigacion\FumigacionService;
 
 class FumigacionController extends Controller
 {
@@ -22,15 +23,14 @@ class FumigacionController extends Controller
 
     public function create()
     {
-        $areas = Area::orderByRaw("FIELD(edificio, 
-            'F', 'A', 'F1', 'B', 'F2', 'C', 'F3', 'D', 'F4', 'E', 'F5', 'G', 'H', 'I', 'J', 'Nave')")
-            ->get();
+        $areas = Area::orderBy('tipo_establecimiento')->orderBy('nivel')->get();
         $responsables = Responsable::orderBy('nombre')->get();
-        $materialEquipos = EquipoFumigacion::orderBy('nombre')->get();
+        $equipoFumigaciones = EquipoFumigacion::orderBy('nombre')->get();
+        $motivos = Motivo::orderBy('descripcion')->get();
         
         return view('fumigaciones.form', 
             ['fumigacion' => new Fumigacion()], 
-            compact('areas', 'responsables', 'materialEquipos')
+            compact('areas', 'responsables', 'equipoFumigaciones','motivos')
         ); 
     }
 

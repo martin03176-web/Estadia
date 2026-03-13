@@ -20,18 +20,21 @@ class AtencionService
             });
         }
 
-        // Filtro por código del paciente
-        if ($request->filled('codigo')) {
-            $query->whereHas('paciente', function($q) use ($request) {
-                $q->where('codigo', 'LIKE', '%' . $request->codigo . '%');
-            });
-        }
-
         // Filtro por carrera/área del paciente
         if ($request->filled('carrera')) {
             $query->whereHas('paciente', function($q) use ($request) {
                 $q->where('carrera_area', 'LIKE', '%' . $request->carrera . '%');
             });
+        }
+
+        // Filtro por semestre
+        if ($request->filled('semestre')) {
+            $query->where('semestre', $request->semestre);
+        }
+
+        // Filtro por signos y síntomas
+        if ($request->filled('signos_sintomas')) {
+            $query->where('signos_sintomas', 'LIKE', '%' . $request->signos_sintomas . '%');
         }
 
         // Filtro por edad con operador
@@ -41,16 +44,6 @@ class AtencionService
             $query->where('edad', $operator, $value);
         } elseif ($request->filled('edad')) {
             $query->where('edad', $request->edad);
-        }
-
-        // Filtro por semestre
-        if ($request->filled('semestre')) {
-            $query->where('semestre', 'LIKE', '%' . $request->semestre . '%');
-        }
-
-        // Filtro por destino
-        if ($request->filled('destino')) {
-            $query->where('destino', $request->destino);
         }
 
         return $query->latest()->paginate(Atencion::PAGINATE);

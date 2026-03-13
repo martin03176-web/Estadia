@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Area extends Model
 {
     protected $fillable = [
-        'edificio',
-        'piso',
-        'lugar',
+        'tipo_establecimiento',
+        'nivel',
+        'lugar_especifico',
         'nota'
     ];
 
@@ -18,15 +18,9 @@ class Area extends Model
 
 
     //Relación con las incidencias
-     public function atncion(): HasMany
+     public function incidente(): HasMany
      {
          return $this->hasMany(Incidente::class);
      }
-   
-    //Accesor para obtener datos del Area
-    public function getNombreCompletoAttribute(): string
-    {
-        return "{$this->edificio} {$this->piso} {$this->lugar} {$this->nota}";
-    }
     
 }

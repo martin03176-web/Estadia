@@ -10,8 +10,8 @@
     <section class="hero">
         <div class="login-wrapper-M">
             <div class="logo-text">
-                <h1>Tablas de Áreas</h1>
-                  <!-- Botón para nuevo paciente (comentado) -->
+                <h1>Tabla de Áreas</h1>
+                  
              <a href="{{ route('areas.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Área</a>
           
             </div>
@@ -21,257 +21,22 @@
                 <table class="table">
                     <thead>
                     <tr class="table-active">
-                        <th scope="col">Edificio</th>
-                        <th scope="col">Piso</th>
-                        <th scope="col">Lugar</th>
+                        <th scope="col">Tipo de establecimiento</th>
+                        <th scope="col">Nivel</th>
+                        <th scope="col">Lugar especifico</th>
                         <th scope="col">Nota</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($areas as $area)
-                            @if($area->edificio == 'F')
-                                <tr class="table-danger">
-                                    <th scope="row">F</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'A')
-                                <tr class="table-success">
-                                    <th scope="row">A</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'F1')
-                                <tr class="table-warning">
-                                    <th scope="row">F1</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'B')
-                                <tr class="table-info">
-                                    <th scope="row">B</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'F2')
-                                <tr class="table-warning">
-                                    <th scope="row">F2</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'C')
-                                <tr class="table-danger">
-                                    <th scope="row">C</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'F3')
-                                <tr class="table-secondary">
-                                    <th scope="row">F3</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'D')
-                                <tr class="table-light">
-                                    <th scope="row">D</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'F4')
-                                <tr class="table-danger">
-                                    <th scope="row">F4</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'E')
-                                <tr class="table-info">
-                                    <th scope="row">E</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'F5')
-                                <tr class="table-secondary">
-                                    <th scope="row">F5</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'G')
-                                <tr class="table-warning">
-                                    <th scope="row">G</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'H')
-                                <tr class="table-danger">
-                                    <th scope="row">H</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'I')
-                                <tr class="table-success">
-                                    <th scope="row">I</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'J')
-                                <tr class="table-info">
-                                    <th scope="row">J</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @elseif($area->edificio == 'Nave')
-                                <tr class="table-danger">
-                                    <th scope="row">Nave</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">{{$area->edificio}}</th>
-                                    <td>{{$area->piso}}</td>
-                                    <td>{{$area->lugar}}</td>
-                                    <td>{{$area->nota}}</td>
-                                    <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
-                                </tr>
-                            @endif
-                            
+                            <tr>
+                                <th scope="row">{{$area->tipo_establecimiento}}</th>
+                                <td>{{$area->nivel}}</td>
+                                <td>{{$area->lugar_especifico}}</td>
+                                <td>{{$area->nota}}</td>
+                                <td><a href="{{ route('areas.edit', $area) }}"  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Actualizar</a></td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

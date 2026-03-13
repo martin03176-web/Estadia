@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncidenteController;
 use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\MaterialEquipoController;
+use App\Http\Controllers\MotivoController;
 use App\Http\Controllers\NivelRiesgoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\ProfileController;
@@ -18,8 +19,6 @@ use App\Http\Controllers\TipoController;
 use App\Http\Controllers\TipoIncidenteController;
 use App\Http\Controllers\TipoRiesgoController;
 use Illuminate\Support\Facades\Route;
-
-
 
 //Route::get('/', function () {
   //  return view('welcome');
@@ -51,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('tipos', TipoController::class);
     Route::resource('extintores', ExtintorController::class);
     Route::resource('mantenimientos', MantenimientoController::class);
+    Route::resource('motivos', MotivoController::class);
 });
 
 require __DIR__.'/auth.php';

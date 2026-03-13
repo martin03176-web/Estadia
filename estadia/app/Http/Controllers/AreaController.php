@@ -16,8 +16,8 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::orderByRaw("FIELD(edificio, 'F', 'A', 'F1', 'B', 'F2','C','F3','D','F4','E','F5','G','H','I','J','Nave')")->get();
-        //$areas = $this->service->getAll();
+        //$areas = Area::orderByRaw("FIELD(edificio, 'F', 'A', 'F1', 'B', 'F2','C','F3','D','F4','E','F5','G','H','I','J','Nave')")->get();
+        $areas = $this->service->getAll();
         return view('areas.index', compact('areas'));
     }
 

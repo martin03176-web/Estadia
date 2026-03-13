@@ -20,7 +20,7 @@
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('status') }}
                         <button type="button" class="btn-login" date-bs-dismiss="alert" ariel-label="Cerrar"></button>
-                    
+                    </div>
                 @endif
             </div>
         </div>
@@ -28,80 +28,91 @@
         <form method="POST" action="{{ $area->exists ? route('areas.update', $area) : route('areas.store') }}" class="login-form">
             @csrf
             @if ($area->exists) 
-            @method('PUT') @endif
-             <!-- Edificio -->
-            <div class="form-group">
-                <label >
-                    <i class="fa-solid fa-arrow-right-to-city"></i> Edifiocio
-                </label>
-                <select class="form-select form-select-sm" aria-label="Large select example" name="edificio" >
-                    <option value="F" @selected(old('edificio', $area->edificio) === 'F' )>F</option>
-                    <option value="A" @selected(old('edificio', $area->edificio) === 'A' )>A</option>
-                    <option value="F1" @selected(old('edificio', $area->edificio) === 'F1' )>F1</option>
-                    <option value="B" @selected(old('edificio', $area->edificio) === 'B' )>B</option>
-                    <option value="F2" @selected(old('edificio', $area->edificio) === 'F2' )>F2</option>
-                    <option value="C" @selected(old('edificio', $area->edificio) === 'C' )>C</option>
-                    <option value="F3" @selected(old('edificio', $area->edificio) === 'F3' )>F3</option>
-                    <option value="D" @selected(old('edificio', $area->edificio) === 'D' )>D</option>
-                    <option value="F4" @selected(old('edificio', $area->edificio) === 'F4' )>F4</option>
-                    <option value="E" @selected(old('edificio', $area->edificio) === 'E' )>E</option>
-                    <option value="G" @selected(old('edificio', $area->edificio) === 'G' )>G</option>
-                    <option value="H" @selected(old('edificio', $area->edificio) === 'H' )>H</option>
-                    <option value="I" @selected(old('edificio', $area->edificio) === 'I' )>I</option>
-                    <option value="J" @selected(old('edificio', $area->edificio) === 'J' )>J</option>
-                    <option value="Nave" @selected(old('edificio', $area->edificio) === 'Nave' )>Nave</option>
-                  </select>
-                  @error('sexo')     
-                  <div class="logo-text">
-                      <p>{{$message}}</p> 
-                  </div>
-                     @enderror
-    
-            </div>
+                @method('PUT') 
+            @endif
             
-            <!-- Piso -->
+            <!-- tipo de establecimiento -->
             <div class="form-group">
                 <label>
-                    <i class="fa-solid fa-sort"></i> Piso
+                    <i class="fas fa-building"></i> Tipo de establecimiento
                 </label>
-                <input type="text" id="piso" name="piso" value="{{ old('piso', $area->piso) }}"
-                       placeholder="Ingrese el Piso" required autofocus autocomplete="piso">
-                       @error('piso')     
+                <select name="tipo_establecimiento" class="form-control" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Edificio" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'Edificio' ? 'selected' : '' }}>Edificio</option>
+                    <option value="Instalaciones auxiliares" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'Instalaciones auxiliares' ? 'selected' : '' }}>Instalaciones auxiliares</option>
+                    <option value="Bloque de conexión" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'Bloque de conexión' ? 'selected' : '' }}>Bloque de conexión</option>
+                    <option value="Módulo operativo" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'Módulo operativo' ? 'selected' : '' }}>Módulo operativo</option>
+                    <option value="Local comercial" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'Local comercial' ? 'selected' : '' }}>Local comercial</option>
+                    <option value="Estacionamiento" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'Estacionamiento' ? 'selected' : '' }}>Estacionamiento</option>
+                    <option value="Áreas comunes exteriores" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'Áreas comunes exteriores' ? 'selected' : '' }}>Áreas comunes exteriores</option>
+                    <option value="otro" {{ old('tipo_establecimiento', $area->tipo_establecimiento ?? '') == 'otro' ? 'selected' : '' }}>Otro</option>
+                </select>
+                @error('tipo_establecimiento')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
                     </div>
-                       @enderror
-                      
-            </div>
-            <!-- Lugar -->
-            <div class="form-group">
-                <label >
-                    <i class="fa-solid fa-magnifying-glass-location"></i> Lugar
-                </label>
-                <input type="text" id="lugar" name="lugar" value="{{ old('lugar', $area->lugar) }}"
-                       placeholder="Ingrese el Lugar" required autofocus autocomplete="lugar">
-                       @error('lugar')     
-                    <div class="logo-text">
-                        <p>{{$message}}</p> 
-                    </div>
-                       @enderror
-                      
+                @enderror
             </div>
             
+            <!-- Nivel -->
             <div class="form-group">
-                <label >
-                    <i class="fa-solid fa-pen-clip"></i> Nota(Opcional)
+                <label>
+                    <i class="fas fa-layer-group"></i> Nivel
                 </label>
-                <input type="text" id="nota" name="nota" value="{{ old('nota', $area->nota) }}"
-                       placeholder="Ingrese código del paciente" required autofocus autocomplete="nota">
-                       @error('nota')     
+                <input 
+                    type="number"
+                    name="nivel"
+                    class="form-control"
+                    placeholder="Ingrese el nivel"
+                    value="{{ old('nivel', $area->nivel ?? '') }}"
+                    required
+                >
+                @error('nivel')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
                     </div>
-                       @enderror
-                      
+                @enderror
+            </div>
+            
+            <!-- Lugar especifico -->
+            <div class="form-group">
+                <label>
+                    <i class="fas fa-map-pin"></i> Lugar específico
+                </label>
+                <input 
+                    type="text"
+                    name="lugar_especifico"
+                    class="form-control"
+                    placeholder="Ejemplo: pasillo, oficina, comedor"
+                    value="{{ old('lugar_especifico', $area->lugar_especifico ?? '') }}"
+                    required
+                >
+                @error('lugar_especifico')     
+                    <div class="logo-text">
+                        <p>{{$message}}</p> 
+                    </div>
+                @enderror
+            </div>
+            
+            <!-- Nota -->
+            <div class="form-group">
+                <label>
+                    <i class="fas fa-sticky-note"></i> Nota / Observaciones
+                </label>
+                <textarea 
+                    name="nota"
+                    class="form-control"
+                    rows="3"
+                    placeholder="Observaciones adicionales (opcional)"
+                >{{ old('nota', $area->nota ?? '') }}</textarea>
+                @error('nota')     
+                    <div class="logo-text">
+                        <p>{{$message}}</p> 
+                    </div>
+                @enderror
             </div>
         
+            <!-- Boton principal -->
             <div class="flex items-center justify-end mt-4">
                 <x-primary-button class="btn btn-solid-red">
                     <i class="fa-solid fa-check-to-slot"></i> {{ $area->exists ? 'Actualizar' : 'Registrar' }}
@@ -113,8 +124,7 @@
     </div>
 </section>
 @endsection
-@section('scripts')
 
+@section('scripts')
     
 @endsection
- 

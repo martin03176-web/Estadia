@@ -29,7 +29,6 @@
                 <thead>
                     <tr class="table-active">
                         <th scope="col">Nombre</th>
-                        <th scope="col">Edad</th>
                         <th scope="col">Sexo</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Código</th>
@@ -42,7 +41,6 @@
                         
                             <tr >
                                 <td>{{$paciente->nombre}}</td>
-                                <td>{{$paciente->edad}}</td>
                                 <td>{{$paciente->sexo}}</td>
                                 <td>{{$paciente->telefono}}</td>
                                 <td>{{$paciente->codigo}}</td>

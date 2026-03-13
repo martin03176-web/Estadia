@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Area;
+namespace App\Http\Requests\Motivo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class AreaRequest extends FormRequest
+class MotivoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,7 @@ class AreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tipo_establecimiento' => 'required|string|max:100',
-            'nivel' =>'required|string|max:100',
-            'lugar_especifico' =>'required|string|max:100',
-            'nota' =>'nullable|string|max:100',
+            'descripcion' => 'required|string|max:100',
         ];
     }
 }

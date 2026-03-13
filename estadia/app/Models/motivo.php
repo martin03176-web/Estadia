@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Motivo extends Model
 {
     protected $fillable = [
-        'motivo',
+        'descripcion',
     ];
 
     public const PAGINATE = 10;
