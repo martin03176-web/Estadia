@@ -12,6 +12,7 @@ class Paciente extends Model
         'sexo',
         'telefono',
         'codigo',
+        'tipo_paciente',
         'carrera_area'
     ];
 

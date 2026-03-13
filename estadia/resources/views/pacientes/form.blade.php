@@ -81,7 +81,7 @@
                     <i class="fa-solid fa-qrcode"></i> Código
                 </label>
                 <input type="number" id="codio" name="codigo" value="{{ old('codigo', $paciente->codigo) }}"
-                       placeholder="Ingrese Código del Paciente" required autofocus autocomplete="codigo">
+                       placeholder="Ingrese Código del Paciente" autofocus autocomplete="codigo">
                        @error('codigo')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
@@ -89,6 +89,48 @@
                        @enderror
                       
             </div>
+
+            <!-- Tipo de Paciente -->
+                <div class="form-group">
+                    <label>
+                        <i class="fa-solid fa-users"></i> Tipo de Paciente
+                    </label>
+
+                    <select class="form-select form-select-lg mb-3" name="tipo_paciente">
+                        <option value="">Seleccione una opción</option>
+
+                        <option value="Academico"
+                        @selected(old('tipo_paciente', $paciente->tipo_paciente) === 'Academico')>
+                        Académico
+                        </option>
+
+                        <option value="Estudiante"
+                        @selected(old('tipo_paciente', $paciente->tipo_paciente) === 'Estudiante')>
+                        Estudiante
+                        </option>
+
+                        <option value="Administrativo"
+                        @selected(old('tipo_paciente', $paciente->tipo_paciente) === 'Administrativo')>
+                        Administrativo
+                        </option>
+
+                        <option value="Operativo"
+                        @selected(old('tipo_paciente', $paciente->tipo_paciente) === 'Operativo')>
+                        Operativo
+                        </option>
+
+                        <option value="Otro"
+                        @selected(old('tipo_paciente', $paciente->tipo_paciente) === 'Otro')>
+                        Otro
+                        </option>
+                    </select>
+
+                    @error('tipo_paciente')
+                        <div class="logo-text">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @enderror
+                </div>
             <!-- Area_carrera -->
             <div class="form-group">
                 <label >

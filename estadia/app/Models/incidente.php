@@ -18,8 +18,15 @@ class Incidente extends Model
         'nivel_riesgo_id',
         'acciones_correctivas',
         'material_equipo_id',
-        'tiempo_total'
+        'hora_inicio',
+        'hora_fin',
     ];
+    public function getDuracionAttribute()
+    {
+        return \Carbon\Carbon::parse($this->hora_inicio)
+            ->diff(\Carbon\Carbon::parse($this->hora_fin))
+            ->format('%H:%I');
+    }
 
     public const PAGINATE = 10;
 

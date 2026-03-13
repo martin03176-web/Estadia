@@ -150,15 +150,59 @@
                             </div>
                             
                             <div class="filter-group">
-                                <label><i class="fa-solid fa-expand"></i> Tipo de establecimiento</label>
-                                <input type="text" name="tipo_establecimiento" value="{{ request('tipo_establecimiento') }}" 
-                                       placeholder="Buscar por tipo de establecimiento...">
+                                <label><i class="fa-solid fa-building"></i> Tipo de establecimiento</label>
+                            
+                                <select name="tipo_establecimiento">
+                                    <option value="">Todos</option>
+                            
+                                    <option value="Edificio" {{ request('tipo_establecimiento') == 'Edificio' ? 'selected' : '' }}>
+                                        Edificio
+                                    </option>
+                            
+                                    <option value="Instalaciones auxiliares" {{ request('tipo_establecimiento') == 'Instalaciones auxiliares' ? 'selected' : '' }}>
+                                        Instalaciones auxiliares
+                                    </option>
+                            
+                                    <option value="Bloque de conexión" {{ request('tipo_establecimiento') == 'Bloque de conexión' ? 'selected' : '' }}>
+                                        Bloque de conexión
+                                    </option>
+                            
+                                    <option value="Módulo operativo" {{ request('tipo_establecimiento') == 'Módulo operativo' ? 'selected' : '' }}>
+                                        Módulo operativo
+                                    </option>
+                            
+                                    <option value="Local comercial" {{ request('tipo_establecimiento') == 'Local comercial' ? 'selected' : '' }}>
+                                        Local comercial
+                                    </option>
+                            
+                                    <option value="Estacionamiento" {{ request('tipo_establecimiento') == 'Estacionamiento' ? 'selected' : '' }}>
+                                        Estacionamiento
+                                    </option>
+                            
+                                    <option value="Áreas comunes exteriores" {{ request('tipo_establecimiento') == 'Áreas comunes exteriores' ? 'selected' : '' }}>
+                                        Áreas comunes exteriores
+                                    </option>
+                            
+                                    <option value="Otro" {{ request('tipo_establecimiento') == 'Otro' ? 'selected' : '' }}>
+                                        Otro
+                                    </option>
+                            
+                                </select>
                             </div>
+                            
                             
                             <div class="filter-group">
                                 <label><i class="fa-solid fa-expand"></i> Nivel</label>
                                 <input type="text" name="nivel" value="{{ request('nivel') }}" 
                                        placeholder="Buscar por nivel...">
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label><i class="fa-solid fa-door-open"></i> Lugar específico</label>
+                                <input type="text" 
+                                       name="lugar_especifico" 
+                                       value="{{ request('lugar_especifico') }}"
+                                       placeholder="Ej: Pasillo, Oficina, Comedor...">
                             </div>
                         
                             <div class="filter-group">
@@ -250,9 +294,9 @@
                                     </p>
                                     <p><strong><i class="fa-solid fa-location-dot"></i> Área:</strong><br>
                                         @if($incidente->area)
-                                            {{ $incidente->area->edificio ?? 'N/A' }} <br>
-                                            Piso: {{ $incidente->area->piso ?? 'N/A' }} <br>
-                                            {{ $incidente->area->lugar ?? 'N/A' }}
+                                            {{ $incidente->area->tipo_establecimiento ?? 'N/A' }} <br>
+                                            Piso: {{ $incidente->area->nivel ?? 'N/A' }} <br>
+                                            {{ $incidente->area->lugar_especifico ?? 'N/A' }}
                                         @else
                                             N/A
                                         @endif
@@ -272,7 +316,7 @@
                                                 {{ $incidente->tipoRiesgo->tipo ?? 'N/A' }}
                                             </p>
                                             <p><strong><i class="fa-solid fa-clock"></i> Tiempo total:</strong> 
-                                                {{ $incidente->tiempo_total ?? 'N/A' }}
+                                                {{ $incidente->duracion ?? 'N/A' }}
                                             </p>
                                         </div>
                                         <div class="col-md-6">

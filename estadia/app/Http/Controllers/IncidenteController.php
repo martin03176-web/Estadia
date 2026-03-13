@@ -89,7 +89,7 @@ class IncidenteController extends Controller
     {
         try {
             $incidente = $this->service->find($id);
-            $areas = Area::orderBy('edificio')->orderBy('piso')->get();
+            $areas = Area::orderBy('tipo_establecimiento')->orderBy('nivel')->get();
             $responsables = Responsable::orderBy('nombre')->get();
             $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
             $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();

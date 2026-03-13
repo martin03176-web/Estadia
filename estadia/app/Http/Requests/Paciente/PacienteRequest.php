@@ -26,7 +26,8 @@ class PacienteRequest extends FormRequest
             'nombre' => 'required|string|max:100',
             'sexo' =>'required|in:Masculino,Femenino,Otro',
             'telefono' =>'nullable|string|max:10',
-            'codigo' =>'required|string|max:20',
+            'codigo' =>'nullable|string|max:20',            
+            'tipo_paciente' =>'required|string|max:100',
             'carrera_area' =>'required|string|max:100',
         ];
     }

@@ -55,7 +55,7 @@
                     <option value="">Seleccione un área...</option>
                     @foreach($areas as $area)
                         <option value="{{ $area->id }}" {{ old('area_id', $incidente->area_id) == $area->id ? 'selected' : '' }}>
-                            {{ $area->edificio }} - {{ $area->piso }} - {{ $area->lugar }}
+                            {{ $area->tipo_establecimiento }} - {{ $area->nivel }} - {{ $area->lugar_especifico }}
                         </option>
                     @endforeach
                 </select>
@@ -172,14 +172,30 @@
                 @enderror
             </div>
 
-            <!-- Tiempo Total -->
-            <div class="form-group">
-                <label><i class="fa-solid fa-clock-rotate-left"></i> Tiempo Total de Atención</label>
-                <input type="text" id="tiempo_total" name="tiempo_total" value="{{ old('tiempo_total', $incidente->tiempo_total) }}"
-                       placeholder="..." required autofocus autocomplete="tiempo_total">
-                @error('tiempo_total')
-                <div class="logo-text"><p>{{$message}}</p></div>
-                @enderror
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Hora de inicio</label>
+                    <input 
+                        type="time"
+                        name="hora_inicio"
+                        class="form-control"
+                        value="{{ old('hora_inicio', $incidente->hora_inicio ?? '') }}"
+                        required
+                    >
+                </div>
+            
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Hora de finalización</label>
+                    <input 
+                        type="time"
+                        name="hora_fin"
+                        class="form-control"
+                        value="{{ old('hora_fin', $incidente->hora_fin ?? '') }}"
+                        required
+                    >
+                </div>
+            
             </div>
 
             <div class="flex items-center justify-end mt-4">

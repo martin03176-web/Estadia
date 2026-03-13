@@ -46,6 +46,15 @@ class AtencionService
             $query->where('edad', $request->edad);
         }
 
+        // Filtro por rango de fechas
+        if ($request->filled('fecha_inicio') && $request->filled('fecha_fin')) {
+            $query->whereBetween('fecha_atencion', [$request->fecha_inicio, $request->fecha_fin]);
+        } elseif ($request->filled('fecha_inicio')) {
+            $query->whereDate('fecha_atencion', '>=', $request->fecha_inicio);
+        } elseif ($request->filled('fecha_fin')) {
+            $query->whereDate('fecha_atencion', '<=', $request->fecha_fin);
+        }
+
         return $query->latest()->paginate(Atencion::PAGINATE);
     }
 

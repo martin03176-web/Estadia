@@ -28,8 +28,8 @@ class IncidenteService
 
         // Filtros por área
         if ($request->filled('tipo_establecimiento')) {
-            $query->whereHas('area', function($q) use ($request) {
-                $q->where('tipo_establecimiento', 'LIKE', '%' . $request->tipo_establecimiento . '%');
+            $query->whereHas('area', function ($q) use ($request) {
+                $q->where('tipo_establecimiento', $request->tipo_establecimiento);
             });
         }
         if ($request->filled('nivel')) {
@@ -38,7 +38,7 @@ class IncidenteService
             });
         }
         if ($request->filled('lugar_especifico')) {
-            $query->whereHas('area', function($q) use ($request) {
+            $query->whereHas('area', function ($q) use ($request) {
                 $q->where('lugar_especifico', 'LIKE', '%' . $request->lugar_especifico . '%');
             });
         }

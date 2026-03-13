@@ -227,6 +227,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Fecha inicio -->
+                                <div class="filter-group">
+                                    <label><i class="fa-solid fa-calendar-days"></i> Fecha desde</label>
+                                    <input type="date" name="fecha_inicio" value="{{ request('fecha_inicio') }}">
+                                </div>
+
+                                <!-- Fecha fin -->
+                                <div class="filter-group">
+                                    <label><i class="fa-solid fa-calendar-days"></i> Fecha hasta</label>
+                                    <input type="date" name="fecha_fin" value="{{ request('fecha_fin') }}">
+                                </div>
 
                             <div class="filter-actions">
                                 <button type="submit" class="btn-filter btn-filter-primary">

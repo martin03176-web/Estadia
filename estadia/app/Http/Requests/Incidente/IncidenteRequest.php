@@ -33,7 +33,8 @@ class IncidenteRequest extends FormRequest
             'nivel_riesgo_id' => 'required|exists:nivel_riesgos,id',
             'acciones_correctivas' => 'required|string|max:5000',
             'material_equipo_id' => 'required|exists:material_equipos,id',
-            'tiempo_total' => 'required|string|max:100',
+            'hora_inicio' => 'required|date_format:H:i',
+            'hora_fin' => 'required|date_format:H:i|after:hora_inicio',
         ];
     }
 }
