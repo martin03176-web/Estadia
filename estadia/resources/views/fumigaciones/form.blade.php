@@ -11,9 +11,10 @@
  <!-- Hero Section -->
  <section class="hero">
     <div class="login-wrapper-M">
-        <div class="logo-text">
-            <h1>Programar Fumigación</h1>
-        </div>
+
+        <h1 style="text-align: center; color: #7c0000; margin-bottom: 30px;">
+            {{ $incidente->exists ? 'Editar' : 'Nueva' }} Fumigación
+        </h1>
         <div class="row ">
             <div class="col-md-6 justify-content-center" >
                 @if (session('status'))

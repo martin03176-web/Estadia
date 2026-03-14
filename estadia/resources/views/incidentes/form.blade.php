@@ -1,57 +1,118 @@
 @extends('layouts.template')
-@section('estilos')
 
+@section('estilos')
+<style>
+    /* Estilos mínimos necesarios */
+    .form-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #000000;  /* CAMBIADO A NEGRO */
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #7c0000;
+    }
+
+    .btn-submit {
+        background: #7c0000;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn-submit:hover {
+        background: #5e0000;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .error {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
 @endsection
 
-@section('titulo','Reporte de incidencias')
+@section('titulo', 'Registro de Incidencias')
 
 @section('contenido')
 <section class="hero">
     <div class="login-wrapper-M">
-        <div class="logo-text">
-            <h1>Registro de Incidencias</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-6 justify-content-center">
-                @if (session('status'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('status') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-                </div>
-                @endif
+        <h1 style="text-align: center; color: #7c0000; margin-bottom: 30px;">
+            {{ $incidente->exists ? 'Editar' : 'Nuevo' }} Incidente
+        </h1>
+    
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
             </div>
-        </div>
-
-        <form method="POST" action="{{ $incidente->exists ? route('incidentes.update', $incidente) : route('incidentes.store') }}" class="login-form">
+        @endif
+    
+        <form method="POST" action="{{ $incidente->exists ? route('incidentes.update', $incidente->id) : route('incidentes.store') }}">
             @csrf
             @if($incidente->exists)
-            @method('PUT')
+                @method('PUT')
             @endif
-
-            <!-- Asunto -->|
+    
+            <!-- Asunto -->
             <div class="form-group">
-                <label><i class="fa-solid fa-align-left"></i> Asunto</label>
-                <textarea name="asunto" class="form-control" rows="4">{{ old('asunto', $incidente->asunto) }}</textarea>
-                @error('asunto')
-                <div class="logo-text"><p>{{$message}}</p></div>
-                @enderror
+                <label>Asunto</label>
+                <textarea name="asunto" rows="3" required>{{ old('asunto', $incidente->asunto) }}</textarea>
+                @error('asunto') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Fecha -->
             <div class="form-group">
-                <label><i class="fa-regular fa-calendar-days"></i> Fecha</label>
-                <input type="date" id="fecha" name="fecha" value="{{ old('fecha', $incidente->fecha) }}" required autofocus autocomplete="fecha">
-                @error('fecha')
-                <div class="logo-text"><p>{{$message}}</p></div>
-                @enderror
+                <label>Fecha</label>
+                <input type="date" name="fecha" value="{{ old('fecha', $incidente->fecha) }}" required>
+                @error('fecha') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Área -->
             <div class="form-group">
-                <label><i class="fa-solid fa-expand"></i> Áreas
-                    <a href="{{ route('areas.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nueva Área</a>
-                </label>
-                <select class="form-control form-select-sm" name="area_id" required>
+                <label>Área</label>
+                <select name="area_id" required>
                     <option value="">Seleccione un área...</option>
                     @foreach($areas as $area)
                         <option value="{{ $area->id }}" {{ old('area_id', $incidente->area_id) == $area->id ? 'selected' : '' }}>
@@ -59,156 +120,132 @@
                         </option>
                     @endforeach
                 </select>
-                @error('area_id')
-                    <div class="logo-text"><p>{{ $message }}</p></div>
-                @enderror
+                @error('area_id') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Responsable -->
             <div class="form-group">
-                <label><i class="fa-solid fa-person"></i> Responsable que Reporta
-                    <a href="{{ route('responsables.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Responsable</a>
-                </label>
-                <select name="responsable_id" class="form-control form-select-sm" required>
+                <label>Responsable</label>
+                <select name="responsable_id" required>
                     <option value="">Seleccione un responsable...</option>
                     @foreach($responsables as $responsable)
                         <option value="{{ $responsable->id }}" {{ old('responsable_id', $incidente->responsable_id) == $responsable->id ? 'selected' : '' }}>
-                            {{ $responsable->nombre }} - {{ $responsable->telefono }} - {{ $responsable->puesto_area }}
+                            {{ $responsable->nombre }} - {{ $responsable->puesto_area }}
                         </option>
                     @endforeach
                 </select>
-                @error('responsable_id')
-                    <div class="logo-text"><p>{{ $message }}</p></div>
-                @enderror
+                @error('responsable_id') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Tipo Incidente -->
             <div class="form-group">
-                <label><i class="fa-solid fa-person-falling-burst"></i> Tipo de Incidente
-                    <a href="{{ route('tipoIncidentes.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Tipo</a>
-                </label>
-                <select name="tipo_incidente_id" class="form-control form-select-sm" required>
+                <label>Tipo de Incidente</label>
+                <select name="tipo_incidente_id" required>
                     <option value="">Seleccione un tipo...</option>
-                    @foreach($tipoIncidentes as $tipoIncidente)
-                        <option value="{{ $tipoIncidente->id }}" {{ old('tipo_incidente_id', $incidente->tipo_incidente_id) == $tipoIncidente->id ? 'selected' : '' }}>
-                            {{ $tipoIncidente->tipo }}
+                    @foreach($tipoIncidentes as $tipo)
+                        <option value="{{ $tipo->id }}" {{ old('tipo_incidente_id', $incidente->tipo_incidente_id) == $tipo->id ? 'selected' : '' }}>
+                            {{ $tipo->tipo }}
                         </option>
                     @endforeach
                 </select>
-                @error('tipo_incidente_id')
-                    <div class="logo-text"><p>{{ $message }}</p></div>
-                @enderror
+                @error('tipo_incidente_id') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Tipo Riesgo -->
             <div class="form-group">
-                <label><i class="fa-solid fa-explosion"></i> Tipo de Riesgo
-                    <a href="{{ route('tipoRiesgos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Tipo</a>
-                </label>
-                <select name="tipo_riesgo_id" class="form-control form-select-sm" required>
+                <label>Tipo de Riesgo</label>
+                <select name="tipo_riesgo_id" required>
                     <option value="">Seleccione un tipo...</option>
-                    @foreach($tipoRiesgos as $tipoRiesgo)
-                        <option value="{{ $tipoRiesgo->id }}" {{ old('tipo_riesgo_id', $incidente->tipo_riesgo_id) == $tipoRiesgo->id ? 'selected' : '' }}>
-                            {{ $tipoRiesgo->tipo }}
+                    @foreach($tipoRiesgos as $tipo)
+                        <option value="{{ $tipo->id }}" {{ old('tipo_riesgo_id', $incidente->tipo_riesgo_id) == $tipo->id ? 'selected' : '' }}>
+                            {{ $tipo->tipo }}
                         </option>
                     @endforeach
                 </select>
-                @error('tipo_riesgo_id')
-                    <div class="logo-text"><p>{{ $message }}</p></div>
-                @enderror
+                @error('tipo_riesgo_id') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Descripción -->
             <div class="form-group">
-                <label><i class="fa-solid fa-align-left"></i> Descripción</label>
-                <textarea name="descripcion" id="descripcion" rows="5" class="form-control">{{ old('descripcion', $incidente->descripcion) }}</textarea>
-                @error('descripcion')
-                <div class="logo-text"><p>{{$message}}</p></div>
-                @enderror
+                <label>Descripción</label>
+                <textarea name="descripcion" rows="5" required>{{ old('descripcion', $incidente->descripcion) }}</textarea>
+                @error('descripcion') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Nivel Riesgo -->
             <div class="form-group">
-                <label><i class="fa-solid fa-skull-crossbones"></i> Nivel de Riesgo
-                    <a href="{{ route('nivelRiesgos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Nivel</a>
-                </label>
-                <select name="nivel_riesgo_id" class="form-control form-select-sm" required>
+                <label>Nivel de Riesgo</label>
+                <select name="nivel_riesgo_id" required>
                     <option value="">Seleccione un nivel...</option>
-                    @foreach($nivelRiesgos as $nivelRiesgo)
-                        <option value="{{ $nivelRiesgo->id }}" {{ old('nivel_riesgo_id', $incidente->nivel_riesgo_id) == $nivelRiesgo->id ? 'selected' : '' }}>
-                            {{ $nivelRiesgo->nivel }}
+                    @foreach($nivelRiesgos as $nivel)
+                        <option value="{{ $nivel->id }}" {{ old('nivel_riesgo_id', $incidente->nivel_riesgo_id) == $nivel->id ? 'selected' : '' }}>
+                            {{ $nivel->nivel }}
                         </option>
                     @endforeach
                 </select>
-                @error('nivel_riesgo_id')
-                    <div class="logo-text"><p>{{ $message }}</p></div>
-                @enderror
+                @error('nivel_riesgo_id') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Acciones Correctivas -->
             <div class="form-group">
-                <label><i class="fa-solid fa-align-left"></i> Acciones Correctivas</label>
-                <textarea name="acciones_correctivas" id="acciones_correctivas" rows="5" class="form-control">{{ old('acciones_correctivas', $incidente->acciones_correctivas) }}</textarea>
-                @error('acciones_correctivas')
-                <div class="logo-text"><p>{{$message}}</p></div>
-                @enderror
+                <label>Acciones Correctivas</label>
+                <textarea name="acciones_correctivas" rows="5" required>{{ old('acciones_correctivas', $incidente->acciones_correctivas) }}</textarea>
+                @error('acciones_correctivas') <div class="error">{{ $message }}</div> @enderror
             </div>
-
+    
             <!-- Material/Equipo -->
             <div class="form-group">
-                <label><i class="fa-solid fa-toolbox"></i> Material o Equipo Utilizado
-                    <a href="{{ route('materialEquipos.create') }}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-circle-up"></i> Nuevo Material/Equipo</a>
-                </label>
-                <select name="material_equipo_id" class="form-control form-select-sm" required>
-                    <option value="">Seleccione un material/equipo...</option>
-                    @foreach($materialEquipos as $materialEquipo)
-                        <option value="{{ $materialEquipo->id }}" {{ old('material_equipo_id', $incidente->material_equipo_id) == $materialEquipo->id ? 'selected' : '' }}>
-                            {{ $materialEquipo->nombre }} - {{ $materialEquipo->nota }}
+                <label>Material o Equipo</label>
+                <select name="material_equipo_id" required>
+                    <option value="">Seleccione un material...</option>
+                    @foreach($materialEquipos as $material)
+                        <option value="{{ $material->id }}" {{ old('material_equipo_id', $incidente->material_equipo_id) == $material->id ? 'selected' : '' }}>
+                            {{ $material->nombre }} - {{ $material->nota }}
                         </option>
                     @endforeach
                 </select>
-                @error('material_equipo_id')
-                    <div class="logo-text"><p>{{ $message }}</p></div>
-                @enderror
+                @error('material_equipo_id') <div class="error">{{ $message }}</div> @enderror
             </div>
-
-            <div class="row">
-
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Hora de inicio</label>
+    
+            <!-- Horas -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label>Hora de inicio</label>
                     <input 
-                        type="time"
-                        name="hora_inicio"
-                        class="form-control"
-                        value="{{ old('hora_inicio', $incidente->hora_inicio ?? '') }}"
+                        type="time" 
+                        name="hora_inicio" 
+                        value="{{ old('hora_inicio', $incidente->hora_inicio ? \Carbon\Carbon::parse($incidente->hora_inicio)->format('H:i') : '') }}" 
                         required
                     >
+                    @error('hora_inicio') <div class="error">{{ $message }}</div> @enderror
                 </div>
-            
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Hora de finalización</label>
+
+                <div class="form-group">
+                    <label>Hora de finalización</label>
                     <input 
-                        type="time"
-                        name="hora_fin"
-                        class="form-control"
-                        value="{{ old('hora_fin', $incidente->hora_fin ?? '') }}"
+                        type="time" 
+                        name="hora_fin" 
+                        value="{{ old('hora_fin', $incidente->hora_fin ? \Carbon\Carbon::parse($incidente->hora_fin)->format('H:i') : '') }}" 
                         required
                     >
+                    @error('hora_fin') <div class="error">{{ $message }}</div> @enderror
                 </div>
-            
             </div>
-
+    
+            <!-- Botón submit -->
             <div class="flex items-center justify-end mt-4">
                 <x-primary-button class="btn btn-solid-red">
                     <i class="fa-solid fa-check-to-slot"></i> {{ $incidente->exists ? 'Actualizar' : 'Registrar' }}
                 </x-primary-button>
             </div>
         </form>
-        <div id="message" class="message"></div>
     </div>
 </section>
+
 @endsection
 
 @section('scripts')
-
+<script>
+    console.log('Formulario cargado correctamente');
+</script>
 @endsection

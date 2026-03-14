@@ -89,6 +89,7 @@ class IncidenteController extends Controller
     {
         try {
             $incidente = $this->service->find($id);
+            
             $areas = Area::orderBy('tipo_establecimiento')->orderBy('nivel')->get();
             $responsables = Responsable::orderBy('nombre')->get();
             $tipoIncidentes = TipoIncidente::orderBy('tipo')->get();
@@ -105,6 +106,7 @@ class IncidenteController extends Controller
                 'nivelRiesgos', 
                 'materialEquipos'
             ));
+            
         } catch (ModelNotFoundException $e) {
             return redirect()->route('incidentes.index')->with('error', 'Incidente no encontrado');
         }

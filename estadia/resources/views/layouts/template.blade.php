@@ -260,6 +260,53 @@
                 background: rgba(0, 0, 0, 0.5);
                 z-index: 998;
             }
+            /* FORZAR VISIBILIDAD DE TODOS LOS ELEMENTOS DEL FORMULARIO */
+                form input,
+                form select,
+                form textarea,
+                form button,
+                .form-group input,
+                .form-group select,
+                .form-group textarea,
+                .login-wrapper-M input,
+                .login-wrapper-M select,
+                .login-wrapper-M textarea {
+                    display: block !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    width: 100% !important;
+                    padding: 10px !important;
+                    margin: 5px 0 !important;
+                    border: 1px solid #ccc !important;
+                    background-color: white !important;
+                    color: black !important;
+                    font-size: 16px !important;
+                    line-height: normal !important;
+                    pointer-events: auto !important;
+                    z-index: 9999 !important;
+                    position: relative !important;
+                }
+
+                /* Forzar que los selects muestren su contenido */
+                select option {
+                    display: block !important;
+                    padding: 5px !important;
+                }
+
+                /* Hacer visible el contenedor del formulario */
+                .login-wrapper-M {
+                    background: white !important;
+                    padding: 30px !important;
+                    border-radius: 8px !important;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1) !important;
+                    margin: 20px auto !important;
+                    max-width: 800px !important;
+                }
+
+                /* Debug - bordes rojos para ver los elementos */
+                form * {
+                    outline: 1px solid rgba(255,0,0,0.1) !important;
+                }
         }
     </style>
 </head>
