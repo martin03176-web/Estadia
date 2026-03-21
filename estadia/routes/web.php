@@ -6,6 +6,7 @@ use App\Http\Controllers\ClaveController;
 use App\Http\Controllers\EquipoFumigacionController;
 use App\Http\Controllers\ExtintorController;
 use App\Http\Controllers\FumigacionController;
+use App\Http\Controllers\FumigacionPeriodoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncidenteController;
 use App\Http\Controllers\MantenimientoController;
@@ -51,6 +52,19 @@ Route::middleware('auth')->group(function () {
     Route::resource('extintores', ExtintorController::class);
     Route::resource('mantenimientos', MantenimientoController::class);
     Route::resource('motivos', MotivoController::class);
+
+    
+    Route::resource('periodos', FumigacionPeriodoController::class)->names([
+      'index' => 'fumigaciones.periodos.index',
+      'create' => 'fumigaciones.periodos.create',
+      'store' => 'fumigaciones.periodos.store',
+      'show' => 'fumigaciones.periodos.show',
+      'edit' => 'fumigaciones.periodos.edit',
+      'update' => 'fumigaciones.periodos.update',
+      'destroy' => 'fumigaciones.periodos.destroy',
+    ]);
+    Route::get('periodos/{periodo}/generar', [FumigacionPeriodoController::class, 'generarFumigaciones'])->name('fumigaciones.periodos.generar');
+
 });
 
 require __DIR__.'/auth.php';

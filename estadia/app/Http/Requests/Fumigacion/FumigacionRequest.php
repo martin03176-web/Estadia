@@ -4,33 +4,43 @@ namespace App\Http\Requests\Fumigacion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class FumigacionRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        return [ 
+        return [
+            'tipo' => 'nullable|string|in:programada,extemporanea',
+            'periodo_id' => 'nullable|exists:fumigacion_periodos,id',
             'responsble_servicio_id' => 'required|exists:responsables,id',
             'area_id' => 'required|exists:areas,id',
             'responsable_titular_id' => 'required|exists:responsables,id',
             'fecha' => 'required|date',
-            'asunto' => 'required|string|max:1000',
+            'horario' => 'required|string|max:100',
+            'motivo_id' => 'required|exists:motivos,id',
             'responsable_contingencia_id' => 'required|exists:responsables,id',
-            'equipo_fumigacion_id' => 'required|exists:tipo_Fumigacions,id',
+            'equipo_fumigacion_id' => 'required|exists:equipo_fumigacions,id',
             'responsable_fumigacion_id' => 'required|exists:responsables,id',
+            'observaciones' => 'nullable|string'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'responsble_servicio_id.required' => 'El responsable del servicio es obligatorio',
+            'area_id.required' => 'El área es obligatoria',
+            'responsable_titular_id.required' => 'El responsable titular es obligatorio',
+            'fecha.required' => 'La fecha es obligatoria',
+            'horario.required' => 'El horario es obligatorio',
+            'motivo_id.required' => 'El motivo es obligatorio',
+            'responsable_contingencia_id.required' => 'El responsable ante contingencia es obligatorio',
+            'equipo_fumigacion_id.required' => 'El equipo de fumigación es obligatorio',
+            'responsable_fumigacion_id.required' => 'El responsable de fumigación es obligatorio',
         ];
     }
 }
