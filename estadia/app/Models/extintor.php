@@ -16,8 +16,8 @@ class Extintor extends Model
         'peso',
         'ubicacion',
         'lugar_referencia',
-        'observaciones',
         'condicion_extintor',
+        'observaciones',
     ];
 
     public const PAGINATE = 10;

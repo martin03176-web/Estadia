@@ -31,8 +31,8 @@ class ExtintorRequest extends FormRequest
             'peso' => 'required|string',
             'ubicacion' => 'required|string',
             'lugar_referencia' => 'required|string', 
-            'observaciones' => 'required|string',
-            'condicion_extintor' => 'required|string',
+            'observaciones' => 'nullable|string',
+            'condicion_extintor' => 'nullable|string',
         ];
     }
 }

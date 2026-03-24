@@ -99,7 +99,7 @@
         @endif
 
         <!-- Fumigaciones Programadas -->
-        <h2 class="mb-3 mt-4">
+        <h2 class="mb-3 mt-4 text-dark">
             <i class="fa-solid fa-calendar-check text-success"></i> 
             Fumigaciones Programadas
         </h2>
@@ -149,7 +149,7 @@
                                                 <small class="text-muted">{{ $fum->area->nivel ?? 'N/A' }} - {{ $fum->area->lugar_especifico ?? 'N/A' }}</small>
                                             </td>
                                             <td>{{ \Carbon\Carbon::parse($fum->fecha)->format('d/m/Y') }}</td>
-                                            <td>{{ $fum->horario ?? 'N/A' }}</td>
+                                            <td>{{ $fum->hora ?? 'N/A' }}</td>
                                             <td>{{ $fum->motivo->descripcion ?? 'N/A' }}</td>
                                             <td>{{ $fum->responsableServicio->nombre ?? 'N/A' }}</td>
                                             <td>{{ $fum->equipoFumigacion->nombre ?? 'N/A' }}</td>
@@ -180,7 +180,7 @@
                 </div>
             </div>
         @empty
-            <div class="alert alert-info">
+            <div class="alert alert-info  text-dark">
                 <i class="fa-solid fa-info-circle"></i> 
                 No hay periodos de fumigación registrados. 
                 <a href="{{ route('fumigaciones.periodos.create') }}" class="alert-link">Crea un nuevo periodo</a> para comenzar.
@@ -188,7 +188,7 @@
         @endforelse
 
         <!-- Fumigaciones Extemporáneas -->
-        <h2 class="mb-3 mt-5">
+        <h2 class="mb-3 mt-5 text-dark">
             <i class="fa-solid fa-triangle-exclamation text-danger"></i> 
             Fumigaciones Extemporáneas
         </h2>
@@ -229,7 +229,7 @@
                                             <small class="text-muted">{{ $fum->area->nivel ?? 'N/A' }} - {{ $fum->area->lugar_especifico ?? 'N/A' }}</small>
                                         </td>
                                         <td>{{ \Carbon\Carbon::parse($fum->fecha)->format('d/m/Y') }}</td>
-                                        <td>{{ $fum->horario ?? 'N/A' }}</td>
+                                        <td>{{ $fum->hora ?? 'N/A' }}</td>
                                         <td>{{ $fum->motivo->descripcion ?? 'N/A' }}</td>
                                         <td>{{ $fum->responsableServicio->nombre ?? 'N/A' }}</td>
                                         <td>{{ $fum->equipoFumigacion->nombre ?? 'N/A' }}</td>

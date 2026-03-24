@@ -33,10 +33,10 @@
                                 <label class="form-label required">Temporada</label>
                                 <select name="temporada" class="form-control @error('temporada') is-invalid @enderror" required>
                                     <option value="">Seleccione...</option>
-                                    <option value="primavera" {{ old('temporada', $periodo->temporada) == 'primavera' ? 'selected' : '' }}>🌱 Primavera</option>
-                                    <option value="verano" {{ old('temporada', $periodo->temporada) == 'verano' ? 'selected' : '' }}>☀️ Verano</option>
-                                    <option value="otoño" {{ old('temporada', $periodo->temporada) == 'otoño' ? 'selected' : '' }}>🍂 Otoño</option>
-                                    <option value="invierno" {{ old('temporada', $periodo->temporada) == 'invierno' ? 'selected' : '' }}>❄️ Invierno</option>
+                                    <option value="primavera" {{ old('temporada', $periodo->temporada) == 'primavera' ? 'selected' : '' }}>Primavera</option>
+                                    <option value="verano" {{ old('temporada', $periodo->temporada) == 'verano' ? 'selected' : '' }}>Verano</option>
+                                    <option value="otoño" {{ old('temporada', $periodo->temporada) == 'otoño' ? 'selected' : '' }}>Otoño</option>
+                                    <option value="invierno" {{ old('temporada', $periodo->temporada) == 'invierno' ? 'selected' : '' }}>Invierno</option>
                                 </select>
                                 @error('temporada')
                                     <div class="invalid-feedback">{{ $message }}</div>

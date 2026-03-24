@@ -35,9 +35,9 @@
                 <label >
                     <i class="fa-solid fa-explosion"></i> Nueva Clave
                 </label>
-                <input type="text" id="tipo" name="tipo" value="{{ old('clave', $clave->tipo) }}"
-                       placeholder="Ingrese el Nuevo Riesgo " required autofocus autocomplete="tipo">
-                       @error('tipo')     
+                <input type="text" id="clave" name="clave" value="{{ old('clave', $clave->clave) }}"
+                       placeholder="Ingrese el Nuevo Riesgo " required autofocus autocomplete="clave">
+                       @error('clave')     
                     <div class="logo-text">
                         <p>{{$message}}</p> 
                     </div>

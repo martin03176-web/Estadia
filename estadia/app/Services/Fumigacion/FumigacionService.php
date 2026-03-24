@@ -99,14 +99,13 @@ class FumigacionService
                 'periodo_id' => $periodo->id,
                 'tipo' => Fumigacion::TIPO_PROGRAMADA,
                 'area_id' => $area->id,
-                'fecha' => $fechaProgramada->format('Y-m-d'),
-                'horario' => '10:00 AM - 12:00 PM',
-                'motivo_id' => 1, // Asegúrate de tener un motivo con ID 1
+                'fecha_hora' => $fechaProgramada->format('Y-m-dth:mi:ss'),
+                'motivo_id' => 1, 
                 'responsble_servicio_id' => $responsableDefault->id,
                 'responsable_titular_id' => $responsableDefault->id,
                 'responsable_contingencia_id' => $responsableDefault->id,
                 'responsable_fumigacion_id' => $responsableDefault->id,
-                'equipo_fumigacion_id' => 1, // Asegúrate de tener un equipo con ID 1
+                'equipo_fumigacion_id' => 1, 
             ]);
         }
 

@@ -12,7 +12,7 @@ class Fumigacion extends Model
         'tipo',
         'area_id',
         'fecha',
-        'horario',
+        'hora',
         'motivo_id',
         'responsble_servicio_id',
         'responsable_titular_id',

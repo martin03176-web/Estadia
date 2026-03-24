@@ -7,11 +7,7 @@ use App\Http\Requests\Extintor\ExtintorRequest;
 use App\Models\Area;
 use App\Models\Clave;
 use App\Models\Extintor;
-use App\Models\MaterialEquipo;
-use App\Models\NivelRiesgo;
-use App\Models\Responsable;
 use App\Models\Tipo;
-use App\Models\TipoRiesgo;
 use App\Services\Extintor\ExtintorService;
 
 
@@ -28,7 +24,7 @@ class ExtintorController extends Controller
     {
         
         $extintores = $this->service->getAll();
-        return view('extintores.index', compact('extintors'));
+        return view('extintores.index', compact('extintores'));
     }
 
     /**
@@ -36,14 +32,11 @@ class ExtintorController extends Controller
      */
     public function create()
     {
-        $areas = Area::orderBy('edificio')->get();
+        $areas = Area::orderBy('tipo_establecimiento')->get();
         $claves = Clave::orderBy('clave')->get();
-        $responsables = Responsable::orderBy('nombre')->get();
-        $tipo = Tipo::orderBy('tipo')->get();
-        $tipoRiesgos = TipoRiesgo::orderBy('tipo')->get();
-        $nivelRiesgos = NivelRiesgo::orderBy('nivel')->get();
-        $materialEquipos = MaterialEquipo::orderBy('nombre')->get();
-        return view('extintores.form', ['extintor'=> new Extintor()] , compact('areas','responsables','tipo','tipoRiesgos','nivelRiesgos','materialEquipos','claves')); 
+        $tipos = Tipo::orderBy('tipo')->get();
+            
+        return view('extintores.form', ['extintor'=> new Extintor()] , compact('areas','tipos','claves')); 
     }
 
     /**
@@ -57,9 +50,7 @@ class ExtintorController extends Controller
         
         // Verificar específicamente los IDs
         \Log::info('area_id:', [$request->input('area_id')]);
-        \Log::info('responsable_id:', [$request->input('responsable_id')]);
         \Log::info('tipo_Extintor_id:', [$request->input('tipo_Extintor_id')]);
-        \Log::info('descripcion:', [$request->input('descripcion')]);
         
         try {
             $extintor = $this->service->create($request->validated());
@@ -91,9 +82,11 @@ class ExtintorController extends Controller
      */
     public function edit(Extintor $extintor)
     {
-        
-        $extintors = Extintor::orderBy('nombre')->get();
-        return view('extintores.form', compact('extintor', 'extintors'));
+        $areas = Area::orderBy('tipo_establecimiento')->get();
+        $claves = Clave::orderBy('clave')->get();
+        $tipos = Tipo::orderBy('tipo')->get();
+        $extintores = Extintor::orderBy('clave_id')->get();
+        return view('extintores.form', compact('extintor', 'areas','tipos','claves')); 
     }
 
     /**

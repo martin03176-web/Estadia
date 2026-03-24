@@ -12,11 +12,7 @@ class ExtintorService
     {
         return Extintor::with([
             'area', 
-            'responsable', 
-            'tipoExtintor', 
-            'tipoRiesgo', 
-            'nivelRiesgo', 
-            'materialEquipo'
+            'tipo'
         ])->latest()->paginate(Extintor::PAGINATE);
     }
 
@@ -29,11 +25,7 @@ class ExtintorService
     {
         return Extintor::with([
             'area', 
-            'responsable', 
-            'tipoExtintor', 
-            'tipoRiesgo', 
-            'nivelRiesgo', 
-            'materialEquipo'
+            'tipo', 
         ])->findOrFail($id); 
     }
 

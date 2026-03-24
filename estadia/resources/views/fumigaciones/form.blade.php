@@ -112,16 +112,26 @@
                     </a>
                 </div>
             </div>
-
+            <!-- Hora de Atención -->
             <div class="form-group">
-                <label class="required">Fecha</label>
-                <input type="date" name="fecha" value="{{ old('fecha', $fumigacion->fecha) }}" class="form-control" required>
+                <label><i class="fa-regular fa-calendar-days"></i> Fecha </label>
+                <input type="date" id="fecha" name="fecha" value="{{ old('fecha', $fumigacion->fecha) }}"
+                    placeholder="Fecha de Atención..." required class="form-control" >
+                @error('fecha')
+                    <div class="logo-text"><p>{{ $message }}</p></div>
+                @enderror
             </div>
 
             <div class="form-group">
-                <label class="required">Horario</label>
-                <input type="text" name="horario" value="{{ old('horario', $fumigacion->horario) }}" class="form-control" placeholder="Ej: 10:00 AM - 12:00 PM" required>
+                <label>Hora de fumigación</label>
+                <div class="d-flex align-items-center">
+                    <input type="time" name="hora" value="{{ old('hora', $fumigacion->hora ?? '') }}" class="form-control" step="60" style="width: 150px;">
+                </div>
+                @error('hora')
+                    <div class="text-danger small">{{ $message }}</div>
+                @enderror
             </div>
+            
 
             <div class="form-group">
                 <label class="required">Motivo</label>
@@ -190,12 +200,6 @@
                     </a>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label>Observaciones</label>
-                <textarea name="observaciones" class="form-control" rows="3">{{ old('observaciones', $fumigacion->observaciones) }}</textarea>
-            </div>
-
             <div class="mt-4">
                 <button type="submit" class="btn btn-solid-red w-100">
                     <i class="fa-solid fa-check-to-slot"></i> 

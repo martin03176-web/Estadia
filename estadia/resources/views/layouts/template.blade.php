@@ -367,6 +367,7 @@
                         <div class="submenu">
                             <a href="{{ route('fumigaciones.create') }}" class="submenu-link"><i class="fa-solid fa-table"></i> Fumigaciones</a>
                             <a href="{{ route('fumigaciones.index') }}" class="submenu-link"><i class="fas fa-clipboard-list"></i> Historial</a>
+                            <a href="{{ route('fumigaciones.periodos.create') }}" class="submenu-link"><i class="fa-solid fa-table"></i> Periodos</a>
                             <a href="{{ route('responsables.index') }}" class="submenu-link"><i class="fa-solid fa-person"></i> Responsables</a>
                             <a href="{{ route('equipoFumigaciones.index') }}" class="submenu-link"><i class="fa-solid fa-toolbox"></i> Equipos</a>
                         </div>
