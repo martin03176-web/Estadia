@@ -30,6 +30,7 @@ class FumigacionService
             'periodo'
         ])->findOrFail($id);
     }
+    
 
     public function create(array $data): Fumigacion
     {
@@ -70,45 +71,52 @@ class FumigacionService
         return $periodo;
     }
 
+    
+
     public function crearPeriodoConFumigaciones(FumigacionPeriodo $periodo)
     {
-        // Obtener áreas activas
         $areas = Area::all();
-        
-        // Obtener responsables por defecto (puedes personalizar esto)
         $responsableDefault = Responsable::first();
         
-        if (!$responsableDefault) {
-            throw new \Exception('No hay responsables registrados. Crea al menos un responsable primero.');
-        }
-
-        // Fechas por temporada
         $fechasPorTemporada = [
             'primavera' => ['mes' => 3, 'dia' => 21],
             'verano' => ['mes' => 6, 'dia' => 21],
             'otoño' => ['mes' => 9, 'dia' => 21],
             'invierno' => ['mes' => 12, 'dia' => 21]
         ];
-
+        
         $fechaBase = $fechasPorTemporada[$periodo->temporada];
         $fechaProgramada = Carbon::create($periodo->anio, $fechaBase['mes'], $fechaBase['dia']);
-
-        // Crear fumigaciones para cada área
-        foreach ($areas as $area) {
+        
+        // Hora por defecto si no está configurada en el periodo
+        $horaInicio = $periodo->hora_inicio ?? '08:00:00';
+        $horaFin = $periodo->hora_fin ?? '17:00:00';
+        
+        foreach ($areas as $index => $area) {
+            // Distribuir horas entre inicio y fin
+            $totalAreas = $areas->count();
+            $progreso = $index / max($totalAreas - 1, 1);
+            
+            $horaInicioCarbon = Carbon::createFromFormat('H:i:s', $horaInicio);
+            $horaFinCarbon = Carbon::createFromFormat('H:i:s', $horaFin);
+            $diferencia = $horaInicioCarbon->diffInSeconds($horaFinCarbon);
+            $horaAsignada = $horaInicioCarbon->addSeconds($diferencia * $progreso);
+            
             Fumigacion::create([
                 'periodo_id' => $periodo->id,
                 'tipo' => Fumigacion::TIPO_PROGRAMADA,
                 'area_id' => $area->id,
-                'fecha_hora' => $fechaProgramada->format('Y-m-dth:mi:ss'),
-                'motivo_id' => 1, 
+                'fecha' => $fechaProgramada->format('Y-m-d'),
+                'hora' => $horaAsignada->format('H:i:s'),
+                'motivo_id' => 1,
                 'responsble_servicio_id' => $responsableDefault->id,
                 'responsable_titular_id' => $responsableDefault->id,
                 'responsable_contingencia_id' => $responsableDefault->id,
                 'responsable_fumigacion_id' => $responsableDefault->id,
-                'equipo_fumigacion_id' => 1, 
+                'equipo_fumigacion_id' => 1,
             ]);
         }
-
+        
         return $periodo;
     }
 

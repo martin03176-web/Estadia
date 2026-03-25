@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Mantenimiento\MantenimientoRequest;
 use App\Services\Mantenimiento\MantenimientoService;
 use App\Models\Mantenimiento;
-use App\Models\Paciente;
 
 class MantenimientoController extends Controller
 {
@@ -20,19 +19,22 @@ class MantenimientoController extends Controller
     public function index()
     {
         
-        $Mantenimientos = $this->service->getAll();
+        $mantenimientos = $this->service->getAll();
         
-        return view('Mantenimientos.index', compact('Mantenimientos'));
+        return view('mantenimientos.index', compact('mantenimientos'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $pacientes = Paciente::orderBy('nombre')->get();
-        return view('Mantenimientos.form', ['Mantenimiento'=> new Mantenimiento()] , compact('pacientes')); 
-    }
+{
+    $extintores = \App\Models\Extintor::orderBy('id')->get();
+    return view('mantenimientos.form', [
+        'mantenimiento' => new Mantenimiento(),
+        'extintores' => $extintores
+    ]); 
+}
 
     /**
      * Store a newly created resource in storage.
@@ -40,7 +42,7 @@ class MantenimientoController extends Controller
     public function store(MantenimientoRequest $request)
     {
         $this->service->create($request->validated());
-        return redirect()->route('Mantenimientos.index')->with('message', 'Mantenimiento creado exitosamente');
+        return redirect()->route('mantenimientos.index')->with('message', 'Mantenimiento creado exitosamente');
     
     }
 
@@ -51,7 +53,6 @@ class MantenimientoController extends Controller
     {
         $mantenimiento = Mantenimiento::with([
             'extintor',
-            'responsable'
         ])->findOrFail($id);
 
         return view('mantenimientos.show', compact('mantenimiento'));
@@ -59,11 +60,13 @@ class MantenimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mantenimiento $Mantenimiento)
+    public function edit(Mantenimiento $mantenimiento)
     {
-        
-        $pacientes = Paciente::orderBy('nombre')->get();
-        return view('Mantenimientos.form', compact('Mantenimiento', 'pacientes'));
+        $extintores = \App\Models\Extintor::orderBy('id')->get();
+        return view('mantenimientos.form', [
+            'mantenimiento' => $mantenimiento,
+            'extintores' => $extintores
+        ]);
     }
 
     /**
@@ -72,7 +75,7 @@ class MantenimientoController extends Controller
     public function update(MantenimientoRequest $request, Mantenimiento $Mantenimiento)
     {
         $this->service->update($Mantenimiento, $request->validated());
-        return redirect()->route('Mantenimientos.index')->with('message', 'Mantenimiento actualizado exitosamente');
+        return redirect()->route('mantenimientos.index')->with('message', 'Mantenimiento actualizado exitosamente');
     }
 
     /**
@@ -81,6 +84,6 @@ class MantenimientoController extends Controller
     public function destroy(int $id)
     {
         $this->service->delete($id);
-        return redirect()->route('Mantenimientos.index')->with('message', 'Mantenimiento Eliminado exitosamente');
+        return redirect()->route('mantenimientos.index')->with('message', 'Mantenimiento Eliminado exitosamente');
     }
 }

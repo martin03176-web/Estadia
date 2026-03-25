@@ -8,11 +8,11 @@ use App\Models\Mantenimiento;
 class MantenimientoService
 {
     public function getAll(): LengthAwarePaginator
-    {
-    return Mantenimiento::with('paciente')
+{
+    return Mantenimiento::with('extintor')
         ->latest()
         ->paginate(Mantenimiento::PAGINATE);
-    }
+}
 
     public function find(int $id): ?Mantenimiento
     {

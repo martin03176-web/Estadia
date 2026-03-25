@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class FumigacionPeriodo extends Model
 {
+    
+    protected $table = 'fumigacion_periodos';
+    
     protected $fillable = [
         'anio', 
         'temporada', 

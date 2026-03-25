@@ -32,34 +32,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($mantenimientos as $mant)
                   <tr>
-                    <th scope="row">A-1</th>
-                    <td>Interno</td>
-                    <td>01/07/2022</td>
-                    <td><a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Nuevo</a></td>
-                    
+                    <th scope="row">{{ $mant->extintor->clave->clave ?? 'N/A' }}/{{$mant->extintor->numeracion ?? 'N/A' }}</th>
+                    <td>{{ $mant->tipo }}</td>
+                    <td>{{ \Carbon\Carbon::parse($mant->fecha)->format('d/m/Y') }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{ route('mantenimientos.show', $mant->id) }}" class="btn btn-sm btn-info text-white"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ route('mantenimientos.edit', $mant->id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <form action="{{ route('mantenimientos.destroy', $mant->id) }}" method="POST" onsubmit="return confirm('¿Eliminar registro?')">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </td>
                   </tr>
-                  <tr>
-                    <th scope="row">F-1</th>
-                    <td>Relleno</td>
-                    <td>01/07/2022</td>
-                    <td><a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Nuevo</a></td>
-                    
-                  </tr>
-                  <tr>
-                    <th scope="row">C-1</th>
-                    <td>Interno</td>
-                    <td>01/07/2022</td>
-                    <td><a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Nuevo</a></td>
-                    
-                  </tr>
-                  <tr>
-                    <th scope="row">D-1</th>
-                    <td>Interno</td>
-                    <td>01/07/2022</td>
-                    <td><a  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-circle-up"></i>Nuevo</a></td>
-                    
-                  </tr>
+                @endforeach
                 </tbody>
               </table>
     </div>

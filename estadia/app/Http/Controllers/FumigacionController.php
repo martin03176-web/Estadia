@@ -18,21 +18,31 @@ class FumigacionController extends Controller
     {}
 
     public function index()
-    {
-        $periodos = FumigacionPeriodo::with('fumigaciones.area')->get();
-        $extemporaneas = Fumigacion::where('tipo', 'extemporanea')
-            ->with(['area', 'equipoFumigacion', 'motivo'])
-            ->get();
+{
+    $periodos = FumigacionPeriodo::with('fumigaciones.area')->get();
+    $extemporaneas = Fumigacion::where('tipo', 'extemporanea')
+        ->with(['area', 'equipoFumigacion', 'motivo'])
+        ->get();
 
-        return view('fumigaciones.index', compact('periodos', 'extemporaneas'));
+    // Debug: Verifica que los IDs existen
+    foreach($periodos as $periodo) {
+        foreach($periodo->fumigaciones as $fum) {
+            \Log::info('Fumigación ID: ' . $fum->id);
+        }
     }
+    
+    foreach($extemporaneas as $fum) {
+        \Log::info('Extemporánea ID: ' . $fum->id);
+    }
+
+    return view('fumigaciones.index', compact('periodos', 'extemporaneas'));
+}
 
     public function create(Request $request)
     {
         $tipo = $request->get('tipo', 'programada');
-        $periodos = $this->service->obtenerPeriodosDisponibles(); // Usa el método del service
+        $periodos = $this->service->obtenerPeriodosDisponibles();
         
-        // Obtener datos para los selects
         $areas = Area::orderBy('tipo_establecimiento')->get();
         $responsables = Responsable::orderBy('nombre')->get();
         $motivos = Motivo::orderBy('descripcion')->get();
@@ -55,7 +65,6 @@ class FumigacionController extends Controller
     {
         $data = $request->validated();
         
-        // Asegurar que tipo esté definido
         $data['tipo'] = $data['tipo'] ?? Fumigacion::TIPO_PROGRAMADA;
         
         $this->service->create($data);
@@ -80,9 +89,10 @@ class FumigacionController extends Controller
         return view('fumigaciones.show', compact('fumigacion'));
     }
 
-    public function edit(Fumigacion $fumigacion)
+    public function edit(Fumigacion $fumigacione)  
     {
-        $tipo = $fumigacion->tipo;
+        
+        $tipo = $fumigacione->tipo;
         $periodos = FumigacionPeriodo::all();
         $areas = Area::orderBy('tipo_establecimiento')->get();
         $responsables = Responsable::orderBy('nombre')->get();
@@ -90,7 +100,7 @@ class FumigacionController extends Controller
         $equipoFumigaciones = EquipoFumigacion::orderBy('nombre')->get();
         
         return view('fumigaciones.form', compact(
-            'fumigacion',
+            'fumigacione',  
             'tipo',
             'periodos',
             'areas',
@@ -100,9 +110,12 @@ class FumigacionController extends Controller
         ));
     }
 
-    public function update(FumigacionRequest $request, Fumigacion $fumigacion)
+    public function update(FumigacionRequest $request, Fumigacion $fumigacione)
     {
-        $this->service->update($fumigacion, $request->validated());
+        \Log::info('Actualizando fumigación ID: ' . $fumigacione->id);
+        \Log::info('Datos recibidos: ', $request->validated());
+        
+        $this->service->update($fumigacione, $request->validated());
 
         return redirect()->route('fumigaciones.index')
             ->with('message', 'Fumigación actualizada exitosamente');

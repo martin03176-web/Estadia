@@ -45,8 +45,8 @@
 @section('contenido')
 <section class="hero">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1><i class="fa-solid fa-calendar-alt"></i> Calendario de Fumigaciones</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4 ">
+            <h1 class="text-dark"><i class="fa-solid fa-calendar-alt text-dark"></i> Calendario de Fumigaciones</h1>
             <div>
                 <a href="{{ route('fumigaciones.create', ['tipo' => 'programada']) }}" class="btn btn-success">
                     <i class="fa-solid fa-plus"></i> Nueva Programada
@@ -145,6 +145,7 @@
                                     @foreach($periodo->fumigaciones as $fum)
                                         <tr>
                                             <td>
+                                                <small class="text-muted">ID: {{ $fum->id }}</small>
                                                 <strong>{{ $fum->area->tipo_establecimiento ?? 'N/A' }}</strong><br>
                                                 <small class="text-muted">{{ $fum->area->nivel ?? 'N/A' }} - {{ $fum->area->lugar_especifico ?? 'N/A' }}</small>
                                             </td>
@@ -158,8 +159,9 @@
                                                     <a href="{{ route('fumigaciones.show', $fum->id) }}" class="btn btn-info btn-sm" title="Ver">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ route('fumigaciones.edit', $fum->id) }}" class="btn btn-warning btn-sm" title="Editar">
-                                                        <i class="fa-solid fa-edit"></i>
+                                                   
+                                                    <a href="{{ route('fumigaciones.edit', ['fumigacione' => $fum->id]) }}" class="btn btn-warning btn-sm" title="Editar">
+                                                        <i class="fa-solid fa-edit"></i> Editar
                                                     </a>
                                                     @if($fum->tipo == 'extemporanea')
                                                         <form action="{{ route('fumigaciones.destroy', $fum->id) }}" method="POST" class="d-inline">
@@ -225,6 +227,7 @@
                                 @foreach($extemporaneas as $fum)
                                     <tr>
                                         <td>
+                                            <small class="text-muted">ID: {{ $fum->id }}</small>
                                             <strong>{{ $fum->area->tipo_establecimiento ?? 'N/A' }}</strong><br>
                                             <small class="text-muted">{{ $fum->area->nivel ?? 'N/A' }} - {{ $fum->area->lugar_especifico ?? 'N/A' }}</small>
                                         </td>

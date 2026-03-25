@@ -25,7 +25,6 @@ class FumigacionRequest extends FormRequest
             'responsable_contingencia_id' => 'required|exists:responsables,id',
             'equipo_fumigacion_id' => 'required|exists:equipo_fumigacions,id',
             'responsable_fumigacion_id' => 'required|exists:responsables,id',
-            'observaciones' => 'nullable|string'
         ];
     }
 

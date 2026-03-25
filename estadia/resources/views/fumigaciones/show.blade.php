@@ -1,73 +1,151 @@
 @extends('layouts.template')
-@section('titulo','Reporte de fumigación')
+@section('titulo','Reporte de Fumigación')
 
 @section('contenido')
-<div class="container mt-4">
-    <div class="card shadow">
-        <div class="card-header bg-dark text-white">
-            <h4 class="mb-0">REPORTE DE FUMIGACIÓN</h4>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <p><strong><i class="fa-solid fa-building"></i> Área:</strong> 
-                        {{ $fumigacion->area->tipo_establecimiento ?? 'N/A' }} - 
-                        {{ $fumigacion->area->nivel ?? 'N/A' }} - 
-                        {{ $fumigacion->area->lugar_especifico ?? 'N/A' }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-user"></i> Responsable del Servicio:</strong> 
-                        {{ $fumigacion->responsableServicio->nombre ?? 'N/A' }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-user-tie"></i> Responsable Titular:</strong> 
-                        {{ $fumigacion->responsableTitular->nombre ?? 'N/A' }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-calendar"></i> Fecha:</strong> 
-                        {{ \Carbon\Carbon::parse($fumigacion->fecha)->format('d/m/Y') }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-clock"></i> Horario:</strong> 
-                        {{ $fumigacion->horario ?? 'N/A' }}
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong><i class="fa-solid fa-book"></i> Motivo:</strong> 
-                        {{ $fumigacion->motivo->descripcion ?? 'N/A' }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-user-shield"></i> Responsable Contingencia:</strong> 
-                        {{ $fumigacion->responsableContingencia->nombre ?? 'N/A' }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-toolbox"></i> Equipo utilizado:</strong> 
-                        {{ $fumigacion->equipoFumigacion->nombre ?? 'N/A' }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-user"></i> Responsable Fumigación:</strong> 
-                        {{ $fumigacion->responsableFumigacion->nombre ?? 'N/A' }}
-                    </p>
-                    <p><strong><i class="fa-solid fa-tag"></i> Tipo:</strong>
-                        @if($fumigacion->tipo == 'programada')
-                            <span class="badge bg-success">Programada</span>
-                        @else
-                            <span class="badge bg-danger">Extemporánea</span>
-                        @endif
-                    </p>
-                </div>
-            </div>
-            
-            @if($fumigacion->observaciones)
-            <div class="mt-3">
-                <strong><i class="fa-solid fa-comment"></i> Observaciones:</strong>
-                <div class="border p-3 mt-2 bg-light rounded">
-                    {{ $fumigacion->observaciones }}
-                </div>
-            </div>
-            @endif
+<style>
+    /* --- ESTILOS DE VISUALIZACIÓN EN PANTALLA --- */
+    .print-wrapper {
+        background: #f4f4f4;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-            <div class="mt-4">
-                <a href="{{ route('fumigaciones.edit', $fumigacion) }}" class="btn btn-warning">
-                    <i class="fa-solid fa-edit"></i> Editar
-                </a>
-                <a href="{{ route('fumigaciones.index') }}" class="btn btn-secondary">
-                    <i class="fa-solid fa-arrow-left"></i> Volver
-                </a>
-            </div>
+    /* Contenedor que simula la hoja de papel */
+    .paper-sheet {
+        background: white;
+        width: 21cm; /* Tamaño A4 Aproximado */
+        min-height: 29.7cm;
+        padding: 1.5cm;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        font-family: "Arial", sans-serif;
+        color: #000;
+        position: relative;
+    }
+
+    /* --- ESTRUCTURA DEL FORMATO TIPO TABLA --- */
+    .header-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    .header-table td { border: none; vertical-align: middle; }
+    
+    .logo-img { width: 80px; }
+    .title-text { text-align: center; font-weight: bold; font-size: 14px; }
+
+    .main-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+    .main-table th, .main-table td {
+        border: 1px solid #000;
+        padding: 6px;
+        font-size: 11px;
+        text-align: center;
+        overflow: hidden;
+    }
+    .bg-light-gray { background-color: #eded ed !important; font-weight: bold; }
+    
+    .text-left { text-align: left; }
+    .signature-space { height: 50px; }
+
+    /* --- CONFIGURACIÓN PARA IMPRESORA --- */
+    @media print {
+        @page {
+            size: portrait;
+            margin: 0;
+        }
+        nav, .navbar, .btn, .sidebar, footer, .d-print-none {
+            display: none !important;
+        }
+        .print-wrapper {
+            padding: 0;
+            background: none;
+        }
+        .paper-sheet {
+            box-shadow: none;
+            width: 100%;
+            margin: 0;
+            padding: 1cm;
+        }
+        .bg-light-gray {
+            background-color: #ededed !important;
+            -webkit-print-color-adjust: exact;
+        }
+    }
+</style>
+
+<div class="print-wrapper">
+    <div class="mb-3 d-print-none">
+        <button onclick="window.print();" class="btn btn-dark btn-lg">
+            <i class="fa-solid fa-print"></i> GENERAR HOJA DE IMPRESIÓN
+        </button>
+        <a href="{{ route('fumigaciones.index') }}" class="btn btn-outline-secondary btn-lg">Volver</a>
+    </div>
+
+    <div class="paper-sheet">
+        <table class="header-table">
+            <tr>
+                <td style="width: 15%;">
+                    <img src="{{ asset('assets/css/logotabla.png') }}" class="logo-img" alt="Logo">
+                </td>
+                <td class="title-text">
+                    Programa de fumigación periodo vacacional de invierno 2025<br>
+                    <span style="font-weight: normal; font-size: 12px;">Jueves 18 y Viernes 19 de Diciembre</span>
+                </td>
+                <td style="width: 15%;"></td>
+            </tr>
+        </table>
+
+        <table class="main-table">
+            <thead>
+                <tr class="bg-light-gray">
+                    <th style="width: 35%;">Área</th>
+                    <th style="width: 7%;">Fecha</th>
+                    <th style="width: 10%;">Horario</th>
+                    <th style="width: 8%;">F. externa</th>
+                    <th style="width: 8%;">F. interna</th>
+                    <th style="width: 20%;">Nombre de quien recibe</th>
+                    <th style="width: 12%;">Firma</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-light-gray">
+                    <td colspan="7">{{ $fumigacion->area->nivel ?? 'Edificio' }}</td>
+                </tr>
+                
+                <tr>
+                    <td class="text-left">{{ $fumigacion->area->lugar_especifico ?? 'N/A' }}</td>
+                    <td>
+                        @php 
+                            $diaNum = \Carbon\Carbon::parse($fumigacion->fecha)->dayOfWeek;
+                            $letra = ($diaNum == 4) ? 'J' : (($diaNum == 5) ? 'V' : '-');
+                        @endphp
+                        {{ $letra }}
+                    </td>
+                    <td>{{ $fumigacion->hora ?? 'N/A' }}</td>
+                    <td></td> <td></td> <td>
+                        {{ $fumigacion->observaciones == 'Cerrada' ? 'Cerrada' : ($fumigacion->responsableTitular->nombre ?? '') }}
+                    </td>
+                    <td class="signature-space"></td>
+                </tr>
+
+                @if($fumigacion->observaciones && $fumigacion->observaciones != 'Cerrada')
+                <tr>
+                    <td colspan="5"></td>
+                    <td colspan="2" style="font-style: italic; font-size: 10px; text-align: left;">
+                        {{ $fumigacion->observaciones }}
+                    </td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
+
+        <div style="margin-top: 50px; font-size: 10px; color: #666; text-align: right;">
+            Documento generado por el Sistema de Gestión de Fumigación el {{ date('d/m/Y H:i') }}
         </div>
     </div>
 </div>

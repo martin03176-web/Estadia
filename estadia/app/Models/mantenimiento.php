@@ -16,10 +16,10 @@ class Mantenimiento extends Model
     public const PAGINATE = 10;
 
 
-    //Relación con las incidencias
-    public function paciente(): BelongsTo
-    {
-        return $this->belongsTo(Extintor::class);
-    }
+    //Relación
+    public function extintor(): BelongsTo
+{
+    return $this->belongsTo(Extintor::class, 'extintor_id');
+}
    
 }
